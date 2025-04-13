@@ -42,6 +42,7 @@ public struct Product: Codable, JSONEncodable, Hashable {
     public var weightUnit: String?
     public var sortOrder: Int?
     public var inStock: Bool?
+    public var onSale: Bool?
     public var backorders: String?
     public var manageStock: String?
     public var isStockManaged: Bool?
@@ -69,7 +70,7 @@ public struct Product: Codable, JSONEncodable, Hashable {
     public var additionalFields: AnyCodable?
     public var customFields: AnyCodable?
 
-    public init(id: String? = nil, type: String? = nil, uModel: String? = nil, uSku: String? = nil, name: String? = nil, description: String? = nil, shortDescription: String? = nil, price: Double? = nil, advancedPrice: [ProductAdvancedPrice]? = nil, costPrice: Double? = nil, quantity: Double? = nil, inventory: [ProductInventory]? = nil, groupItems: [ProductGroupItem]? = nil, uBrandId: String? = nil, uBrand: String? = nil, categoriesIds: [String]? = nil, storesIds: [String]? = nil, url: String? = nil, seoUrl: String? = nil, metaTitle: String? = nil, metaKeywords: String? = nil, metaDescription: String? = nil, availSale: Bool? = nil, availView: Bool? = nil, isVirtual: Bool? = nil, isDownloadable: Bool? = nil, weight: Double? = nil, weightUnit: String? = nil, sortOrder: Int? = nil, inStock: Bool? = nil, backorders: String? = nil, manageStock: String? = nil, isStockManaged: Bool? = nil, createAt: A2CDateTime? = nil, modifiedAt: A2CDateTime? = nil, taxClassId: String? = nil, specialPrice: SpecialPrice? = nil, tierPrice: [ProductTierPrice]? = nil, groupPrice: [ProductGroupPrice]? = nil, images: [Image]? = nil, productOptions: [ProductOption]? = nil, uUpc: String? = nil, uMpn: String? = nil, uGtin: String? = nil, uIsbn: String? = nil, uEan: String? = nil, relatedProductsIds: [String]? = nil, upSellProductsIds: [String]? = nil, crossSellProductsIds: [String]? = nil, dimensionsUnit: String? = nil, width: Double? = nil, height: Double? = nil, length: Double? = nil, discounts: [Discount]? = nil, additionalFields: AnyCodable? = nil, customFields: AnyCodable? = nil) {
+    public init(id: String? = nil, type: String? = nil, uModel: String? = nil, uSku: String? = nil, name: String? = nil, description: String? = nil, shortDescription: String? = nil, price: Double? = nil, advancedPrice: [ProductAdvancedPrice]? = nil, costPrice: Double? = nil, quantity: Double? = nil, inventory: [ProductInventory]? = nil, groupItems: [ProductGroupItem]? = nil, uBrandId: String? = nil, uBrand: String? = nil, categoriesIds: [String]? = nil, storesIds: [String]? = nil, url: String? = nil, seoUrl: String? = nil, metaTitle: String? = nil, metaKeywords: String? = nil, metaDescription: String? = nil, availSale: Bool? = nil, availView: Bool? = nil, isVirtual: Bool? = nil, isDownloadable: Bool? = nil, weight: Double? = nil, weightUnit: String? = nil, sortOrder: Int? = nil, inStock: Bool? = nil, onSale: Bool? = nil, backorders: String? = nil, manageStock: String? = nil, isStockManaged: Bool? = nil, createAt: A2CDateTime? = nil, modifiedAt: A2CDateTime? = nil, taxClassId: String? = nil, specialPrice: SpecialPrice? = nil, tierPrice: [ProductTierPrice]? = nil, groupPrice: [ProductGroupPrice]? = nil, images: [Image]? = nil, productOptions: [ProductOption]? = nil, uUpc: String? = nil, uMpn: String? = nil, uGtin: String? = nil, uIsbn: String? = nil, uEan: String? = nil, relatedProductsIds: [String]? = nil, upSellProductsIds: [String]? = nil, crossSellProductsIds: [String]? = nil, dimensionsUnit: String? = nil, width: Double? = nil, height: Double? = nil, length: Double? = nil, discounts: [Discount]? = nil, additionalFields: AnyCodable? = nil, customFields: AnyCodable? = nil) {
         self.id = id
         self.type = type
         self.uModel = uModel
@@ -100,6 +101,7 @@ public struct Product: Codable, JSONEncodable, Hashable {
         self.weightUnit = weightUnit
         self.sortOrder = sortOrder
         self.inStock = inStock
+        self.onSale = onSale
         self.backorders = backorders
         self.manageStock = manageStock
         self.isStockManaged = isStockManaged
@@ -159,6 +161,7 @@ public struct Product: Codable, JSONEncodable, Hashable {
         case weightUnit = "weight_unit"
         case sortOrder = "sort_order"
         case inStock = "in_stock"
+        case onSale = "on_sale"
         case backorders
         case manageStock = "manage_stock"
         case isStockManaged = "is_stock_managed"
@@ -221,6 +224,7 @@ public struct Product: Codable, JSONEncodable, Hashable {
         try container.encodeIfPresent(weightUnit, forKey: .weightUnit)
         try container.encodeIfPresent(sortOrder, forKey: .sortOrder)
         try container.encodeIfPresent(inStock, forKey: .inStock)
+        try container.encodeIfPresent(onSale, forKey: .onSale)
         try container.encodeIfPresent(backorders, forKey: .backorders)
         try container.encodeIfPresent(manageStock, forKey: .manageStock)
         try container.encodeIfPresent(isStockManaged, forKey: .isStockManaged)
