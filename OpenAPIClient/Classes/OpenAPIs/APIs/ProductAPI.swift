@@ -358,6 +358,7 @@ open class ProductAPI {
      - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,name,short_description,active,url")
      - parameter brandIds: (query) Retrieves brands specified by brand ids (optional)
      - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
+     - parameter categoryId: (query) Retrieves product brands specified by category id (optional)
      - parameter storeId: (query) Store Id (optional)
      - parameter langId: (query) Language id (optional)
      - parameter createdFrom: (query) Retrieve entities from their creation date (optional)
@@ -372,8 +373,8 @@ open class ProductAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func productBrandList(start: Int? = nil, count: Int? = nil, pageCursor: String? = nil, params: String? = nil, brandIds: String? = nil, exclude: String? = nil, storeId: String? = nil, langId: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, parentId: String? = nil, responseFields: String? = nil, findWhere: String? = nil, findValue: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseProductBrandList?, _ error: Error?) -> Void)) -> RequestTask {
-        return productBrandListWithRequestBuilder(start: start, count: count, pageCursor: pageCursor, params: params, brandIds: brandIds, exclude: exclude, storeId: storeId, langId: langId, createdFrom: createdFrom, createdTo: createdTo, modifiedFrom: modifiedFrom, modifiedTo: modifiedTo, parentId: parentId, responseFields: responseFields, findWhere: findWhere, findValue: findValue).execute(apiResponseQueue) { result in
+    open class func productBrandList(start: Int? = nil, count: Int? = nil, pageCursor: String? = nil, params: String? = nil, brandIds: String? = nil, exclude: String? = nil, categoryId: String? = nil, storeId: String? = nil, langId: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, parentId: String? = nil, responseFields: String? = nil, findWhere: String? = nil, findValue: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseProductBrandList?, _ error: Error?) -> Void)) -> RequestTask {
+        return productBrandListWithRequestBuilder(start: start, count: count, pageCursor: pageCursor, params: params, brandIds: brandIds, exclude: exclude, categoryId: categoryId, storeId: storeId, langId: langId, createdFrom: createdFrom, createdTo: createdTo, modifiedFrom: modifiedFrom, modifiedTo: modifiedTo, parentId: parentId, responseFields: responseFields, findWhere: findWhere, findValue: findValue).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -399,6 +400,7 @@ open class ProductAPI {
      - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,name,short_description,active,url")
      - parameter brandIds: (query) Retrieves brands specified by brand ids (optional)
      - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
+     - parameter categoryId: (query) Retrieves product brands specified by category id (optional)
      - parameter storeId: (query) Store Id (optional)
      - parameter langId: (query) Language id (optional)
      - parameter createdFrom: (query) Retrieve entities from their creation date (optional)
@@ -411,7 +413,7 @@ open class ProductAPI {
      - parameter findValue: (query) Entity search that is specified by some value (optional)
      - returns: RequestBuilder<ModelResponseProductBrandList> 
      */
-    open class func productBrandListWithRequestBuilder(start: Int? = nil, count: Int? = nil, pageCursor: String? = nil, params: String? = nil, brandIds: String? = nil, exclude: String? = nil, storeId: String? = nil, langId: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, parentId: String? = nil, responseFields: String? = nil, findWhere: String? = nil, findValue: String? = nil) -> RequestBuilder<ModelResponseProductBrandList> {
+    open class func productBrandListWithRequestBuilder(start: Int? = nil, count: Int? = nil, pageCursor: String? = nil, params: String? = nil, brandIds: String? = nil, exclude: String? = nil, categoryId: String? = nil, storeId: String? = nil, langId: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, parentId: String? = nil, responseFields: String? = nil, findWhere: String? = nil, findValue: String? = nil) -> RequestBuilder<ModelResponseProductBrandList> {
         let localVariablePath = "/product.brand.list.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -424,6 +426,7 @@ open class ProductAPI {
             "params": (wrappedValue: params?.encodeToJSON(), isExplode: true),
             "brand_ids": (wrappedValue: brandIds?.encodeToJSON(), isExplode: true),
             "exclude": (wrappedValue: exclude?.encodeToJSON(), isExplode: true),
+            "category_id": (wrappedValue: categoryId?.encodeToJSON(), isExplode: true),
             "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
             "lang_id": (wrappedValue: langId?.encodeToJSON(), isExplode: true),
             "created_from": (wrappedValue: createdFrom?.encodeToJSON(), isExplode: true),
