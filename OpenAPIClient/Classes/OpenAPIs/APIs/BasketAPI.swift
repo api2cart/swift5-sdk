@@ -17,15 +17,15 @@ open class BasketAPI {
      
      - parameter id: (query) Entity id 
      - parameter storeId: (query) Store Id (optional)
+     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
      - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "force_all")
      - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
-     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func basketInfo(id: String, storeId: String? = nil, params: String? = nil, exclude: String? = nil, responseFields: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: BasketInfo200Response?, _ error: Error?) -> Void)) -> RequestTask {
-        return basketInfoWithRequestBuilder(id: id, storeId: storeId, params: params, exclude: exclude, responseFields: responseFields).execute(apiResponseQueue) { result in
+    open class func basketInfo(id: String, storeId: String? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: BasketInfo200Response?, _ error: Error?) -> Void)) -> RequestTask {
+        return basketInfoWithRequestBuilder(id: id, storeId: storeId, responseFields: responseFields, params: params, exclude: exclude).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -47,12 +47,12 @@ open class BasketAPI {
        - name: ApiKeyAuth
      - parameter id: (query) Entity id 
      - parameter storeId: (query) Store Id (optional)
+     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
      - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "force_all")
      - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
-     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
      - returns: RequestBuilder<BasketInfo200Response> 
      */
-    open class func basketInfoWithRequestBuilder(id: String, storeId: String? = nil, params: String? = nil, exclude: String? = nil, responseFields: String? = nil) -> RequestBuilder<BasketInfo200Response> {
+    open class func basketInfoWithRequestBuilder(id: String, storeId: String? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil) -> RequestBuilder<BasketInfo200Response> {
         let localVariablePath = "/basket.info.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -61,9 +61,9 @@ open class BasketAPI {
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
             "id": (wrappedValue: id.encodeToJSON(), isExplode: true),
             "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
+            "response_fields": (wrappedValue: responseFields?.encodeToJSON(), isExplode: true),
             "params": (wrappedValue: params?.encodeToJSON(), isExplode: true),
             "exclude": (wrappedValue: exclude?.encodeToJSON(), isExplode: true),
-            "response_fields": (wrappedValue: responseFields?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -185,9 +185,9 @@ open class BasketAPI {
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
             "name": (wrappedValue: name.encodeToJSON(), isExplode: true),
             "callback": (wrappedValue: callback.encodeToJSON(), isExplode: true),
+            "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -257,15 +257,15 @@ open class BasketAPI {
     /**
      basket.live_shipping_service.list
      
-     - parameter storeId: (query) Store Id (optional)
      - parameter start: (query) This parameter sets the number from which you want to get entities (optional, default to 0)
      - parameter count: (query) This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 (optional, default to 10)
+     - parameter storeId: (query) Store Id (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func basketLiveShippingServiceList(storeId: String? = nil, start: Int? = nil, count: Int? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: BasketLiveShippingServiceList200Response?, _ error: Error?) -> Void)) -> RequestTask {
-        return basketLiveShippingServiceListWithRequestBuilder(storeId: storeId, start: start, count: count).execute(apiResponseQueue) { result in
+    open class func basketLiveShippingServiceList(start: Int? = nil, count: Int? = nil, storeId: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: BasketLiveShippingServiceList200Response?, _ error: Error?) -> Void)) -> RequestTask {
+        return basketLiveShippingServiceListWithRequestBuilder(start: start, count: count, storeId: storeId).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -285,21 +285,21 @@ open class BasketAPI {
      - API Key:
        - type: apiKey x-api-key (HEADER)
        - name: ApiKeyAuth
-     - parameter storeId: (query) Store Id (optional)
      - parameter start: (query) This parameter sets the number from which you want to get entities (optional, default to 0)
      - parameter count: (query) This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 (optional, default to 10)
+     - parameter storeId: (query) Store Id (optional)
      - returns: RequestBuilder<BasketLiveShippingServiceList200Response> 
      */
-    open class func basketLiveShippingServiceListWithRequestBuilder(storeId: String? = nil, start: Int? = nil, count: Int? = nil) -> RequestBuilder<BasketLiveShippingServiceList200Response> {
+    open class func basketLiveShippingServiceListWithRequestBuilder(start: Int? = nil, count: Int? = nil, storeId: String? = nil) -> RequestBuilder<BasketLiveShippingServiceList200Response> {
         let localVariablePath = "/basket.live_shipping_service.list.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
             "start": (wrappedValue: start?.encodeToJSON(), isExplode: true),
             "count": (wrappedValue: count?.encodeToJSON(), isExplode: true),
+            "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [

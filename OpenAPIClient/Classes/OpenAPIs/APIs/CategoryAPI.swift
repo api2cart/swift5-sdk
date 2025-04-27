@@ -16,26 +16,26 @@ open class CategoryAPI {
      category.add
      
      - parameter name: (query) Defines category&#39;s name that has to be added 
-     - parameter parentId: (query) Adds categories specified by parent id (optional)
-     - parameter storesIds: (query) Create category in the stores that is specified by comma-separated stores&#39; id (optional)
-     - parameter storeId: (query) Store Id (optional)
-     - parameter langId: (query) Language id (optional)
-     - parameter avail: (query) Defines category&#39;s visibility status (optional, default to true)
-     - parameter sortOrder: (query) Sort number in the list (optional, default to 0)
-     - parameter createdTime: (query) Entity&#39;s date creation (optional)
-     - parameter modifiedTime: (query) Entity&#39;s date modification (optional)
      - parameter description: (query) Defines category&#39;s description (optional)
      - parameter shortDescription: (query) Defines short description (optional)
+     - parameter parentId: (query) Adds categories specified by parent id (optional)
+     - parameter avail: (query) Defines category&#39;s visibility status (optional, default to true)
+     - parameter createdTime: (query) Entity&#39;s date creation (optional)
+     - parameter modifiedTime: (query) Entity&#39;s date modification (optional)
+     - parameter sortOrder: (query) Sort number in the list (optional, default to 0)
      - parameter metaTitle: (query) Defines unique meta title for each entity (optional)
      - parameter metaDescription: (query) Defines unique meta description of a entity (optional)
      - parameter metaKeywords: (query) Defines unique meta keywords for each entity (optional)
      - parameter seoUrl: (query) Defines unique category&#39;s URL for SEO (optional)
+     - parameter storeId: (query) Store Id (optional)
+     - parameter storesIds: (query) Create category in the stores that is specified by comma-separated stores&#39; id (optional)
+     - parameter langId: (query) Language id (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func categoryAdd(name: String, parentId: String? = nil, storesIds: String? = nil, storeId: String? = nil, langId: String? = nil, avail: Bool? = nil, sortOrder: Int? = nil, createdTime: String? = nil, modifiedTime: String? = nil, description: String? = nil, shortDescription: String? = nil, metaTitle: String? = nil, metaDescription: String? = nil, metaKeywords: String? = nil, seoUrl: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: CategoryAdd200Response?, _ error: Error?) -> Void)) -> RequestTask {
-        return categoryAddWithRequestBuilder(name: name, parentId: parentId, storesIds: storesIds, storeId: storeId, langId: langId, avail: avail, sortOrder: sortOrder, createdTime: createdTime, modifiedTime: modifiedTime, description: description, shortDescription: shortDescription, metaTitle: metaTitle, metaDescription: metaDescription, metaKeywords: metaKeywords, seoUrl: seoUrl).execute(apiResponseQueue) { result in
+    open class func categoryAdd(name: String, description: String? = nil, shortDescription: String? = nil, parentId: String? = nil, avail: Bool? = nil, createdTime: String? = nil, modifiedTime: String? = nil, sortOrder: Int? = nil, metaTitle: String? = nil, metaDescription: String? = nil, metaKeywords: String? = nil, seoUrl: String? = nil, storeId: String? = nil, storesIds: String? = nil, langId: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: CategoryAdd200Response?, _ error: Error?) -> Void)) -> RequestTask {
+        return categoryAddWithRequestBuilder(name: name, description: description, shortDescription: shortDescription, parentId: parentId, avail: avail, createdTime: createdTime, modifiedTime: modifiedTime, sortOrder: sortOrder, metaTitle: metaTitle, metaDescription: metaDescription, metaKeywords: metaKeywords, seoUrl: seoUrl, storeId: storeId, storesIds: storesIds, langId: langId).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -56,23 +56,23 @@ open class CategoryAPI {
        - type: apiKey x-api-key (HEADER)
        - name: ApiKeyAuth
      - parameter name: (query) Defines category&#39;s name that has to be added 
-     - parameter parentId: (query) Adds categories specified by parent id (optional)
-     - parameter storesIds: (query) Create category in the stores that is specified by comma-separated stores&#39; id (optional)
-     - parameter storeId: (query) Store Id (optional)
-     - parameter langId: (query) Language id (optional)
-     - parameter avail: (query) Defines category&#39;s visibility status (optional, default to true)
-     - parameter sortOrder: (query) Sort number in the list (optional, default to 0)
-     - parameter createdTime: (query) Entity&#39;s date creation (optional)
-     - parameter modifiedTime: (query) Entity&#39;s date modification (optional)
      - parameter description: (query) Defines category&#39;s description (optional)
      - parameter shortDescription: (query) Defines short description (optional)
+     - parameter parentId: (query) Adds categories specified by parent id (optional)
+     - parameter avail: (query) Defines category&#39;s visibility status (optional, default to true)
+     - parameter createdTime: (query) Entity&#39;s date creation (optional)
+     - parameter modifiedTime: (query) Entity&#39;s date modification (optional)
+     - parameter sortOrder: (query) Sort number in the list (optional, default to 0)
      - parameter metaTitle: (query) Defines unique meta title for each entity (optional)
      - parameter metaDescription: (query) Defines unique meta description of a entity (optional)
      - parameter metaKeywords: (query) Defines unique meta keywords for each entity (optional)
      - parameter seoUrl: (query) Defines unique category&#39;s URL for SEO (optional)
+     - parameter storeId: (query) Store Id (optional)
+     - parameter storesIds: (query) Create category in the stores that is specified by comma-separated stores&#39; id (optional)
+     - parameter langId: (query) Language id (optional)
      - returns: RequestBuilder<CategoryAdd200Response> 
      */
-    open class func categoryAddWithRequestBuilder(name: String, parentId: String? = nil, storesIds: String? = nil, storeId: String? = nil, langId: String? = nil, avail: Bool? = nil, sortOrder: Int? = nil, createdTime: String? = nil, modifiedTime: String? = nil, description: String? = nil, shortDescription: String? = nil, metaTitle: String? = nil, metaDescription: String? = nil, metaKeywords: String? = nil, seoUrl: String? = nil) -> RequestBuilder<CategoryAdd200Response> {
+    open class func categoryAddWithRequestBuilder(name: String, description: String? = nil, shortDescription: String? = nil, parentId: String? = nil, avail: Bool? = nil, createdTime: String? = nil, modifiedTime: String? = nil, sortOrder: Int? = nil, metaTitle: String? = nil, metaDescription: String? = nil, metaKeywords: String? = nil, seoUrl: String? = nil, storeId: String? = nil, storesIds: String? = nil, langId: String? = nil) -> RequestBuilder<CategoryAdd200Response> {
         let localVariablePath = "/category.add.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -80,20 +80,20 @@ open class CategoryAPI {
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
             "name": (wrappedValue: name.encodeToJSON(), isExplode: true),
-            "parent_id": (wrappedValue: parentId?.encodeToJSON(), isExplode: true),
-            "stores_ids": (wrappedValue: storesIds?.encodeToJSON(), isExplode: true),
-            "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
-            "lang_id": (wrappedValue: langId?.encodeToJSON(), isExplode: true),
-            "avail": (wrappedValue: avail?.encodeToJSON(), isExplode: true),
-            "sort_order": (wrappedValue: sortOrder?.encodeToJSON(), isExplode: true),
-            "created_time": (wrappedValue: createdTime?.encodeToJSON(), isExplode: true),
-            "modified_time": (wrappedValue: modifiedTime?.encodeToJSON(), isExplode: true),
             "description": (wrappedValue: description?.encodeToJSON(), isExplode: true),
             "short_description": (wrappedValue: shortDescription?.encodeToJSON(), isExplode: true),
+            "parent_id": (wrappedValue: parentId?.encodeToJSON(), isExplode: true),
+            "avail": (wrappedValue: avail?.encodeToJSON(), isExplode: true),
+            "created_time": (wrappedValue: createdTime?.encodeToJSON(), isExplode: true),
+            "modified_time": (wrappedValue: modifiedTime?.encodeToJSON(), isExplode: true),
+            "sort_order": (wrappedValue: sortOrder?.encodeToJSON(), isExplode: true),
             "meta_title": (wrappedValue: metaTitle?.encodeToJSON(), isExplode: true),
             "meta_description": (wrappedValue: metaDescription?.encodeToJSON(), isExplode: true),
             "meta_keywords": (wrappedValue: metaKeywords?.encodeToJSON(), isExplode: true),
             "seo_url": (wrappedValue: seoUrl?.encodeToJSON(), isExplode: true),
+            "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
+            "stores_ids": (wrappedValue: storesIds?.encodeToJSON(), isExplode: true),
+            "lang_id": (wrappedValue: langId?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -160,15 +160,15 @@ open class CategoryAPI {
     /**
      category.assign
      
-     - parameter productId: (query) Defines category assign to the product, specified by product id 
      - parameter categoryId: (query) Defines category assign, specified by category id 
+     - parameter productId: (query) Defines category assign to the product, specified by product id 
      - parameter storeId: (query) Store Id (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func categoryAssign(productId: String, categoryId: String, storeId: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: CartConfigUpdate200Response?, _ error: Error?) -> Void)) -> RequestTask {
-        return categoryAssignWithRequestBuilder(productId: productId, categoryId: categoryId, storeId: storeId).execute(apiResponseQueue) { result in
+    open class func categoryAssign(categoryId: String, productId: String, storeId: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: CartConfigUpdate200Response?, _ error: Error?) -> Void)) -> RequestTask {
+        return categoryAssignWithRequestBuilder(categoryId: categoryId, productId: productId, storeId: storeId).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -188,20 +188,20 @@ open class CategoryAPI {
      - API Key:
        - type: apiKey x-api-key (HEADER)
        - name: ApiKeyAuth
-     - parameter productId: (query) Defines category assign to the product, specified by product id 
      - parameter categoryId: (query) Defines category assign, specified by category id 
+     - parameter productId: (query) Defines category assign to the product, specified by product id 
      - parameter storeId: (query) Store Id (optional)
      - returns: RequestBuilder<CartConfigUpdate200Response> 
      */
-    open class func categoryAssignWithRequestBuilder(productId: String, categoryId: String, storeId: String? = nil) -> RequestBuilder<CartConfigUpdate200Response> {
+    open class func categoryAssignWithRequestBuilder(categoryId: String, productId: String, storeId: String? = nil) -> RequestBuilder<CartConfigUpdate200Response> {
         let localVariablePath = "/category.assign.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "product_id": (wrappedValue: productId.encodeToJSON(), isExplode: true),
             "category_id": (wrappedValue: categoryId.encodeToJSON(), isExplode: true),
+            "product_id": (wrappedValue: productId.encodeToJSON(), isExplode: true),
             "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
         ])
 
@@ -222,11 +222,11 @@ open class CategoryAPI {
      - parameter parentId: (query) Counts categories specified by parent id (optional)
      - parameter storeId: (query) Counts category specified by store id (optional)
      - parameter langId: (query) Counts category specified by language id (optional)
+     - parameter avail: (query) Defines category&#39;s visibility status (optional, default to true)
      - parameter createdFrom: (query) Retrieve entities from their creation date (optional)
      - parameter createdTo: (query) Retrieve entities to their creation date (optional)
      - parameter modifiedFrom: (query) Retrieve entities from their modification date (optional)
      - parameter modifiedTo: (query) Retrieve entities to their modification date (optional)
-     - parameter avail: (query) Defines category&#39;s visibility status (optional, default to true)
      - parameter productType: (query) A categorization for the product (optional)
      - parameter findValue: (query) Entity search that is specified by some value (optional)
      - parameter findWhere: (query) Counts categories that are searched specified by field (optional)
@@ -236,8 +236,8 @@ open class CategoryAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func categoryCount(parentId: String? = nil, storeId: String? = nil, langId: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, avail: Bool? = nil, productType: String? = nil, findValue: String? = nil, findWhere: String? = nil, reportRequestId: String? = nil, disableReportCache: Bool? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: CategoryCount200Response?, _ error: Error?) -> Void)) -> RequestTask {
-        return categoryCountWithRequestBuilder(parentId: parentId, storeId: storeId, langId: langId, createdFrom: createdFrom, createdTo: createdTo, modifiedFrom: modifiedFrom, modifiedTo: modifiedTo, avail: avail, productType: productType, findValue: findValue, findWhere: findWhere, reportRequestId: reportRequestId, disableReportCache: disableReportCache).execute(apiResponseQueue) { result in
+    open class func categoryCount(parentId: String? = nil, storeId: String? = nil, langId: String? = nil, avail: Bool? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, productType: String? = nil, findValue: String? = nil, findWhere: String? = nil, reportRequestId: String? = nil, disableReportCache: Bool? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: CategoryCount200Response?, _ error: Error?) -> Void)) -> RequestTask {
+        return categoryCountWithRequestBuilder(parentId: parentId, storeId: storeId, langId: langId, avail: avail, createdFrom: createdFrom, createdTo: createdTo, modifiedFrom: modifiedFrom, modifiedTo: modifiedTo, productType: productType, findValue: findValue, findWhere: findWhere, reportRequestId: reportRequestId, disableReportCache: disableReportCache).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -260,11 +260,11 @@ open class CategoryAPI {
      - parameter parentId: (query) Counts categories specified by parent id (optional)
      - parameter storeId: (query) Counts category specified by store id (optional)
      - parameter langId: (query) Counts category specified by language id (optional)
+     - parameter avail: (query) Defines category&#39;s visibility status (optional, default to true)
      - parameter createdFrom: (query) Retrieve entities from their creation date (optional)
      - parameter createdTo: (query) Retrieve entities to their creation date (optional)
      - parameter modifiedFrom: (query) Retrieve entities from their modification date (optional)
      - parameter modifiedTo: (query) Retrieve entities to their modification date (optional)
-     - parameter avail: (query) Defines category&#39;s visibility status (optional, default to true)
      - parameter productType: (query) A categorization for the product (optional)
      - parameter findValue: (query) Entity search that is specified by some value (optional)
      - parameter findWhere: (query) Counts categories that are searched specified by field (optional)
@@ -272,7 +272,7 @@ open class CategoryAPI {
      - parameter disableReportCache: (query) Disable report cache for current request (optional, default to false)
      - returns: RequestBuilder<CategoryCount200Response> 
      */
-    open class func categoryCountWithRequestBuilder(parentId: String? = nil, storeId: String? = nil, langId: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, avail: Bool? = nil, productType: String? = nil, findValue: String? = nil, findWhere: String? = nil, reportRequestId: String? = nil, disableReportCache: Bool? = nil) -> RequestBuilder<CategoryCount200Response> {
+    open class func categoryCountWithRequestBuilder(parentId: String? = nil, storeId: String? = nil, langId: String? = nil, avail: Bool? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, productType: String? = nil, findValue: String? = nil, findWhere: String? = nil, reportRequestId: String? = nil, disableReportCache: Bool? = nil) -> RequestBuilder<CategoryCount200Response> {
         let localVariablePath = "/category.count.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -282,11 +282,11 @@ open class CategoryAPI {
             "parent_id": (wrappedValue: parentId?.encodeToJSON(), isExplode: true),
             "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
             "lang_id": (wrappedValue: langId?.encodeToJSON(), isExplode: true),
+            "avail": (wrappedValue: avail?.encodeToJSON(), isExplode: true),
             "created_from": (wrappedValue: createdFrom?.encodeToJSON(), isExplode: true),
             "created_to": (wrappedValue: createdTo?.encodeToJSON(), isExplode: true),
             "modified_from": (wrappedValue: modifiedFrom?.encodeToJSON(), isExplode: true),
             "modified_to": (wrappedValue: modifiedTo?.encodeToJSON(), isExplode: true),
-            "avail": (wrappedValue: avail?.encodeToJSON(), isExplode: true),
             "product_type": (wrappedValue: productType?.encodeToJSON(), isExplode: true),
             "find_value": (wrappedValue: findValue?.encodeToJSON(), isExplode: true),
             "find_where": (wrappedValue: findWhere?.encodeToJSON(), isExplode: true),
@@ -441,16 +441,16 @@ open class CategoryAPI {
      - parameter imageName: (query) Defines image&#39;s name 
      - parameter url: (query) Defines URL of the image that has to be added 
      - parameter type: (query) Defines image&#39;s types that are specified by comma-separated list 
+     - parameter storeId: (query) Store Id (optional)
      - parameter label: (query) Defines alternative text that has to be attached to the picture (optional)
      - parameter mime: (query) Mime type of image http://en.wikipedia.org/wiki/Internet_media_type. (optional)
      - parameter position: (query) Defines image’s position in the list (optional, default to 0)
-     - parameter storeId: (query) Store Id (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func categoryImageAdd(categoryId: String, imageName: String, url: String, type: ModelType_categoryImageAdd, label: String? = nil, mime: String? = nil, position: Int? = nil, storeId: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: CategoryImageAdd200Response?, _ error: Error?) -> Void)) -> RequestTask {
-        return categoryImageAddWithRequestBuilder(categoryId: categoryId, imageName: imageName, url: url, type: type, label: label, mime: mime, position: position, storeId: storeId).execute(apiResponseQueue) { result in
+    open class func categoryImageAdd(categoryId: String, imageName: String, url: String, type: ModelType_categoryImageAdd, storeId: String? = nil, label: String? = nil, mime: String? = nil, position: Int? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: CategoryImageAdd200Response?, _ error: Error?) -> Void)) -> RequestTask {
+        return categoryImageAddWithRequestBuilder(categoryId: categoryId, imageName: imageName, url: url, type: type, storeId: storeId, label: label, mime: mime, position: position).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -474,13 +474,13 @@ open class CategoryAPI {
      - parameter imageName: (query) Defines image&#39;s name 
      - parameter url: (query) Defines URL of the image that has to be added 
      - parameter type: (query) Defines image&#39;s types that are specified by comma-separated list 
+     - parameter storeId: (query) Store Id (optional)
      - parameter label: (query) Defines alternative text that has to be attached to the picture (optional)
      - parameter mime: (query) Mime type of image http://en.wikipedia.org/wiki/Internet_media_type. (optional)
      - parameter position: (query) Defines image’s position in the list (optional, default to 0)
-     - parameter storeId: (query) Store Id (optional)
      - returns: RequestBuilder<CategoryImageAdd200Response> 
      */
-    open class func categoryImageAddWithRequestBuilder(categoryId: String, imageName: String, url: String, type: ModelType_categoryImageAdd, label: String? = nil, mime: String? = nil, position: Int? = nil, storeId: String? = nil) -> RequestBuilder<CategoryImageAdd200Response> {
+    open class func categoryImageAddWithRequestBuilder(categoryId: String, imageName: String, url: String, type: ModelType_categoryImageAdd, storeId: String? = nil, label: String? = nil, mime: String? = nil, position: Int? = nil) -> RequestBuilder<CategoryImageAdd200Response> {
         let localVariablePath = "/category.image.add.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -490,11 +490,11 @@ open class CategoryAPI {
             "category_id": (wrappedValue: categoryId.encodeToJSON(), isExplode: true),
             "image_name": (wrappedValue: imageName.encodeToJSON(), isExplode: true),
             "url": (wrappedValue: url.encodeToJSON(), isExplode: true),
+            "type": (wrappedValue: type.encodeToJSON(), isExplode: true),
+            "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
             "label": (wrappedValue: label?.encodeToJSON(), isExplode: true),
             "mime": (wrappedValue: mime?.encodeToJSON(), isExplode: true),
-            "type": (wrappedValue: type.encodeToJSON(), isExplode: true),
             "position": (wrappedValue: position?.encodeToJSON(), isExplode: true),
-            "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -571,20 +571,20 @@ open class CategoryAPI {
      category.info
      
      - parameter id: (query) Retrieves category&#39;s info specified by category id 
-     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,parent_id,name,description")
-     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
-     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
      - parameter storeId: (query) Retrieves category info  specified by store id (optional)
      - parameter langId: (query) Retrieves category info  specified by language id (optional)
      - parameter schemaType: (query) The name of the requirements set for the provided schema. (optional)
+     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
+     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,parent_id,name,description")
+     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
      - parameter reportRequestId: (query) Report request id (optional)
      - parameter disableReportCache: (query) Disable report cache for current request (optional, default to false)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func categoryInfo(id: String, params: String? = nil, responseFields: String? = nil, exclude: String? = nil, storeId: String? = nil, langId: String? = nil, schemaType: String? = nil, reportRequestId: String? = nil, disableReportCache: Bool? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: CategoryInfo200Response?, _ error: Error?) -> Void)) -> RequestTask {
-        return categoryInfoWithRequestBuilder(id: id, params: params, responseFields: responseFields, exclude: exclude, storeId: storeId, langId: langId, schemaType: schemaType, reportRequestId: reportRequestId, disableReportCache: disableReportCache).execute(apiResponseQueue) { result in
+    open class func categoryInfo(id: String, storeId: String? = nil, langId: String? = nil, schemaType: String? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil, reportRequestId: String? = nil, disableReportCache: Bool? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: CategoryInfo200Response?, _ error: Error?) -> Void)) -> RequestTask {
+        return categoryInfoWithRequestBuilder(id: id, storeId: storeId, langId: langId, schemaType: schemaType, responseFields: responseFields, params: params, exclude: exclude, reportRequestId: reportRequestId, disableReportCache: disableReportCache).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -605,17 +605,17 @@ open class CategoryAPI {
        - type: apiKey x-api-key (HEADER)
        - name: ApiKeyAuth
      - parameter id: (query) Retrieves category&#39;s info specified by category id 
-     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,parent_id,name,description")
-     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
-     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
      - parameter storeId: (query) Retrieves category info  specified by store id (optional)
      - parameter langId: (query) Retrieves category info  specified by language id (optional)
      - parameter schemaType: (query) The name of the requirements set for the provided schema. (optional)
+     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
+     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,parent_id,name,description")
+     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
      - parameter reportRequestId: (query) Report request id (optional)
      - parameter disableReportCache: (query) Disable report cache for current request (optional, default to false)
      - returns: RequestBuilder<CategoryInfo200Response> 
      */
-    open class func categoryInfoWithRequestBuilder(id: String, params: String? = nil, responseFields: String? = nil, exclude: String? = nil, storeId: String? = nil, langId: String? = nil, schemaType: String? = nil, reportRequestId: String? = nil, disableReportCache: Bool? = nil) -> RequestBuilder<CategoryInfo200Response> {
+    open class func categoryInfoWithRequestBuilder(id: String, storeId: String? = nil, langId: String? = nil, schemaType: String? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil, reportRequestId: String? = nil, disableReportCache: Bool? = nil) -> RequestBuilder<CategoryInfo200Response> {
         let localVariablePath = "/category.info.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -623,12 +623,12 @@ open class CategoryAPI {
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
             "id": (wrappedValue: id.encodeToJSON(), isExplode: true),
-            "params": (wrappedValue: params?.encodeToJSON(), isExplode: true),
-            "response_fields": (wrappedValue: responseFields?.encodeToJSON(), isExplode: true),
-            "exclude": (wrappedValue: exclude?.encodeToJSON(), isExplode: true),
             "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
             "lang_id": (wrappedValue: langId?.encodeToJSON(), isExplode: true),
             "schema_type": (wrappedValue: schemaType?.encodeToJSON(), isExplode: true),
+            "response_fields": (wrappedValue: responseFields?.encodeToJSON(), isExplode: true),
+            "params": (wrappedValue: params?.encodeToJSON(), isExplode: true),
+            "exclude": (wrappedValue: exclude?.encodeToJSON(), isExplode: true),
             "report_request_id": (wrappedValue: reportRequestId?.encodeToJSON(), isExplode: true),
             "disable_report_cache": (wrappedValue: disableReportCache?.encodeToJSON(), isExplode: true),
         ])
@@ -650,20 +650,20 @@ open class CategoryAPI {
      - parameter start: (query) This parameter sets the number from which you want to get entities (optional, default to 0)
      - parameter count: (query) This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 (optional, default to 10)
      - parameter pageCursor: (query) Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) (optional)
-     - parameter parentId: (query) Retrieves categories specified by parent id (optional)
-     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,parent_id,name,description")
-     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
-     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
      - parameter storeId: (query) Retrieves categories specified by store id (optional)
      - parameter langId: (query) Retrieves categorys specified by language id (optional)
+     - parameter parentId: (query) Retrieves categories specified by parent id (optional)
+     - parameter avail: (query) Defines category&#39;s visibility status (optional, default to true)
+     - parameter productType: (query) A categorization for the product (optional)
      - parameter createdFrom: (query) Retrieve entities from their creation date (optional)
      - parameter createdTo: (query) Retrieve entities to their creation date (optional)
      - parameter modifiedFrom: (query) Retrieve entities from their modification date (optional)
      - parameter modifiedTo: (query) Retrieve entities to their modification date (optional)
-     - parameter avail: (query) Defines category&#39;s visibility status (optional, default to true)
-     - parameter productType: (query) A categorization for the product (optional)
      - parameter findValue: (query) Entity search that is specified by some value (optional)
      - parameter findWhere: (query) Category search that is specified by field (optional)
+     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
+     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,parent_id,name,description")
+     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
      - parameter reportRequestId: (query) Report request id (optional)
      - parameter disableReportCache: (query) Disable report cache for current request (optional, default to false)
      - parameter disableCache: (query) Disable cache for current request (optional, default to false)
@@ -671,8 +671,8 @@ open class CategoryAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func categoryList(start: Int? = nil, count: Int? = nil, pageCursor: String? = nil, parentId: String? = nil, params: String? = nil, responseFields: String? = nil, exclude: String? = nil, storeId: String? = nil, langId: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, avail: Bool? = nil, productType: String? = nil, findValue: String? = nil, findWhere: String? = nil, reportRequestId: String? = nil, disableReportCache: Bool? = nil, disableCache: Bool? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseCategoryList?, _ error: Error?) -> Void)) -> RequestTask {
-        return categoryListWithRequestBuilder(start: start, count: count, pageCursor: pageCursor, parentId: parentId, params: params, responseFields: responseFields, exclude: exclude, storeId: storeId, langId: langId, createdFrom: createdFrom, createdTo: createdTo, modifiedFrom: modifiedFrom, modifiedTo: modifiedTo, avail: avail, productType: productType, findValue: findValue, findWhere: findWhere, reportRequestId: reportRequestId, disableReportCache: disableReportCache, disableCache: disableCache).execute(apiResponseQueue) { result in
+    open class func categoryList(start: Int? = nil, count: Int? = nil, pageCursor: String? = nil, storeId: String? = nil, langId: String? = nil, parentId: String? = nil, avail: Bool? = nil, productType: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, findValue: String? = nil, findWhere: String? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil, reportRequestId: String? = nil, disableReportCache: Bool? = nil, disableCache: Bool? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseCategoryList?, _ error: Error?) -> Void)) -> RequestTask {
+        return categoryListWithRequestBuilder(start: start, count: count, pageCursor: pageCursor, storeId: storeId, langId: langId, parentId: parentId, avail: avail, productType: productType, createdFrom: createdFrom, createdTo: createdTo, modifiedFrom: modifiedFrom, modifiedTo: modifiedTo, findValue: findValue, findWhere: findWhere, responseFields: responseFields, params: params, exclude: exclude, reportRequestId: reportRequestId, disableReportCache: disableReportCache, disableCache: disableCache).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -695,26 +695,26 @@ open class CategoryAPI {
      - parameter start: (query) This parameter sets the number from which you want to get entities (optional, default to 0)
      - parameter count: (query) This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 (optional, default to 10)
      - parameter pageCursor: (query) Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) (optional)
-     - parameter parentId: (query) Retrieves categories specified by parent id (optional)
-     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,parent_id,name,description")
-     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
-     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
      - parameter storeId: (query) Retrieves categories specified by store id (optional)
      - parameter langId: (query) Retrieves categorys specified by language id (optional)
+     - parameter parentId: (query) Retrieves categories specified by parent id (optional)
+     - parameter avail: (query) Defines category&#39;s visibility status (optional, default to true)
+     - parameter productType: (query) A categorization for the product (optional)
      - parameter createdFrom: (query) Retrieve entities from their creation date (optional)
      - parameter createdTo: (query) Retrieve entities to their creation date (optional)
      - parameter modifiedFrom: (query) Retrieve entities from their modification date (optional)
      - parameter modifiedTo: (query) Retrieve entities to their modification date (optional)
-     - parameter avail: (query) Defines category&#39;s visibility status (optional, default to true)
-     - parameter productType: (query) A categorization for the product (optional)
      - parameter findValue: (query) Entity search that is specified by some value (optional)
      - parameter findWhere: (query) Category search that is specified by field (optional)
+     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
+     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,parent_id,name,description")
+     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
      - parameter reportRequestId: (query) Report request id (optional)
      - parameter disableReportCache: (query) Disable report cache for current request (optional, default to false)
      - parameter disableCache: (query) Disable cache for current request (optional, default to false)
      - returns: RequestBuilder<ModelResponseCategoryList> 
      */
-    open class func categoryListWithRequestBuilder(start: Int? = nil, count: Int? = nil, pageCursor: String? = nil, parentId: String? = nil, params: String? = nil, responseFields: String? = nil, exclude: String? = nil, storeId: String? = nil, langId: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, avail: Bool? = nil, productType: String? = nil, findValue: String? = nil, findWhere: String? = nil, reportRequestId: String? = nil, disableReportCache: Bool? = nil, disableCache: Bool? = nil) -> RequestBuilder<ModelResponseCategoryList> {
+    open class func categoryListWithRequestBuilder(start: Int? = nil, count: Int? = nil, pageCursor: String? = nil, storeId: String? = nil, langId: String? = nil, parentId: String? = nil, avail: Bool? = nil, productType: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, findValue: String? = nil, findWhere: String? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil, reportRequestId: String? = nil, disableReportCache: Bool? = nil, disableCache: Bool? = nil) -> RequestBuilder<ModelResponseCategoryList> {
         let localVariablePath = "/category.list.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -724,20 +724,20 @@ open class CategoryAPI {
             "start": (wrappedValue: start?.encodeToJSON(), isExplode: true),
             "count": (wrappedValue: count?.encodeToJSON(), isExplode: true),
             "page_cursor": (wrappedValue: pageCursor?.encodeToJSON(), isExplode: true),
-            "parent_id": (wrappedValue: parentId?.encodeToJSON(), isExplode: true),
-            "params": (wrappedValue: params?.encodeToJSON(), isExplode: true),
-            "response_fields": (wrappedValue: responseFields?.encodeToJSON(), isExplode: true),
-            "exclude": (wrappedValue: exclude?.encodeToJSON(), isExplode: true),
             "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
             "lang_id": (wrappedValue: langId?.encodeToJSON(), isExplode: true),
+            "parent_id": (wrappedValue: parentId?.encodeToJSON(), isExplode: true),
+            "avail": (wrappedValue: avail?.encodeToJSON(), isExplode: true),
+            "product_type": (wrappedValue: productType?.encodeToJSON(), isExplode: true),
             "created_from": (wrappedValue: createdFrom?.encodeToJSON(), isExplode: true),
             "created_to": (wrappedValue: createdTo?.encodeToJSON(), isExplode: true),
             "modified_from": (wrappedValue: modifiedFrom?.encodeToJSON(), isExplode: true),
             "modified_to": (wrappedValue: modifiedTo?.encodeToJSON(), isExplode: true),
-            "avail": (wrappedValue: avail?.encodeToJSON(), isExplode: true),
-            "product_type": (wrappedValue: productType?.encodeToJSON(), isExplode: true),
             "find_value": (wrappedValue: findValue?.encodeToJSON(), isExplode: true),
             "find_where": (wrappedValue: findWhere?.encodeToJSON(), isExplode: true),
+            "response_fields": (wrappedValue: responseFields?.encodeToJSON(), isExplode: true),
+            "params": (wrappedValue: params?.encodeToJSON(), isExplode: true),
+            "exclude": (wrappedValue: exclude?.encodeToJSON(), isExplode: true),
             "report_request_id": (wrappedValue: reportRequestId?.encodeToJSON(), isExplode: true),
             "disable_report_cache": (wrappedValue: disableReportCache?.encodeToJSON(), isExplode: true),
             "disable_cache": (wrappedValue: disableCache?.encodeToJSON(), isExplode: true),
@@ -818,25 +818,25 @@ open class CategoryAPI {
      
      - parameter id: (query) Defines category update specified by category id 
      - parameter name: (query) Defines new category’s name (optional)
+     - parameter description: (query) Defines new category&#39;s description (optional)
+     - parameter shortDescription: (query) Defines short description (optional)
      - parameter parentId: (query) Defines new parent category id (optional)
-     - parameter storesIds: (query) Update category in the stores that is specified by comma-separated stores&#39; id (optional)
      - parameter avail: (query) Defines category&#39;s visibility status (optional)
      - parameter sortOrder: (query) Sort number in the list (optional)
      - parameter modifiedTime: (query) Entity&#39;s date modification (optional)
-     - parameter description: (query) Defines new category&#39;s description (optional)
-     - parameter shortDescription: (query) Defines short description (optional)
      - parameter metaTitle: (query) Defines unique meta title for each entity (optional)
      - parameter metaDescription: (query) Defines unique meta description of a entity (optional)
      - parameter metaKeywords: (query) Defines unique meta keywords for each entity (optional)
      - parameter seoUrl: (query) Defines unique category&#39;s URL for SEO (optional)
-     - parameter langId: (query) Language id (optional)
      - parameter storeId: (query) Store Id (optional)
+     - parameter storesIds: (query) Update category in the stores that is specified by comma-separated stores&#39; id (optional)
+     - parameter langId: (query) Language id (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func categoryUpdate(id: String, name: String? = nil, parentId: String? = nil, storesIds: String? = nil, avail: Bool? = nil, sortOrder: Int? = nil, modifiedTime: String? = nil, description: String? = nil, shortDescription: String? = nil, metaTitle: String? = nil, metaDescription: String? = nil, metaKeywords: String? = nil, seoUrl: String? = nil, langId: String? = nil, storeId: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: AccountConfigUpdate200Response?, _ error: Error?) -> Void)) -> RequestTask {
-        return categoryUpdateWithRequestBuilder(id: id, name: name, parentId: parentId, storesIds: storesIds, avail: avail, sortOrder: sortOrder, modifiedTime: modifiedTime, description: description, shortDescription: shortDescription, metaTitle: metaTitle, metaDescription: metaDescription, metaKeywords: metaKeywords, seoUrl: seoUrl, langId: langId, storeId: storeId).execute(apiResponseQueue) { result in
+    open class func categoryUpdate(id: String, name: String? = nil, description: String? = nil, shortDescription: String? = nil, parentId: String? = nil, avail: Bool? = nil, sortOrder: Int? = nil, modifiedTime: String? = nil, metaTitle: String? = nil, metaDescription: String? = nil, metaKeywords: String? = nil, seoUrl: String? = nil, storeId: String? = nil, storesIds: String? = nil, langId: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: AccountConfigUpdate200Response?, _ error: Error?) -> Void)) -> RequestTask {
+        return categoryUpdateWithRequestBuilder(id: id, name: name, description: description, shortDescription: shortDescription, parentId: parentId, avail: avail, sortOrder: sortOrder, modifiedTime: modifiedTime, metaTitle: metaTitle, metaDescription: metaDescription, metaKeywords: metaKeywords, seoUrl: seoUrl, storeId: storeId, storesIds: storesIds, langId: langId).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -858,22 +858,22 @@ open class CategoryAPI {
        - name: ApiKeyAuth
      - parameter id: (query) Defines category update specified by category id 
      - parameter name: (query) Defines new category’s name (optional)
+     - parameter description: (query) Defines new category&#39;s description (optional)
+     - parameter shortDescription: (query) Defines short description (optional)
      - parameter parentId: (query) Defines new parent category id (optional)
-     - parameter storesIds: (query) Update category in the stores that is specified by comma-separated stores&#39; id (optional)
      - parameter avail: (query) Defines category&#39;s visibility status (optional)
      - parameter sortOrder: (query) Sort number in the list (optional)
      - parameter modifiedTime: (query) Entity&#39;s date modification (optional)
-     - parameter description: (query) Defines new category&#39;s description (optional)
-     - parameter shortDescription: (query) Defines short description (optional)
      - parameter metaTitle: (query) Defines unique meta title for each entity (optional)
      - parameter metaDescription: (query) Defines unique meta description of a entity (optional)
      - parameter metaKeywords: (query) Defines unique meta keywords for each entity (optional)
      - parameter seoUrl: (query) Defines unique category&#39;s URL for SEO (optional)
-     - parameter langId: (query) Language id (optional)
      - parameter storeId: (query) Store Id (optional)
+     - parameter storesIds: (query) Update category in the stores that is specified by comma-separated stores&#39; id (optional)
+     - parameter langId: (query) Language id (optional)
      - returns: RequestBuilder<AccountConfigUpdate200Response> 
      */
-    open class func categoryUpdateWithRequestBuilder(id: String, name: String? = nil, parentId: String? = nil, storesIds: String? = nil, avail: Bool? = nil, sortOrder: Int? = nil, modifiedTime: String? = nil, description: String? = nil, shortDescription: String? = nil, metaTitle: String? = nil, metaDescription: String? = nil, metaKeywords: String? = nil, seoUrl: String? = nil, langId: String? = nil, storeId: String? = nil) -> RequestBuilder<AccountConfigUpdate200Response> {
+    open class func categoryUpdateWithRequestBuilder(id: String, name: String? = nil, description: String? = nil, shortDescription: String? = nil, parentId: String? = nil, avail: Bool? = nil, sortOrder: Int? = nil, modifiedTime: String? = nil, metaTitle: String? = nil, metaDescription: String? = nil, metaKeywords: String? = nil, seoUrl: String? = nil, storeId: String? = nil, storesIds: String? = nil, langId: String? = nil) -> RequestBuilder<AccountConfigUpdate200Response> {
         let localVariablePath = "/category.update.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -882,19 +882,19 @@ open class CategoryAPI {
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
             "id": (wrappedValue: id.encodeToJSON(), isExplode: true),
             "name": (wrappedValue: name?.encodeToJSON(), isExplode: true),
+            "description": (wrappedValue: description?.encodeToJSON(), isExplode: true),
+            "short_description": (wrappedValue: shortDescription?.encodeToJSON(), isExplode: true),
             "parent_id": (wrappedValue: parentId?.encodeToJSON(), isExplode: true),
-            "stores_ids": (wrappedValue: storesIds?.encodeToJSON(), isExplode: true),
             "avail": (wrappedValue: avail?.encodeToJSON(), isExplode: true),
             "sort_order": (wrappedValue: sortOrder?.encodeToJSON(), isExplode: true),
             "modified_time": (wrappedValue: modifiedTime?.encodeToJSON(), isExplode: true),
-            "description": (wrappedValue: description?.encodeToJSON(), isExplode: true),
-            "short_description": (wrappedValue: shortDescription?.encodeToJSON(), isExplode: true),
             "meta_title": (wrappedValue: metaTitle?.encodeToJSON(), isExplode: true),
             "meta_description": (wrappedValue: metaDescription?.encodeToJSON(), isExplode: true),
             "meta_keywords": (wrappedValue: metaKeywords?.encodeToJSON(), isExplode: true),
             "seo_url": (wrappedValue: seoUrl?.encodeToJSON(), isExplode: true),
-            "lang_id": (wrappedValue: langId?.encodeToJSON(), isExplode: true),
             "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
+            "stores_ids": (wrappedValue: storesIds?.encodeToJSON(), isExplode: true),
+            "lang_id": (wrappedValue: langId?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [

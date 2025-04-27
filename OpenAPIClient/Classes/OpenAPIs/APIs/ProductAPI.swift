@@ -116,26 +116,26 @@ open class ProductAPI {
      product.attribute.list
      
      - parameter productId: (query) Retrieves attributes specified by product id 
-     - parameter attributeId: (query) Retrieves info for specified attribute_id (optional)
-     - parameter variantId: (query) Defines product&#39;s variants specified by variant id (optional)
-     - parameter pageCursor: (query) Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) (optional)
      - parameter start: (query) This parameter sets the number from which you want to get entities (optional, default to 0)
      - parameter count: (query) This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 (optional, default to 10)
+     - parameter pageCursor: (query) Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) (optional)
+     - parameter attributeId: (query) Retrieves info for specified attribute_id (optional)
+     - parameter variantId: (query) Defines product&#39;s variants specified by variant id (optional)
      - parameter attributeGroupId: (query) Filter by attribute_group_id (optional)
-     - parameter setName: (query) Retrieves attributes specified by set_name in Magento (optional)
      - parameter langId: (query) Retrieves attributes specified by language id (optional)
      - parameter storeId: (query) Retrieves attributes specified by store id (optional)
+     - parameter setName: (query) Retrieves attributes specified by set_name in Magento (optional)
      - parameter sortBy: (query) Set field to sort by (optional, default to "attribute_id")
      - parameter sortDirection: (query) Set sorting direction (optional, default to "asc")
-     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "attribute_id,name")
      - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
+     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "attribute_id,name")
      - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func productAttributeList(productId: String, attributeId: String? = nil, variantId: String? = nil, pageCursor: String? = nil, start: Int? = nil, count: Int? = nil, attributeGroupId: String? = nil, setName: String? = nil, langId: String? = nil, storeId: String? = nil, sortBy: String? = nil, sortDirection: String? = nil, params: String? = nil, responseFields: String? = nil, exclude: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseProductAttributeList?, _ error: Error?) -> Void)) -> RequestTask {
-        return productAttributeListWithRequestBuilder(productId: productId, attributeId: attributeId, variantId: variantId, pageCursor: pageCursor, start: start, count: count, attributeGroupId: attributeGroupId, setName: setName, langId: langId, storeId: storeId, sortBy: sortBy, sortDirection: sortDirection, params: params, responseFields: responseFields, exclude: exclude).execute(apiResponseQueue) { result in
+    open class func productAttributeList(productId: String, start: Int? = nil, count: Int? = nil, pageCursor: String? = nil, attributeId: String? = nil, variantId: String? = nil, attributeGroupId: String? = nil, langId: String? = nil, storeId: String? = nil, setName: String? = nil, sortBy: String? = nil, sortDirection: String? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseProductAttributeList?, _ error: Error?) -> Void)) -> RequestTask {
+        return productAttributeListWithRequestBuilder(productId: productId, start: start, count: count, pageCursor: pageCursor, attributeId: attributeId, variantId: variantId, attributeGroupId: attributeGroupId, langId: langId, storeId: storeId, setName: setName, sortBy: sortBy, sortDirection: sortDirection, responseFields: responseFields, params: params, exclude: exclude).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -156,43 +156,43 @@ open class ProductAPI {
        - type: apiKey x-api-key (HEADER)
        - name: ApiKeyAuth
      - parameter productId: (query) Retrieves attributes specified by product id 
-     - parameter attributeId: (query) Retrieves info for specified attribute_id (optional)
-     - parameter variantId: (query) Defines product&#39;s variants specified by variant id (optional)
-     - parameter pageCursor: (query) Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) (optional)
      - parameter start: (query) This parameter sets the number from which you want to get entities (optional, default to 0)
      - parameter count: (query) This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 (optional, default to 10)
+     - parameter pageCursor: (query) Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) (optional)
+     - parameter attributeId: (query) Retrieves info for specified attribute_id (optional)
+     - parameter variantId: (query) Defines product&#39;s variants specified by variant id (optional)
      - parameter attributeGroupId: (query) Filter by attribute_group_id (optional)
-     - parameter setName: (query) Retrieves attributes specified by set_name in Magento (optional)
      - parameter langId: (query) Retrieves attributes specified by language id (optional)
      - parameter storeId: (query) Retrieves attributes specified by store id (optional)
+     - parameter setName: (query) Retrieves attributes specified by set_name in Magento (optional)
      - parameter sortBy: (query) Set field to sort by (optional, default to "attribute_id")
      - parameter sortDirection: (query) Set sorting direction (optional, default to "asc")
-     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "attribute_id,name")
      - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
+     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "attribute_id,name")
      - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
      - returns: RequestBuilder<ModelResponseProductAttributeList> 
      */
-    open class func productAttributeListWithRequestBuilder(productId: String, attributeId: String? = nil, variantId: String? = nil, pageCursor: String? = nil, start: Int? = nil, count: Int? = nil, attributeGroupId: String? = nil, setName: String? = nil, langId: String? = nil, storeId: String? = nil, sortBy: String? = nil, sortDirection: String? = nil, params: String? = nil, responseFields: String? = nil, exclude: String? = nil) -> RequestBuilder<ModelResponseProductAttributeList> {
+    open class func productAttributeListWithRequestBuilder(productId: String, start: Int? = nil, count: Int? = nil, pageCursor: String? = nil, attributeId: String? = nil, variantId: String? = nil, attributeGroupId: String? = nil, langId: String? = nil, storeId: String? = nil, setName: String? = nil, sortBy: String? = nil, sortDirection: String? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil) -> RequestBuilder<ModelResponseProductAttributeList> {
         let localVariablePath = "/product.attribute.list.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "start": (wrappedValue: start?.encodeToJSON(), isExplode: true),
+            "count": (wrappedValue: count?.encodeToJSON(), isExplode: true),
+            "page_cursor": (wrappedValue: pageCursor?.encodeToJSON(), isExplode: true),
             "product_id": (wrappedValue: productId.encodeToJSON(), isExplode: true),
             "attribute_id": (wrappedValue: attributeId?.encodeToJSON(), isExplode: true),
             "variant_id": (wrappedValue: variantId?.encodeToJSON(), isExplode: true),
-            "page_cursor": (wrappedValue: pageCursor?.encodeToJSON(), isExplode: true),
-            "start": (wrappedValue: start?.encodeToJSON(), isExplode: true),
-            "count": (wrappedValue: count?.encodeToJSON(), isExplode: true),
             "attribute_group_id": (wrappedValue: attributeGroupId?.encodeToJSON(), isExplode: true),
-            "set_name": (wrappedValue: setName?.encodeToJSON(), isExplode: true),
             "lang_id": (wrappedValue: langId?.encodeToJSON(), isExplode: true),
             "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
+            "set_name": (wrappedValue: setName?.encodeToJSON(), isExplode: true),
             "sort_by": (wrappedValue: sortBy?.encodeToJSON(), isExplode: true),
             "sort_direction": (wrappedValue: sortDirection?.encodeToJSON(), isExplode: true),
-            "params": (wrappedValue: params?.encodeToJSON(), isExplode: true),
             "response_fields": (wrappedValue: responseFields?.encodeToJSON(), isExplode: true),
+            "params": (wrappedValue: params?.encodeToJSON(), isExplode: true),
             "exclude": (wrappedValue: exclude?.encodeToJSON(), isExplode: true),
         ])
 
@@ -355,26 +355,26 @@ open class ProductAPI {
      - parameter start: (query) This parameter sets the number from which you want to get entities (optional, default to 0)
      - parameter count: (query) This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 (optional, default to 10)
      - parameter pageCursor: (query) Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) (optional)
-     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,name,short_description,active,url")
      - parameter brandIds: (query) Retrieves brands specified by brand ids (optional)
-     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
      - parameter categoryId: (query) Retrieves product brands specified by category id (optional)
+     - parameter parentId: (query) Retrieves brands specified by parent id (optional)
      - parameter storeId: (query) Store Id (optional)
      - parameter langId: (query) Language id (optional)
+     - parameter findWhere: (query) Entity search that is specified by the comma-separated unique fields (optional)
+     - parameter findValue: (query) Entity search that is specified by some value (optional)
      - parameter createdFrom: (query) Retrieve entities from their creation date (optional)
      - parameter createdTo: (query) Retrieve entities to their creation date (optional)
      - parameter modifiedFrom: (query) Retrieve entities from their modification date (optional)
      - parameter modifiedTo: (query) Retrieve entities to their modification date (optional)
-     - parameter parentId: (query) Retrieves brands specified by parent id (optional)
      - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
-     - parameter findWhere: (query) Entity search that is specified by the comma-separated unique fields (optional)
-     - parameter findValue: (query) Entity search that is specified by some value (optional)
+     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,name,short_description,active,url")
+     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func productBrandList(start: Int? = nil, count: Int? = nil, pageCursor: String? = nil, params: String? = nil, brandIds: String? = nil, exclude: String? = nil, categoryId: String? = nil, storeId: String? = nil, langId: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, parentId: String? = nil, responseFields: String? = nil, findWhere: String? = nil, findValue: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseProductBrandList?, _ error: Error?) -> Void)) -> RequestTask {
-        return productBrandListWithRequestBuilder(start: start, count: count, pageCursor: pageCursor, params: params, brandIds: brandIds, exclude: exclude, categoryId: categoryId, storeId: storeId, langId: langId, createdFrom: createdFrom, createdTo: createdTo, modifiedFrom: modifiedFrom, modifiedTo: modifiedTo, parentId: parentId, responseFields: responseFields, findWhere: findWhere, findValue: findValue).execute(apiResponseQueue) { result in
+    open class func productBrandList(start: Int? = nil, count: Int? = nil, pageCursor: String? = nil, brandIds: String? = nil, categoryId: String? = nil, parentId: String? = nil, storeId: String? = nil, langId: String? = nil, findWhere: String? = nil, findValue: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseProductBrandList?, _ error: Error?) -> Void)) -> RequestTask {
+        return productBrandListWithRequestBuilder(start: start, count: count, pageCursor: pageCursor, brandIds: brandIds, categoryId: categoryId, parentId: parentId, storeId: storeId, langId: langId, findWhere: findWhere, findValue: findValue, createdFrom: createdFrom, createdTo: createdTo, modifiedFrom: modifiedFrom, modifiedTo: modifiedTo, responseFields: responseFields, params: params, exclude: exclude).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -397,23 +397,23 @@ open class ProductAPI {
      - parameter start: (query) This parameter sets the number from which you want to get entities (optional, default to 0)
      - parameter count: (query) This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 (optional, default to 10)
      - parameter pageCursor: (query) Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) (optional)
-     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,name,short_description,active,url")
      - parameter brandIds: (query) Retrieves brands specified by brand ids (optional)
-     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
      - parameter categoryId: (query) Retrieves product brands specified by category id (optional)
+     - parameter parentId: (query) Retrieves brands specified by parent id (optional)
      - parameter storeId: (query) Store Id (optional)
      - parameter langId: (query) Language id (optional)
+     - parameter findWhere: (query) Entity search that is specified by the comma-separated unique fields (optional)
+     - parameter findValue: (query) Entity search that is specified by some value (optional)
      - parameter createdFrom: (query) Retrieve entities from their creation date (optional)
      - parameter createdTo: (query) Retrieve entities to their creation date (optional)
      - parameter modifiedFrom: (query) Retrieve entities from their modification date (optional)
      - parameter modifiedTo: (query) Retrieve entities to their modification date (optional)
-     - parameter parentId: (query) Retrieves brands specified by parent id (optional)
      - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
-     - parameter findWhere: (query) Entity search that is specified by the comma-separated unique fields (optional)
-     - parameter findValue: (query) Entity search that is specified by some value (optional)
+     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,name,short_description,active,url")
+     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
      - returns: RequestBuilder<ModelResponseProductBrandList> 
      */
-    open class func productBrandListWithRequestBuilder(start: Int? = nil, count: Int? = nil, pageCursor: String? = nil, params: String? = nil, brandIds: String? = nil, exclude: String? = nil, categoryId: String? = nil, storeId: String? = nil, langId: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, parentId: String? = nil, responseFields: String? = nil, findWhere: String? = nil, findValue: String? = nil) -> RequestBuilder<ModelResponseProductBrandList> {
+    open class func productBrandListWithRequestBuilder(start: Int? = nil, count: Int? = nil, pageCursor: String? = nil, brandIds: String? = nil, categoryId: String? = nil, parentId: String? = nil, storeId: String? = nil, langId: String? = nil, findWhere: String? = nil, findValue: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil) -> RequestBuilder<ModelResponseProductBrandList> {
         let localVariablePath = "/product.brand.list.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -423,20 +423,20 @@ open class ProductAPI {
             "start": (wrappedValue: start?.encodeToJSON(), isExplode: true),
             "count": (wrappedValue: count?.encodeToJSON(), isExplode: true),
             "page_cursor": (wrappedValue: pageCursor?.encodeToJSON(), isExplode: true),
-            "params": (wrappedValue: params?.encodeToJSON(), isExplode: true),
             "brand_ids": (wrappedValue: brandIds?.encodeToJSON(), isExplode: true),
-            "exclude": (wrappedValue: exclude?.encodeToJSON(), isExplode: true),
             "category_id": (wrappedValue: categoryId?.encodeToJSON(), isExplode: true),
+            "parent_id": (wrappedValue: parentId?.encodeToJSON(), isExplode: true),
             "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
             "lang_id": (wrappedValue: langId?.encodeToJSON(), isExplode: true),
+            "find_where": (wrappedValue: findWhere?.encodeToJSON(), isExplode: true),
+            "find_value": (wrappedValue: findValue?.encodeToJSON(), isExplode: true),
             "created_from": (wrappedValue: createdFrom?.encodeToJSON(), isExplode: true),
             "created_to": (wrappedValue: createdTo?.encodeToJSON(), isExplode: true),
             "modified_from": (wrappedValue: modifiedFrom?.encodeToJSON(), isExplode: true),
             "modified_to": (wrappedValue: modifiedTo?.encodeToJSON(), isExplode: true),
-            "parent_id": (wrappedValue: parentId?.encodeToJSON(), isExplode: true),
             "response_fields": (wrappedValue: responseFields?.encodeToJSON(), isExplode: true),
-            "find_where": (wrappedValue: findWhere?.encodeToJSON(), isExplode: true),
-            "find_value": (wrappedValue: findValue?.encodeToJSON(), isExplode: true),
+            "params": (wrappedValue: params?.encodeToJSON(), isExplode: true),
+            "exclude": (wrappedValue: exclude?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -517,19 +517,19 @@ open class ProductAPI {
      
      - parameter productId: (query) Filter by parent product id 
      - parameter id: (query) Entity id 
-     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "force_all")
-     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
-     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
      - parameter storeId: (query) Store Id (optional)
      - parameter langId: (query) Language id (optional)
      - parameter currencyId: (query) Currency Id (optional)
+     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
+     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "force_all")
+     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
      - parameter useLatestApiVersion: (query) Use the latest platform API version (optional, default to false)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func productChildItemInfo(productId: String, id: String, params: String? = nil, responseFields: String? = nil, exclude: String? = nil, storeId: String? = nil, langId: String? = nil, currencyId: String? = nil, useLatestApiVersion: Bool? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ProductChildItemInfo200Response?, _ error: Error?) -> Void)) -> RequestTask {
-        return productChildItemInfoWithRequestBuilder(productId: productId, id: id, params: params, responseFields: responseFields, exclude: exclude, storeId: storeId, langId: langId, currencyId: currencyId, useLatestApiVersion: useLatestApiVersion).execute(apiResponseQueue) { result in
+    open class func productChildItemInfo(productId: String, id: String, storeId: String? = nil, langId: String? = nil, currencyId: String? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil, useLatestApiVersion: Bool? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ProductChildItemInfo200Response?, _ error: Error?) -> Void)) -> RequestTask {
+        return productChildItemInfoWithRequestBuilder(productId: productId, id: id, storeId: storeId, langId: langId, currencyId: currencyId, responseFields: responseFields, params: params, exclude: exclude, useLatestApiVersion: useLatestApiVersion).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -551,30 +551,30 @@ open class ProductAPI {
        - name: ApiKeyAuth
      - parameter productId: (query) Filter by parent product id 
      - parameter id: (query) Entity id 
-     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "force_all")
-     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
-     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
      - parameter storeId: (query) Store Id (optional)
      - parameter langId: (query) Language id (optional)
      - parameter currencyId: (query) Currency Id (optional)
+     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
+     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "force_all")
+     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
      - parameter useLatestApiVersion: (query) Use the latest platform API version (optional, default to false)
      - returns: RequestBuilder<ProductChildItemInfo200Response> 
      */
-    open class func productChildItemInfoWithRequestBuilder(productId: String, id: String, params: String? = nil, responseFields: String? = nil, exclude: String? = nil, storeId: String? = nil, langId: String? = nil, currencyId: String? = nil, useLatestApiVersion: Bool? = nil) -> RequestBuilder<ProductChildItemInfo200Response> {
+    open class func productChildItemInfoWithRequestBuilder(productId: String, id: String, storeId: String? = nil, langId: String? = nil, currencyId: String? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil, useLatestApiVersion: Bool? = nil) -> RequestBuilder<ProductChildItemInfo200Response> {
         let localVariablePath = "/product.child_item.info.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "params": (wrappedValue: params?.encodeToJSON(), isExplode: true),
-            "response_fields": (wrappedValue: responseFields?.encodeToJSON(), isExplode: true),
-            "exclude": (wrappedValue: exclude?.encodeToJSON(), isExplode: true),
             "product_id": (wrappedValue: productId.encodeToJSON(), isExplode: true),
             "id": (wrappedValue: id.encodeToJSON(), isExplode: true),
             "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
             "lang_id": (wrappedValue: langId?.encodeToJSON(), isExplode: true),
             "currency_id": (wrappedValue: currencyId?.encodeToJSON(), isExplode: true),
+            "response_fields": (wrappedValue: responseFields?.encodeToJSON(), isExplode: true),
+            "params": (wrappedValue: params?.encodeToJSON(), isExplode: true),
+            "exclude": (wrappedValue: exclude?.encodeToJSON(), isExplode: true),
             "use_latest_api_version": (wrappedValue: useLatestApiVersion?.encodeToJSON(), isExplode: true),
         ])
 
@@ -592,16 +592,9 @@ open class ProductAPI {
     /**
      product.child_item.list
      
-     - parameter pageCursor: (query) Used to retrieve products child items via cursor-based pagination (it can&#39;t be used with any other filtering parameter) (optional)
      - parameter start: (query) This parameter sets the number from which you want to get entities (optional, default to 0)
      - parameter count: (query) This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 (optional, default to 10)
-     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "force_all")
-     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
-     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
-     - parameter createdFrom: (query) Retrieve entities from their creation date (optional)
-     - parameter createdTo: (query) Retrieve entities to their creation date (optional)
-     - parameter modifiedFrom: (query) Retrieve entities from their modification date (optional)
-     - parameter modifiedTo: (query) Retrieve entities to their modification date (optional)
+     - parameter pageCursor: (query) Used to retrieve products child items via cursor-based pagination (it can&#39;t be used with any other filtering parameter) (optional)
      - parameter productId: (query) Filter by parent product id (optional)
      - parameter productIds: (query) Filter by parent product ids (optional)
      - parameter sku: (query) Filter by products variant&#39;s sku (optional)
@@ -611,16 +604,23 @@ open class ProductAPI {
      - parameter availSale: (query) Specifies the set of available/not available products for sale (optional)
      - parameter findValue: (query) Entity search that is specified by some value (optional)
      - parameter findWhere: (query) Child products search that is specified by field (optional)
+     - parameter createdFrom: (query) Retrieve entities from their creation date (optional)
+     - parameter createdTo: (query) Retrieve entities to their creation date (optional)
+     - parameter modifiedFrom: (query) Retrieve entities from their modification date (optional)
+     - parameter modifiedTo: (query) Retrieve entities to their modification date (optional)
+     - parameter returnGlobal: (query) Determines the type of products to be returned. If set to &#39;true&#39;, only global products will be returned; if set to &#39;false&#39;, only local products will be returned. (optional, default to false)
+     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
+     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "force_all")
+     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
      - parameter reportRequestId: (query) Report request id (optional)
      - parameter disableReportCache: (query) Disable report cache for current request (optional, default to false)
      - parameter useLatestApiVersion: (query) Use the latest platform API version (optional, default to false)
-     - parameter returnGlobal: (query) Determines the type of products to be returned. If set to &#39;true&#39;, only global products will be returned; if set to &#39;false&#39;, only local products will be returned. (optional, default to false)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func productChildItemList(pageCursor: String? = nil, start: Int? = nil, count: Int? = nil, params: String? = nil, responseFields: String? = nil, exclude: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, productId: String? = nil, productIds: String? = nil, sku: String? = nil, storeId: String? = nil, langId: String? = nil, currencyId: String? = nil, availSale: Bool? = nil, findValue: String? = nil, findWhere: String? = nil, reportRequestId: String? = nil, disableReportCache: Bool? = nil, useLatestApiVersion: Bool? = nil, returnGlobal: Bool? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseProductChildItemList?, _ error: Error?) -> Void)) -> RequestTask {
-        return productChildItemListWithRequestBuilder(pageCursor: pageCursor, start: start, count: count, params: params, responseFields: responseFields, exclude: exclude, createdFrom: createdFrom, createdTo: createdTo, modifiedFrom: modifiedFrom, modifiedTo: modifiedTo, productId: productId, productIds: productIds, sku: sku, storeId: storeId, langId: langId, currencyId: currencyId, availSale: availSale, findValue: findValue, findWhere: findWhere, reportRequestId: reportRequestId, disableReportCache: disableReportCache, useLatestApiVersion: useLatestApiVersion, returnGlobal: returnGlobal).execute(apiResponseQueue) { result in
+    open class func productChildItemList(start: Int? = nil, count: Int? = nil, pageCursor: String? = nil, productId: String? = nil, productIds: String? = nil, sku: String? = nil, storeId: String? = nil, langId: String? = nil, currencyId: String? = nil, availSale: Bool? = nil, findValue: String? = nil, findWhere: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, returnGlobal: Bool? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil, reportRequestId: String? = nil, disableReportCache: Bool? = nil, useLatestApiVersion: Bool? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseProductChildItemList?, _ error: Error?) -> Void)) -> RequestTask {
+        return productChildItemListWithRequestBuilder(start: start, count: count, pageCursor: pageCursor, productId: productId, productIds: productIds, sku: sku, storeId: storeId, langId: langId, currencyId: currencyId, availSale: availSale, findValue: findValue, findWhere: findWhere, createdFrom: createdFrom, createdTo: createdTo, modifiedFrom: modifiedFrom, modifiedTo: modifiedTo, returnGlobal: returnGlobal, responseFields: responseFields, params: params, exclude: exclude, reportRequestId: reportRequestId, disableReportCache: disableReportCache, useLatestApiVersion: useLatestApiVersion).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -640,16 +640,9 @@ open class ProductAPI {
      - API Key:
        - type: apiKey x-api-key (HEADER)
        - name: ApiKeyAuth
-     - parameter pageCursor: (query) Used to retrieve products child items via cursor-based pagination (it can&#39;t be used with any other filtering parameter) (optional)
      - parameter start: (query) This parameter sets the number from which you want to get entities (optional, default to 0)
      - parameter count: (query) This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 (optional, default to 10)
-     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "force_all")
-     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
-     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
-     - parameter createdFrom: (query) Retrieve entities from their creation date (optional)
-     - parameter createdTo: (query) Retrieve entities to their creation date (optional)
-     - parameter modifiedFrom: (query) Retrieve entities from their modification date (optional)
-     - parameter modifiedTo: (query) Retrieve entities to their modification date (optional)
+     - parameter pageCursor: (query) Used to retrieve products child items via cursor-based pagination (it can&#39;t be used with any other filtering parameter) (optional)
      - parameter productId: (query) Filter by parent product id (optional)
      - parameter productIds: (query) Filter by parent product ids (optional)
      - parameter sku: (query) Filter by products variant&#39;s sku (optional)
@@ -659,29 +652,29 @@ open class ProductAPI {
      - parameter availSale: (query) Specifies the set of available/not available products for sale (optional)
      - parameter findValue: (query) Entity search that is specified by some value (optional)
      - parameter findWhere: (query) Child products search that is specified by field (optional)
+     - parameter createdFrom: (query) Retrieve entities from their creation date (optional)
+     - parameter createdTo: (query) Retrieve entities to their creation date (optional)
+     - parameter modifiedFrom: (query) Retrieve entities from their modification date (optional)
+     - parameter modifiedTo: (query) Retrieve entities to their modification date (optional)
+     - parameter returnGlobal: (query) Determines the type of products to be returned. If set to &#39;true&#39;, only global products will be returned; if set to &#39;false&#39;, only local products will be returned. (optional, default to false)
+     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
+     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "force_all")
+     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
      - parameter reportRequestId: (query) Report request id (optional)
      - parameter disableReportCache: (query) Disable report cache for current request (optional, default to false)
      - parameter useLatestApiVersion: (query) Use the latest platform API version (optional, default to false)
-     - parameter returnGlobal: (query) Determines the type of products to be returned. If set to &#39;true&#39;, only global products will be returned; if set to &#39;false&#39;, only local products will be returned. (optional, default to false)
      - returns: RequestBuilder<ModelResponseProductChildItemList> 
      */
-    open class func productChildItemListWithRequestBuilder(pageCursor: String? = nil, start: Int? = nil, count: Int? = nil, params: String? = nil, responseFields: String? = nil, exclude: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, productId: String? = nil, productIds: String? = nil, sku: String? = nil, storeId: String? = nil, langId: String? = nil, currencyId: String? = nil, availSale: Bool? = nil, findValue: String? = nil, findWhere: String? = nil, reportRequestId: String? = nil, disableReportCache: Bool? = nil, useLatestApiVersion: Bool? = nil, returnGlobal: Bool? = nil) -> RequestBuilder<ModelResponseProductChildItemList> {
+    open class func productChildItemListWithRequestBuilder(start: Int? = nil, count: Int? = nil, pageCursor: String? = nil, productId: String? = nil, productIds: String? = nil, sku: String? = nil, storeId: String? = nil, langId: String? = nil, currencyId: String? = nil, availSale: Bool? = nil, findValue: String? = nil, findWhere: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, returnGlobal: Bool? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil, reportRequestId: String? = nil, disableReportCache: Bool? = nil, useLatestApiVersion: Bool? = nil) -> RequestBuilder<ModelResponseProductChildItemList> {
         let localVariablePath = "/product.child_item.list.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "page_cursor": (wrappedValue: pageCursor?.encodeToJSON(), isExplode: true),
             "start": (wrappedValue: start?.encodeToJSON(), isExplode: true),
             "count": (wrappedValue: count?.encodeToJSON(), isExplode: true),
-            "params": (wrappedValue: params?.encodeToJSON(), isExplode: true),
-            "response_fields": (wrappedValue: responseFields?.encodeToJSON(), isExplode: true),
-            "exclude": (wrappedValue: exclude?.encodeToJSON(), isExplode: true),
-            "created_from": (wrappedValue: createdFrom?.encodeToJSON(), isExplode: true),
-            "created_to": (wrappedValue: createdTo?.encodeToJSON(), isExplode: true),
-            "modified_from": (wrappedValue: modifiedFrom?.encodeToJSON(), isExplode: true),
-            "modified_to": (wrappedValue: modifiedTo?.encodeToJSON(), isExplode: true),
+            "page_cursor": (wrappedValue: pageCursor?.encodeToJSON(), isExplode: true),
             "product_id": (wrappedValue: productId?.encodeToJSON(), isExplode: true),
             "product_ids": (wrappedValue: productIds?.encodeToJSON(), isExplode: true),
             "sku": (wrappedValue: sku?.encodeToJSON(), isExplode: true),
@@ -691,10 +684,17 @@ open class ProductAPI {
             "avail_sale": (wrappedValue: availSale?.encodeToJSON(), isExplode: true),
             "find_value": (wrappedValue: findValue?.encodeToJSON(), isExplode: true),
             "find_where": (wrappedValue: findWhere?.encodeToJSON(), isExplode: true),
+            "created_from": (wrappedValue: createdFrom?.encodeToJSON(), isExplode: true),
+            "created_to": (wrappedValue: createdTo?.encodeToJSON(), isExplode: true),
+            "modified_from": (wrappedValue: modifiedFrom?.encodeToJSON(), isExplode: true),
+            "modified_to": (wrappedValue: modifiedTo?.encodeToJSON(), isExplode: true),
+            "return_global": (wrappedValue: returnGlobal?.encodeToJSON(), isExplode: true),
+            "response_fields": (wrappedValue: responseFields?.encodeToJSON(), isExplode: true),
+            "params": (wrappedValue: params?.encodeToJSON(), isExplode: true),
+            "exclude": (wrappedValue: exclude?.encodeToJSON(), isExplode: true),
             "report_request_id": (wrappedValue: reportRequestId?.encodeToJSON(), isExplode: true),
             "disable_report_cache": (wrappedValue: disableReportCache?.encodeToJSON(), isExplode: true),
             "use_latest_api_version": (wrappedValue: useLatestApiVersion?.encodeToJSON(), isExplode: true),
-            "return_global": (wrappedValue: returnGlobal?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -711,34 +711,34 @@ open class ProductAPI {
     /**
      product.count
      
+     - parameter productIds: (query) Counts products specified by product ids (optional)
+     - parameter sinceId: (query) Retrieve entities starting from the specified id. (optional)
+     - parameter categoriesIds: (query) Defines product add that is specified by comma-separated categories id (optional)
      - parameter categoryId: (query) Counts products specified by category id (optional)
+     - parameter storeId: (query) Counts products specified by store id (optional)
+     - parameter langId: (query) Counts products specified by language id (optional)
+     - parameter availView: (query) Specifies the set of visible/invisible products (optional)
+     - parameter availSale: (query) Specifies the set of available/not available products for sale (optional)
      - parameter createdFrom: (query) Retrieve entities from their creation date (optional)
      - parameter createdTo: (query) Retrieve entities to their creation date (optional)
      - parameter modifiedFrom: (query) Retrieve entities from their modification date (optional)
      - parameter modifiedTo: (query) Retrieve entities to their modification date (optional)
-     - parameter availView: (query) Specifies the set of visible/invisible products (optional)
-     - parameter availSale: (query) Specifies the set of available/not available products for sale (optional)
-     - parameter storeId: (query) Counts products specified by store id (optional)
-     - parameter langId: (query) Counts products specified by language id (optional)
-     - parameter productIds: (query) Counts products specified by product ids (optional)
-     - parameter sinceId: (query) Retrieve entities starting from the specified id. (optional)
-     - parameter reportRequestId: (query) Report request id (optional)
-     - parameter disableReportCache: (query) Disable report cache for current request (optional, default to false)
      - parameter brandName: (query) Retrieves brands specified by brand name (optional)
      - parameter productAttributes: (query) Defines product attributes (optional)
      - parameter status: (query) Defines product&#39;s status (optional)
      - parameter type: (query) Defines products&#39;s type (optional)
      - parameter findValue: (query) Entity search that is specified by some value (optional)
      - parameter findWhere: (query) Counts products that are searched specified by field (optional)
-     - parameter useLatestApiVersion: (query) Use the latest platform API version (optional, default to false)
+     - parameter reportRequestId: (query) Report request id (optional)
      - parameter returnGlobal: (query) Determines the type of products to be returned. If set to &#39;true&#39;, only global products will be returned; if set to &#39;false&#39;, only local products will be returned. (optional, default to false)
-     - parameter categoriesIds: (query) Defines product add that is specified by comma-separated categories id (optional)
+     - parameter disableReportCache: (query) Disable report cache for current request (optional, default to false)
+     - parameter useLatestApiVersion: (query) Use the latest platform API version (optional, default to false)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func productCount(categoryId: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, availView: Bool? = nil, availSale: Bool? = nil, storeId: String? = nil, langId: String? = nil, productIds: String? = nil, sinceId: String? = nil, reportRequestId: String? = nil, disableReportCache: Bool? = nil, brandName: String? = nil, productAttributes: [String]? = nil, status: String? = nil, type: String? = nil, findValue: String? = nil, findWhere: String? = nil, useLatestApiVersion: Bool? = nil, returnGlobal: Bool? = nil, categoriesIds: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ProductCount200Response?, _ error: Error?) -> Void)) -> RequestTask {
-        return productCountWithRequestBuilder(categoryId: categoryId, createdFrom: createdFrom, createdTo: createdTo, modifiedFrom: modifiedFrom, modifiedTo: modifiedTo, availView: availView, availSale: availSale, storeId: storeId, langId: langId, productIds: productIds, sinceId: sinceId, reportRequestId: reportRequestId, disableReportCache: disableReportCache, brandName: brandName, productAttributes: productAttributes, status: status, type: type, findValue: findValue, findWhere: findWhere, useLatestApiVersion: useLatestApiVersion, returnGlobal: returnGlobal, categoriesIds: categoriesIds).execute(apiResponseQueue) { result in
+    open class func productCount(productIds: String? = nil, sinceId: String? = nil, categoriesIds: String? = nil, categoryId: String? = nil, storeId: String? = nil, langId: String? = nil, availView: Bool? = nil, availSale: Bool? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, brandName: String? = nil, productAttributes: [String]? = nil, status: String? = nil, type: String? = nil, findValue: String? = nil, findWhere: String? = nil, reportRequestId: String? = nil, returnGlobal: Bool? = nil, disableReportCache: Bool? = nil, useLatestApiVersion: Bool? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ProductCount200Response?, _ error: Error?) -> Void)) -> RequestTask {
+        return productCountWithRequestBuilder(productIds: productIds, sinceId: sinceId, categoriesIds: categoriesIds, categoryId: categoryId, storeId: storeId, langId: langId, availView: availView, availSale: availSale, createdFrom: createdFrom, createdTo: createdTo, modifiedFrom: modifiedFrom, modifiedTo: modifiedTo, brandName: brandName, productAttributes: productAttributes, status: status, type: type, findValue: findValue, findWhere: findWhere, reportRequestId: reportRequestId, returnGlobal: returnGlobal, disableReportCache: disableReportCache, useLatestApiVersion: useLatestApiVersion).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -758,59 +758,59 @@ open class ProductAPI {
      - API Key:
        - type: apiKey x-api-key (HEADER)
        - name: ApiKeyAuth
+     - parameter productIds: (query) Counts products specified by product ids (optional)
+     - parameter sinceId: (query) Retrieve entities starting from the specified id. (optional)
+     - parameter categoriesIds: (query) Defines product add that is specified by comma-separated categories id (optional)
      - parameter categoryId: (query) Counts products specified by category id (optional)
+     - parameter storeId: (query) Counts products specified by store id (optional)
+     - parameter langId: (query) Counts products specified by language id (optional)
+     - parameter availView: (query) Specifies the set of visible/invisible products (optional)
+     - parameter availSale: (query) Specifies the set of available/not available products for sale (optional)
      - parameter createdFrom: (query) Retrieve entities from their creation date (optional)
      - parameter createdTo: (query) Retrieve entities to their creation date (optional)
      - parameter modifiedFrom: (query) Retrieve entities from their modification date (optional)
      - parameter modifiedTo: (query) Retrieve entities to their modification date (optional)
-     - parameter availView: (query) Specifies the set of visible/invisible products (optional)
-     - parameter availSale: (query) Specifies the set of available/not available products for sale (optional)
-     - parameter storeId: (query) Counts products specified by store id (optional)
-     - parameter langId: (query) Counts products specified by language id (optional)
-     - parameter productIds: (query) Counts products specified by product ids (optional)
-     - parameter sinceId: (query) Retrieve entities starting from the specified id. (optional)
-     - parameter reportRequestId: (query) Report request id (optional)
-     - parameter disableReportCache: (query) Disable report cache for current request (optional, default to false)
      - parameter brandName: (query) Retrieves brands specified by brand name (optional)
      - parameter productAttributes: (query) Defines product attributes (optional)
      - parameter status: (query) Defines product&#39;s status (optional)
      - parameter type: (query) Defines products&#39;s type (optional)
      - parameter findValue: (query) Entity search that is specified by some value (optional)
      - parameter findWhere: (query) Counts products that are searched specified by field (optional)
-     - parameter useLatestApiVersion: (query) Use the latest platform API version (optional, default to false)
+     - parameter reportRequestId: (query) Report request id (optional)
      - parameter returnGlobal: (query) Determines the type of products to be returned. If set to &#39;true&#39;, only global products will be returned; if set to &#39;false&#39;, only local products will be returned. (optional, default to false)
-     - parameter categoriesIds: (query) Defines product add that is specified by comma-separated categories id (optional)
+     - parameter disableReportCache: (query) Disable report cache for current request (optional, default to false)
+     - parameter useLatestApiVersion: (query) Use the latest platform API version (optional, default to false)
      - returns: RequestBuilder<ProductCount200Response> 
      */
-    open class func productCountWithRequestBuilder(categoryId: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, availView: Bool? = nil, availSale: Bool? = nil, storeId: String? = nil, langId: String? = nil, productIds: String? = nil, sinceId: String? = nil, reportRequestId: String? = nil, disableReportCache: Bool? = nil, brandName: String? = nil, productAttributes: [String]? = nil, status: String? = nil, type: String? = nil, findValue: String? = nil, findWhere: String? = nil, useLatestApiVersion: Bool? = nil, returnGlobal: Bool? = nil, categoriesIds: String? = nil) -> RequestBuilder<ProductCount200Response> {
+    open class func productCountWithRequestBuilder(productIds: String? = nil, sinceId: String? = nil, categoriesIds: String? = nil, categoryId: String? = nil, storeId: String? = nil, langId: String? = nil, availView: Bool? = nil, availSale: Bool? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, brandName: String? = nil, productAttributes: [String]? = nil, status: String? = nil, type: String? = nil, findValue: String? = nil, findWhere: String? = nil, reportRequestId: String? = nil, returnGlobal: Bool? = nil, disableReportCache: Bool? = nil, useLatestApiVersion: Bool? = nil) -> RequestBuilder<ProductCount200Response> {
         let localVariablePath = "/product.count.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "product_ids": (wrappedValue: productIds?.encodeToJSON(), isExplode: true),
+            "since_id": (wrappedValue: sinceId?.encodeToJSON(), isExplode: true),
+            "categories_ids": (wrappedValue: categoriesIds?.encodeToJSON(), isExplode: true),
             "category_id": (wrappedValue: categoryId?.encodeToJSON(), isExplode: true),
+            "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
+            "lang_id": (wrappedValue: langId?.encodeToJSON(), isExplode: true),
+            "avail_view": (wrappedValue: availView?.encodeToJSON(), isExplode: true),
+            "avail_sale": (wrappedValue: availSale?.encodeToJSON(), isExplode: true),
             "created_from": (wrappedValue: createdFrom?.encodeToJSON(), isExplode: true),
             "created_to": (wrappedValue: createdTo?.encodeToJSON(), isExplode: true),
             "modified_from": (wrappedValue: modifiedFrom?.encodeToJSON(), isExplode: true),
             "modified_to": (wrappedValue: modifiedTo?.encodeToJSON(), isExplode: true),
-            "avail_view": (wrappedValue: availView?.encodeToJSON(), isExplode: true),
-            "avail_sale": (wrappedValue: availSale?.encodeToJSON(), isExplode: true),
-            "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
-            "lang_id": (wrappedValue: langId?.encodeToJSON(), isExplode: true),
-            "product_ids": (wrappedValue: productIds?.encodeToJSON(), isExplode: true),
-            "since_id": (wrappedValue: sinceId?.encodeToJSON(), isExplode: true),
-            "report_request_id": (wrappedValue: reportRequestId?.encodeToJSON(), isExplode: true),
-            "disable_report_cache": (wrappedValue: disableReportCache?.encodeToJSON(), isExplode: true),
             "brand_name": (wrappedValue: brandName?.encodeToJSON(), isExplode: true),
             "product_attributes": (wrappedValue: productAttributes?.encodeToJSON(), isExplode: true),
             "status": (wrappedValue: status?.encodeToJSON(), isExplode: true),
             "type": (wrappedValue: type?.encodeToJSON(), isExplode: true),
             "find_value": (wrappedValue: findValue?.encodeToJSON(), isExplode: true),
             "find_where": (wrappedValue: findWhere?.encodeToJSON(), isExplode: true),
-            "use_latest_api_version": (wrappedValue: useLatestApiVersion?.encodeToJSON(), isExplode: true),
+            "report_request_id": (wrappedValue: reportRequestId?.encodeToJSON(), isExplode: true),
             "return_global": (wrappedValue: returnGlobal?.encodeToJSON(), isExplode: true),
-            "categories_ids": (wrappedValue: categoriesIds?.encodeToJSON(), isExplode: true),
+            "disable_report_cache": (wrappedValue: disableReportCache?.encodeToJSON(), isExplode: true),
+            "use_latest_api_version": (wrappedValue: useLatestApiVersion?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -900,18 +900,18 @@ open class ProductAPI {
      
      - parameter start: (query) This parameter sets the number from which you want to get entities (optional, default to 0)
      - parameter count: (query) This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 (optional, default to 10)
-     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "name,iso3,default,avail")
      - parameter pageCursor: (query) Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) (optional)
-     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
-     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
      - parameter _default: (query) Specifies the set of default/not default currencies (optional)
      - parameter avail: (query) Specifies the set of available/not available currencies (optional)
+     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
+     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "name,iso3,default,avail")
+     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func productCurrencyList(start: Int? = nil, count: Int? = nil, params: String? = nil, pageCursor: String? = nil, exclude: String? = nil, responseFields: String? = nil, _default: Bool? = nil, avail: Bool? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseProductCurrencyList?, _ error: Error?) -> Void)) -> RequestTask {
-        return productCurrencyListWithRequestBuilder(start: start, count: count, params: params, pageCursor: pageCursor, exclude: exclude, responseFields: responseFields, _default: _default, avail: avail).execute(apiResponseQueue) { result in
+    open class func productCurrencyList(start: Int? = nil, count: Int? = nil, pageCursor: String? = nil, _default: Bool? = nil, avail: Bool? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseProductCurrencyList?, _ error: Error?) -> Void)) -> RequestTask {
+        return productCurrencyListWithRequestBuilder(start: start, count: count, pageCursor: pageCursor, _default: _default, avail: avail, responseFields: responseFields, params: params, exclude: exclude).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -933,15 +933,15 @@ open class ProductAPI {
        - name: ApiKeyAuth
      - parameter start: (query) This parameter sets the number from which you want to get entities (optional, default to 0)
      - parameter count: (query) This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 (optional, default to 10)
-     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "name,iso3,default,avail")
      - parameter pageCursor: (query) Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) (optional)
-     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
-     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
      - parameter _default: (query) Specifies the set of default/not default currencies (optional)
      - parameter avail: (query) Specifies the set of available/not available currencies (optional)
+     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
+     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "name,iso3,default,avail")
+     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
      - returns: RequestBuilder<ModelResponseProductCurrencyList> 
      */
-    open class func productCurrencyListWithRequestBuilder(start: Int? = nil, count: Int? = nil, params: String? = nil, pageCursor: String? = nil, exclude: String? = nil, responseFields: String? = nil, _default: Bool? = nil, avail: Bool? = nil) -> RequestBuilder<ModelResponseProductCurrencyList> {
+    open class func productCurrencyListWithRequestBuilder(start: Int? = nil, count: Int? = nil, pageCursor: String? = nil, _default: Bool? = nil, avail: Bool? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil) -> RequestBuilder<ModelResponseProductCurrencyList> {
         let localVariablePath = "/product.currency.list.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -950,12 +950,12 @@ open class ProductAPI {
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
             "start": (wrappedValue: start?.encodeToJSON(), isExplode: true),
             "count": (wrappedValue: count?.encodeToJSON(), isExplode: true),
-            "params": (wrappedValue: params?.encodeToJSON(), isExplode: true),
             "page_cursor": (wrappedValue: pageCursor?.encodeToJSON(), isExplode: true),
-            "exclude": (wrappedValue: exclude?.encodeToJSON(), isExplode: true),
-            "response_fields": (wrappedValue: responseFields?.encodeToJSON(), isExplode: true),
             "default": (wrappedValue: _default?.encodeToJSON(), isExplode: true),
             "avail": (wrappedValue: avail?.encodeToJSON(), isExplode: true),
+            "response_fields": (wrappedValue: responseFields?.encodeToJSON(), isExplode: true),
+            "params": (wrappedValue: params?.encodeToJSON(), isExplode: true),
+            "exclude": (wrappedValue: exclude?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -1308,19 +1308,19 @@ open class ProductAPI {
      - parameter productId: (query) Defines product id where the image should be updated 
      - parameter id: (query) Defines image update specified by image id 
      - parameter variantIds: (query) Defines product&#39;s variants ids (optional)
+     - parameter storeId: (query) Store Id (optional)
+     - parameter langId: (query) Language id (optional)
      - parameter imageName: (query) Defines image&#39;s name (optional)
      - parameter type: (query) Defines image&#39;s types that are specified by comma-separated list (optional, default to "additional")
      - parameter label: (query) Defines alternative text that has to be attached to the picture (optional)
      - parameter position: (query) Defines image’s position in the list (optional)
-     - parameter storeId: (query) Store Id (optional)
-     - parameter langId: (query) Language id (optional)
      - parameter hidden: (query) Define is hide image (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func productImageUpdate(productId: String, id: String, variantIds: String? = nil, imageName: String? = nil, type: String? = nil, label: String? = nil, position: Int? = nil, storeId: String? = nil, langId: String? = nil, hidden: Bool? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ProductImageUpdate200Response?, _ error: Error?) -> Void)) -> RequestTask {
-        return productImageUpdateWithRequestBuilder(productId: productId, id: id, variantIds: variantIds, imageName: imageName, type: type, label: label, position: position, storeId: storeId, langId: langId, hidden: hidden).execute(apiResponseQueue) { result in
+    open class func productImageUpdate(productId: String, id: String, variantIds: String? = nil, storeId: String? = nil, langId: String? = nil, imageName: String? = nil, type: String? = nil, label: String? = nil, position: Int? = nil, hidden: Bool? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ProductImageUpdate200Response?, _ error: Error?) -> Void)) -> RequestTask {
+        return productImageUpdateWithRequestBuilder(productId: productId, id: id, variantIds: variantIds, storeId: storeId, langId: langId, imageName: imageName, type: type, label: label, position: position, hidden: hidden).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -1343,16 +1343,16 @@ open class ProductAPI {
      - parameter productId: (query) Defines product id where the image should be updated 
      - parameter id: (query) Defines image update specified by image id 
      - parameter variantIds: (query) Defines product&#39;s variants ids (optional)
+     - parameter storeId: (query) Store Id (optional)
+     - parameter langId: (query) Language id (optional)
      - parameter imageName: (query) Defines image&#39;s name (optional)
      - parameter type: (query) Defines image&#39;s types that are specified by comma-separated list (optional, default to "additional")
      - parameter label: (query) Defines alternative text that has to be attached to the picture (optional)
      - parameter position: (query) Defines image’s position in the list (optional)
-     - parameter storeId: (query) Store Id (optional)
-     - parameter langId: (query) Language id (optional)
      - parameter hidden: (query) Define is hide image (optional)
      - returns: RequestBuilder<ProductImageUpdate200Response> 
      */
-    open class func productImageUpdateWithRequestBuilder(productId: String, id: String, variantIds: String? = nil, imageName: String? = nil, type: String? = nil, label: String? = nil, position: Int? = nil, storeId: String? = nil, langId: String? = nil, hidden: Bool? = nil) -> RequestBuilder<ProductImageUpdate200Response> {
+    open class func productImageUpdateWithRequestBuilder(productId: String, id: String, variantIds: String? = nil, storeId: String? = nil, langId: String? = nil, imageName: String? = nil, type: String? = nil, label: String? = nil, position: Int? = nil, hidden: Bool? = nil) -> RequestBuilder<ProductImageUpdate200Response> {
         let localVariablePath = "/product.image.update.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -1360,14 +1360,14 @@ open class ProductAPI {
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
             "product_id": (wrappedValue: productId.encodeToJSON(), isExplode: true),
+            "id": (wrappedValue: id.encodeToJSON(), isExplode: true),
             "variant_ids": (wrappedValue: variantIds?.encodeToJSON(), isExplode: true),
+            "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
+            "lang_id": (wrappedValue: langId?.encodeToJSON(), isExplode: true),
             "image_name": (wrappedValue: imageName?.encodeToJSON(), isExplode: true),
             "type": (wrappedValue: type?.encodeToJSON(), isExplode: true),
             "label": (wrappedValue: label?.encodeToJSON(), isExplode: true),
             "position": (wrappedValue: position?.encodeToJSON(), isExplode: true),
-            "id": (wrappedValue: id.encodeToJSON(), isExplode: true),
-            "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
-            "lang_id": (wrappedValue: langId?.encodeToJSON(), isExplode: true),
             "hidden": (wrappedValue: hidden?.encodeToJSON(), isExplode: true),
         ])
 
@@ -1386,12 +1386,12 @@ open class ProductAPI {
      product.info
      
      - parameter id: (query) Retrieves product&#39;s info specified by product id 
-     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,name,description,price,categories_ids")
-     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
-     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
      - parameter storeId: (query) Retrieves product info specified by store id (optional)
      - parameter langId: (query) Retrieves product info specified by language id (optional)
      - parameter currencyId: (query) Currency Id (optional)
+     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
+     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,name,description,price,categories_ids")
+     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
      - parameter reportRequestId: (query) Report request id (optional)
      - parameter disableReportCache: (query) Disable report cache for current request (optional, default to false)
      - parameter useLatestApiVersion: (query) Use the latest platform API version (optional, default to false)
@@ -1399,8 +1399,8 @@ open class ProductAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func productInfo(id: String, params: String? = nil, responseFields: String? = nil, exclude: String? = nil, storeId: String? = nil, langId: String? = nil, currencyId: String? = nil, reportRequestId: String? = nil, disableReportCache: Bool? = nil, useLatestApiVersion: Bool? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ProductInfo200Response?, _ error: Error?) -> Void)) -> RequestTask {
-        return productInfoWithRequestBuilder(id: id, params: params, responseFields: responseFields, exclude: exclude, storeId: storeId, langId: langId, currencyId: currencyId, reportRequestId: reportRequestId, disableReportCache: disableReportCache, useLatestApiVersion: useLatestApiVersion).execute(apiResponseQueue) { result in
+    open class func productInfo(id: String, storeId: String? = nil, langId: String? = nil, currencyId: String? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil, reportRequestId: String? = nil, disableReportCache: Bool? = nil, useLatestApiVersion: Bool? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ProductInfo200Response?, _ error: Error?) -> Void)) -> RequestTask {
+        return productInfoWithRequestBuilder(id: id, storeId: storeId, langId: langId, currencyId: currencyId, responseFields: responseFields, params: params, exclude: exclude, reportRequestId: reportRequestId, disableReportCache: disableReportCache, useLatestApiVersion: useLatestApiVersion).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -1421,18 +1421,18 @@ open class ProductAPI {
        - type: apiKey x-api-key (HEADER)
        - name: ApiKeyAuth
      - parameter id: (query) Retrieves product&#39;s info specified by product id 
-     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,name,description,price,categories_ids")
-     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
-     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
      - parameter storeId: (query) Retrieves product info specified by store id (optional)
      - parameter langId: (query) Retrieves product info specified by language id (optional)
      - parameter currencyId: (query) Currency Id (optional)
+     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
+     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,name,description,price,categories_ids")
+     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
      - parameter reportRequestId: (query) Report request id (optional)
      - parameter disableReportCache: (query) Disable report cache for current request (optional, default to false)
      - parameter useLatestApiVersion: (query) Use the latest platform API version (optional, default to false)
      - returns: RequestBuilder<ProductInfo200Response> 
      */
-    open class func productInfoWithRequestBuilder(id: String, params: String? = nil, responseFields: String? = nil, exclude: String? = nil, storeId: String? = nil, langId: String? = nil, currencyId: String? = nil, reportRequestId: String? = nil, disableReportCache: Bool? = nil, useLatestApiVersion: Bool? = nil) -> RequestBuilder<ProductInfo200Response> {
+    open class func productInfoWithRequestBuilder(id: String, storeId: String? = nil, langId: String? = nil, currencyId: String? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil, reportRequestId: String? = nil, disableReportCache: Bool? = nil, useLatestApiVersion: Bool? = nil) -> RequestBuilder<ProductInfo200Response> {
         let localVariablePath = "/product.info.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -1440,12 +1440,12 @@ open class ProductAPI {
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
             "id": (wrappedValue: id.encodeToJSON(), isExplode: true),
-            "params": (wrappedValue: params?.encodeToJSON(), isExplode: true),
-            "response_fields": (wrappedValue: responseFields?.encodeToJSON(), isExplode: true),
-            "exclude": (wrappedValue: exclude?.encodeToJSON(), isExplode: true),
             "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
             "lang_id": (wrappedValue: langId?.encodeToJSON(), isExplode: true),
             "currency_id": (wrappedValue: currencyId?.encodeToJSON(), isExplode: true),
+            "response_fields": (wrappedValue: responseFields?.encodeToJSON(), isExplode: true),
+            "params": (wrappedValue: params?.encodeToJSON(), isExplode: true),
+            "exclude": (wrappedValue: exclude?.encodeToJSON(), isExplode: true),
             "report_request_id": (wrappedValue: reportRequestId?.encodeToJSON(), isExplode: true),
             "disable_report_cache": (wrappedValue: disableReportCache?.encodeToJSON(), isExplode: true),
             "use_latest_api_version": (wrappedValue: useLatestApiVersion?.encodeToJSON(), isExplode: true),
@@ -1465,45 +1465,45 @@ open class ProductAPI {
     /**
      product.list
      
-     - parameter pageCursor: (query) Used to retrieve products via cursor-based pagination (it can&#39;t be used with any other filtering parameter) (optional)
      - parameter start: (query) This parameter sets the number from which you want to get entities (optional, default to 0)
      - parameter count: (query) This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 (optional, default to 10)
-     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,name,description,price,categories_ids")
-     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
-     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
+     - parameter pageCursor: (query) Used to retrieve products via cursor-based pagination (it can&#39;t be used with any other filtering parameter) (optional)
+     - parameter productIds: (query) Retrieves products specified by product ids (optional)
+     - parameter sinceId: (query) Retrieve entities starting from the specified id. (optional)
+     - parameter categoriesIds: (query) Retrieves products specified by categories ids (optional)
      - parameter categoryId: (query) Retrieves products specified by category id (optional)
+     - parameter storeId: (query) Retrieves products specified by store id (optional)
+     - parameter langId: (query) Retrieves products specified by language id (optional)
+     - parameter currencyId: (query) Currency Id (optional)
+     - parameter availView: (query) Specifies the set of visible/invisible products (optional)
+     - parameter availSale: (query) Specifies the set of available/not available products for sale (optional)
      - parameter createdFrom: (query) Retrieve entities from their creation date (optional)
      - parameter createdTo: (query) Retrieve entities to their creation date (optional)
      - parameter modifiedFrom: (query) Retrieve entities from their modification date (optional)
      - parameter modifiedTo: (query) Retrieve entities to their modification date (optional)
-     - parameter availView: (query) Specifies the set of visible/invisible products (optional)
-     - parameter availSale: (query) Specifies the set of available/not available products for sale (optional)
-     - parameter storeId: (query) Retrieves products specified by store id (optional)
-     - parameter langId: (query) Retrieves products specified by language id (optional)
-     - parameter currencyId: (query) Currency Id (optional)
-     - parameter productIds: (query) Retrieves products specified by product ids (optional)
-     - parameter sinceId: (query) Retrieve entities starting from the specified id. (optional)
-     - parameter reportRequestId: (query) Report request id (optional)
-     - parameter disableReportCache: (query) Disable report cache for current request (optional, default to false)
-     - parameter sortBy: (query) Set field to sort by (optional, default to "id")
-     - parameter sortDirection: (query) Set sorting direction (optional, default to "asc")
      - parameter sku: (query) Filter by product&#39;s sku (optional)
-     - parameter disableCache: (query) Disable cache for current request (optional, default to false)
      - parameter brandName: (query) Retrieves brands specified by brand name (optional)
      - parameter productAttributes: (query) Defines product attributes (optional)
      - parameter status: (query) Defines product&#39;s status (optional)
      - parameter type: (query) Defines products&#39;s type (optional)
      - parameter findValue: (query) Entity search that is specified by some value (optional)
      - parameter findWhere: (query) Product search that is specified by field (optional)
-     - parameter useLatestApiVersion: (query) Use the latest platform API version (optional, default to false)
      - parameter returnGlobal: (query) Determines the type of products to be returned. If set to &#39;true&#39;, only global products will be returned; if set to &#39;false&#39;, only local products will be returned. (optional, default to false)
-     - parameter categoriesIds: (query) Retrieves products specified by categories ids (optional)
+     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,name,description,price,categories_ids")
+     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
+     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
+     - parameter sortBy: (query) Set field to sort by (optional, default to "id")
+     - parameter sortDirection: (query) Set sorting direction (optional, default to "asc")
+     - parameter reportRequestId: (query) Report request id (optional)
+     - parameter disableCache: (query) Disable cache for current request (optional, default to false)
+     - parameter disableReportCache: (query) Disable report cache for current request (optional, default to false)
+     - parameter useLatestApiVersion: (query) Use the latest platform API version (optional, default to false)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func productList(pageCursor: String? = nil, start: Int? = nil, count: Int? = nil, params: String? = nil, responseFields: String? = nil, exclude: String? = nil, categoryId: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, availView: Bool? = nil, availSale: Bool? = nil, storeId: String? = nil, langId: String? = nil, currencyId: String? = nil, productIds: String? = nil, sinceId: String? = nil, reportRequestId: String? = nil, disableReportCache: Bool? = nil, sortBy: String? = nil, sortDirection: String? = nil, sku: String? = nil, disableCache: Bool? = nil, brandName: String? = nil, productAttributes: [String]? = nil, status: String? = nil, type: String? = nil, findValue: String? = nil, findWhere: String? = nil, useLatestApiVersion: Bool? = nil, returnGlobal: Bool? = nil, categoriesIds: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseProductList?, _ error: Error?) -> Void)) -> RequestTask {
-        return productListWithRequestBuilder(pageCursor: pageCursor, start: start, count: count, params: params, responseFields: responseFields, exclude: exclude, categoryId: categoryId, createdFrom: createdFrom, createdTo: createdTo, modifiedFrom: modifiedFrom, modifiedTo: modifiedTo, availView: availView, availSale: availSale, storeId: storeId, langId: langId, currencyId: currencyId, productIds: productIds, sinceId: sinceId, reportRequestId: reportRequestId, disableReportCache: disableReportCache, sortBy: sortBy, sortDirection: sortDirection, sku: sku, disableCache: disableCache, brandName: brandName, productAttributes: productAttributes, status: status, type: type, findValue: findValue, findWhere: findWhere, useLatestApiVersion: useLatestApiVersion, returnGlobal: returnGlobal, categoriesIds: categoriesIds).execute(apiResponseQueue) { result in
+    open class func productList(start: Int? = nil, count: Int? = nil, pageCursor: String? = nil, productIds: String? = nil, sinceId: String? = nil, categoriesIds: String? = nil, categoryId: String? = nil, storeId: String? = nil, langId: String? = nil, currencyId: String? = nil, availView: Bool? = nil, availSale: Bool? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, sku: String? = nil, brandName: String? = nil, productAttributes: [String]? = nil, status: String? = nil, type: String? = nil, findValue: String? = nil, findWhere: String? = nil, returnGlobal: Bool? = nil, params: String? = nil, responseFields: String? = nil, exclude: String? = nil, sortBy: String? = nil, sortDirection: String? = nil, reportRequestId: String? = nil, disableCache: Bool? = nil, disableReportCache: Bool? = nil, useLatestApiVersion: Bool? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseProductList?, _ error: Error?) -> Void)) -> RequestTask {
+        return productListWithRequestBuilder(start: start, count: count, pageCursor: pageCursor, productIds: productIds, sinceId: sinceId, categoriesIds: categoriesIds, categoryId: categoryId, storeId: storeId, langId: langId, currencyId: currencyId, availView: availView, availSale: availSale, createdFrom: createdFrom, createdTo: createdTo, modifiedFrom: modifiedFrom, modifiedTo: modifiedTo, sku: sku, brandName: brandName, productAttributes: productAttributes, status: status, type: type, findValue: findValue, findWhere: findWhere, returnGlobal: returnGlobal, params: params, responseFields: responseFields, exclude: exclude, sortBy: sortBy, sortDirection: sortDirection, reportRequestId: reportRequestId, disableCache: disableCache, disableReportCache: disableReportCache, useLatestApiVersion: useLatestApiVersion).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -1523,81 +1523,81 @@ open class ProductAPI {
      - API Key:
        - type: apiKey x-api-key (HEADER)
        - name: ApiKeyAuth
-     - parameter pageCursor: (query) Used to retrieve products via cursor-based pagination (it can&#39;t be used with any other filtering parameter) (optional)
      - parameter start: (query) This parameter sets the number from which you want to get entities (optional, default to 0)
      - parameter count: (query) This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 (optional, default to 10)
-     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,name,description,price,categories_ids")
-     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
-     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
+     - parameter pageCursor: (query) Used to retrieve products via cursor-based pagination (it can&#39;t be used with any other filtering parameter) (optional)
+     - parameter productIds: (query) Retrieves products specified by product ids (optional)
+     - parameter sinceId: (query) Retrieve entities starting from the specified id. (optional)
+     - parameter categoriesIds: (query) Retrieves products specified by categories ids (optional)
      - parameter categoryId: (query) Retrieves products specified by category id (optional)
+     - parameter storeId: (query) Retrieves products specified by store id (optional)
+     - parameter langId: (query) Retrieves products specified by language id (optional)
+     - parameter currencyId: (query) Currency Id (optional)
+     - parameter availView: (query) Specifies the set of visible/invisible products (optional)
+     - parameter availSale: (query) Specifies the set of available/not available products for sale (optional)
      - parameter createdFrom: (query) Retrieve entities from their creation date (optional)
      - parameter createdTo: (query) Retrieve entities to their creation date (optional)
      - parameter modifiedFrom: (query) Retrieve entities from their modification date (optional)
      - parameter modifiedTo: (query) Retrieve entities to their modification date (optional)
-     - parameter availView: (query) Specifies the set of visible/invisible products (optional)
-     - parameter availSale: (query) Specifies the set of available/not available products for sale (optional)
-     - parameter storeId: (query) Retrieves products specified by store id (optional)
-     - parameter langId: (query) Retrieves products specified by language id (optional)
-     - parameter currencyId: (query) Currency Id (optional)
-     - parameter productIds: (query) Retrieves products specified by product ids (optional)
-     - parameter sinceId: (query) Retrieve entities starting from the specified id. (optional)
-     - parameter reportRequestId: (query) Report request id (optional)
-     - parameter disableReportCache: (query) Disable report cache for current request (optional, default to false)
-     - parameter sortBy: (query) Set field to sort by (optional, default to "id")
-     - parameter sortDirection: (query) Set sorting direction (optional, default to "asc")
      - parameter sku: (query) Filter by product&#39;s sku (optional)
-     - parameter disableCache: (query) Disable cache for current request (optional, default to false)
      - parameter brandName: (query) Retrieves brands specified by brand name (optional)
      - parameter productAttributes: (query) Defines product attributes (optional)
      - parameter status: (query) Defines product&#39;s status (optional)
      - parameter type: (query) Defines products&#39;s type (optional)
      - parameter findValue: (query) Entity search that is specified by some value (optional)
      - parameter findWhere: (query) Product search that is specified by field (optional)
-     - parameter useLatestApiVersion: (query) Use the latest platform API version (optional, default to false)
      - parameter returnGlobal: (query) Determines the type of products to be returned. If set to &#39;true&#39;, only global products will be returned; if set to &#39;false&#39;, only local products will be returned. (optional, default to false)
-     - parameter categoriesIds: (query) Retrieves products specified by categories ids (optional)
+     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,name,description,price,categories_ids")
+     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
+     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
+     - parameter sortBy: (query) Set field to sort by (optional, default to "id")
+     - parameter sortDirection: (query) Set sorting direction (optional, default to "asc")
+     - parameter reportRequestId: (query) Report request id (optional)
+     - parameter disableCache: (query) Disable cache for current request (optional, default to false)
+     - parameter disableReportCache: (query) Disable report cache for current request (optional, default to false)
+     - parameter useLatestApiVersion: (query) Use the latest platform API version (optional, default to false)
      - returns: RequestBuilder<ModelResponseProductList> 
      */
-    open class func productListWithRequestBuilder(pageCursor: String? = nil, start: Int? = nil, count: Int? = nil, params: String? = nil, responseFields: String? = nil, exclude: String? = nil, categoryId: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, availView: Bool? = nil, availSale: Bool? = nil, storeId: String? = nil, langId: String? = nil, currencyId: String? = nil, productIds: String? = nil, sinceId: String? = nil, reportRequestId: String? = nil, disableReportCache: Bool? = nil, sortBy: String? = nil, sortDirection: String? = nil, sku: String? = nil, disableCache: Bool? = nil, brandName: String? = nil, productAttributes: [String]? = nil, status: String? = nil, type: String? = nil, findValue: String? = nil, findWhere: String? = nil, useLatestApiVersion: Bool? = nil, returnGlobal: Bool? = nil, categoriesIds: String? = nil) -> RequestBuilder<ModelResponseProductList> {
+    open class func productListWithRequestBuilder(start: Int? = nil, count: Int? = nil, pageCursor: String? = nil, productIds: String? = nil, sinceId: String? = nil, categoriesIds: String? = nil, categoryId: String? = nil, storeId: String? = nil, langId: String? = nil, currencyId: String? = nil, availView: Bool? = nil, availSale: Bool? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, sku: String? = nil, brandName: String? = nil, productAttributes: [String]? = nil, status: String? = nil, type: String? = nil, findValue: String? = nil, findWhere: String? = nil, returnGlobal: Bool? = nil, params: String? = nil, responseFields: String? = nil, exclude: String? = nil, sortBy: String? = nil, sortDirection: String? = nil, reportRequestId: String? = nil, disableCache: Bool? = nil, disableReportCache: Bool? = nil, useLatestApiVersion: Bool? = nil) -> RequestBuilder<ModelResponseProductList> {
         let localVariablePath = "/product.list.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "page_cursor": (wrappedValue: pageCursor?.encodeToJSON(), isExplode: true),
             "start": (wrappedValue: start?.encodeToJSON(), isExplode: true),
             "count": (wrappedValue: count?.encodeToJSON(), isExplode: true),
-            "params": (wrappedValue: params?.encodeToJSON(), isExplode: true),
-            "response_fields": (wrappedValue: responseFields?.encodeToJSON(), isExplode: true),
-            "exclude": (wrappedValue: exclude?.encodeToJSON(), isExplode: true),
+            "page_cursor": (wrappedValue: pageCursor?.encodeToJSON(), isExplode: true),
+            "product_ids": (wrappedValue: productIds?.encodeToJSON(), isExplode: true),
+            "since_id": (wrappedValue: sinceId?.encodeToJSON(), isExplode: true),
+            "categories_ids": (wrappedValue: categoriesIds?.encodeToJSON(), isExplode: true),
             "category_id": (wrappedValue: categoryId?.encodeToJSON(), isExplode: true),
+            "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
+            "lang_id": (wrappedValue: langId?.encodeToJSON(), isExplode: true),
+            "currency_id": (wrappedValue: currencyId?.encodeToJSON(), isExplode: true),
+            "avail_view": (wrappedValue: availView?.encodeToJSON(), isExplode: true),
+            "avail_sale": (wrappedValue: availSale?.encodeToJSON(), isExplode: true),
             "created_from": (wrappedValue: createdFrom?.encodeToJSON(), isExplode: true),
             "created_to": (wrappedValue: createdTo?.encodeToJSON(), isExplode: true),
             "modified_from": (wrappedValue: modifiedFrom?.encodeToJSON(), isExplode: true),
             "modified_to": (wrappedValue: modifiedTo?.encodeToJSON(), isExplode: true),
-            "avail_view": (wrappedValue: availView?.encodeToJSON(), isExplode: true),
-            "avail_sale": (wrappedValue: availSale?.encodeToJSON(), isExplode: true),
-            "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
-            "lang_id": (wrappedValue: langId?.encodeToJSON(), isExplode: true),
-            "currency_id": (wrappedValue: currencyId?.encodeToJSON(), isExplode: true),
-            "product_ids": (wrappedValue: productIds?.encodeToJSON(), isExplode: true),
-            "since_id": (wrappedValue: sinceId?.encodeToJSON(), isExplode: true),
-            "report_request_id": (wrappedValue: reportRequestId?.encodeToJSON(), isExplode: true),
-            "disable_report_cache": (wrappedValue: disableReportCache?.encodeToJSON(), isExplode: true),
-            "sort_by": (wrappedValue: sortBy?.encodeToJSON(), isExplode: true),
-            "sort_direction": (wrappedValue: sortDirection?.encodeToJSON(), isExplode: true),
             "sku": (wrappedValue: sku?.encodeToJSON(), isExplode: true),
-            "disable_cache": (wrappedValue: disableCache?.encodeToJSON(), isExplode: true),
             "brand_name": (wrappedValue: brandName?.encodeToJSON(), isExplode: true),
             "product_attributes": (wrappedValue: productAttributes?.encodeToJSON(), isExplode: true),
             "status": (wrappedValue: status?.encodeToJSON(), isExplode: true),
             "type": (wrappedValue: type?.encodeToJSON(), isExplode: true),
             "find_value": (wrappedValue: findValue?.encodeToJSON(), isExplode: true),
             "find_where": (wrappedValue: findWhere?.encodeToJSON(), isExplode: true),
-            "use_latest_api_version": (wrappedValue: useLatestApiVersion?.encodeToJSON(), isExplode: true),
             "return_global": (wrappedValue: returnGlobal?.encodeToJSON(), isExplode: true),
-            "categories_ids": (wrappedValue: categoriesIds?.encodeToJSON(), isExplode: true),
+            "params": (wrappedValue: params?.encodeToJSON(), isExplode: true),
+            "response_fields": (wrappedValue: responseFields?.encodeToJSON(), isExplode: true),
+            "exclude": (wrappedValue: exclude?.encodeToJSON(), isExplode: true),
+            "sort_by": (wrappedValue: sortBy?.encodeToJSON(), isExplode: true),
+            "sort_direction": (wrappedValue: sortDirection?.encodeToJSON(), isExplode: true),
+            "report_request_id": (wrappedValue: reportRequestId?.encodeToJSON(), isExplode: true),
+            "disable_cache": (wrappedValue: disableCache?.encodeToJSON(), isExplode: true),
+            "disable_report_cache": (wrappedValue: disableReportCache?.encodeToJSON(), isExplode: true),
+            "use_latest_api_version": (wrappedValue: useLatestApiVersion?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -1852,18 +1852,18 @@ open class ProductAPI {
      
      - parameter start: (query) This parameter sets the number from which you want to get entities (optional, default to 0)
      - parameter count: (query) This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 (optional, default to 10)
-     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,name,description")
-     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
-     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
      - parameter productId: (query) Retrieves products&#39; options specified by product id (optional)
      - parameter langId: (query) Language id (optional)
      - parameter storeId: (query) Store Id (optional)
+     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
+     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,name,description")
+     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func productOptionList(start: Int? = nil, count: Int? = nil, params: String? = nil, exclude: String? = nil, responseFields: String? = nil, productId: String? = nil, langId: String? = nil, storeId: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseProductOptionList?, _ error: Error?) -> Void)) -> RequestTask {
-        return productOptionListWithRequestBuilder(start: start, count: count, params: params, exclude: exclude, responseFields: responseFields, productId: productId, langId: langId, storeId: storeId).execute(apiResponseQueue) { result in
+    open class func productOptionList(start: Int? = nil, count: Int? = nil, productId: String? = nil, langId: String? = nil, storeId: String? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseProductOptionList?, _ error: Error?) -> Void)) -> RequestTask {
+        return productOptionListWithRequestBuilder(start: start, count: count, productId: productId, langId: langId, storeId: storeId, responseFields: responseFields, params: params, exclude: exclude).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -1885,15 +1885,15 @@ open class ProductAPI {
        - name: ApiKeyAuth
      - parameter start: (query) This parameter sets the number from which you want to get entities (optional, default to 0)
      - parameter count: (query) This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 (optional, default to 10)
-     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,name,description")
-     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
-     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
      - parameter productId: (query) Retrieves products&#39; options specified by product id (optional)
      - parameter langId: (query) Language id (optional)
      - parameter storeId: (query) Store Id (optional)
+     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
+     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,name,description")
+     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
      - returns: RequestBuilder<ModelResponseProductOptionList> 
      */
-    open class func productOptionListWithRequestBuilder(start: Int? = nil, count: Int? = nil, params: String? = nil, exclude: String? = nil, responseFields: String? = nil, productId: String? = nil, langId: String? = nil, storeId: String? = nil) -> RequestBuilder<ModelResponseProductOptionList> {
+    open class func productOptionListWithRequestBuilder(start: Int? = nil, count: Int? = nil, productId: String? = nil, langId: String? = nil, storeId: String? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil) -> RequestBuilder<ModelResponseProductOptionList> {
         let localVariablePath = "/product.option.list.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -1902,12 +1902,12 @@ open class ProductAPI {
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
             "start": (wrappedValue: start?.encodeToJSON(), isExplode: true),
             "count": (wrappedValue: count?.encodeToJSON(), isExplode: true),
-            "params": (wrappedValue: params?.encodeToJSON(), isExplode: true),
-            "exclude": (wrappedValue: exclude?.encodeToJSON(), isExplode: true),
-            "response_fields": (wrappedValue: responseFields?.encodeToJSON(), isExplode: true),
             "product_id": (wrappedValue: productId?.encodeToJSON(), isExplode: true),
             "lang_id": (wrappedValue: langId?.encodeToJSON(), isExplode: true),
             "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
+            "response_fields": (wrappedValue: responseFields?.encodeToJSON(), isExplode: true),
+            "params": (wrappedValue: params?.encodeToJSON(), isExplode: true),
+            "exclude": (wrappedValue: exclude?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -2351,20 +2351,20 @@ open class ProductAPI {
      
      - parameter productId: (query) Product id 
      - parameter start: (query) This parameter sets the number from which you want to get entities (optional, default to 0)
-     - parameter pageCursor: (query) Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) (optional)
      - parameter count: (query) This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 (optional, default to 10)
+     - parameter pageCursor: (query) Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) (optional)
      - parameter ids: (query) Retrieves reviews specified by ids (optional)
      - parameter storeId: (query) Store Id (optional)
      - parameter status: (query) Defines status (optional)
+     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
      - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,customer_id,email,message,status,product_id,nick_name,summary,rating,ratings,status,created_time")
      - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
-     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func productReviewList(productId: String, start: Int? = nil, pageCursor: String? = nil, count: Int? = nil, ids: String? = nil, storeId: String? = nil, status: String? = nil, params: String? = nil, exclude: String? = nil, responseFields: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseProductReviewList?, _ error: Error?) -> Void)) -> RequestTask {
-        return productReviewListWithRequestBuilder(productId: productId, start: start, pageCursor: pageCursor, count: count, ids: ids, storeId: storeId, status: status, params: params, exclude: exclude, responseFields: responseFields).execute(apiResponseQueue) { result in
+    open class func productReviewList(productId: String, start: Int? = nil, count: Int? = nil, pageCursor: String? = nil, ids: String? = nil, storeId: String? = nil, status: String? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseProductReviewList?, _ error: Error?) -> Void)) -> RequestTask {
+        return productReviewListWithRequestBuilder(productId: productId, start: start, count: count, pageCursor: pageCursor, ids: ids, storeId: storeId, status: status, responseFields: responseFields, params: params, exclude: exclude).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -2386,17 +2386,17 @@ open class ProductAPI {
        - name: ApiKeyAuth
      - parameter productId: (query) Product id 
      - parameter start: (query) This parameter sets the number from which you want to get entities (optional, default to 0)
-     - parameter pageCursor: (query) Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) (optional)
      - parameter count: (query) This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 (optional, default to 10)
+     - parameter pageCursor: (query) Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) (optional)
      - parameter ids: (query) Retrieves reviews specified by ids (optional)
      - parameter storeId: (query) Store Id (optional)
      - parameter status: (query) Defines status (optional)
+     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
      - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,customer_id,email,message,status,product_id,nick_name,summary,rating,ratings,status,created_time")
      - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
-     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
      - returns: RequestBuilder<ModelResponseProductReviewList> 
      */
-    open class func productReviewListWithRequestBuilder(productId: String, start: Int? = nil, pageCursor: String? = nil, count: Int? = nil, ids: String? = nil, storeId: String? = nil, status: String? = nil, params: String? = nil, exclude: String? = nil, responseFields: String? = nil) -> RequestBuilder<ModelResponseProductReviewList> {
+    open class func productReviewListWithRequestBuilder(productId: String, start: Int? = nil, count: Int? = nil, pageCursor: String? = nil, ids: String? = nil, storeId: String? = nil, status: String? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil) -> RequestBuilder<ModelResponseProductReviewList> {
         let localVariablePath = "/product.review.list.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -2404,15 +2404,15 @@ open class ProductAPI {
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
             "start": (wrappedValue: start?.encodeToJSON(), isExplode: true),
-            "page_cursor": (wrappedValue: pageCursor?.encodeToJSON(), isExplode: true),
             "count": (wrappedValue: count?.encodeToJSON(), isExplode: true),
+            "page_cursor": (wrappedValue: pageCursor?.encodeToJSON(), isExplode: true),
             "product_id": (wrappedValue: productId.encodeToJSON(), isExplode: true),
             "ids": (wrappedValue: ids?.encodeToJSON(), isExplode: true),
             "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
             "status": (wrappedValue: status?.encodeToJSON(), isExplode: true),
+            "response_fields": (wrappedValue: responseFields?.encodeToJSON(), isExplode: true),
             "params": (wrappedValue: params?.encodeToJSON(), isExplode: true),
             "exclude": (wrappedValue: exclude?.encodeToJSON(), isExplode: true),
-            "response_fields": (wrappedValue: responseFields?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -2736,19 +2736,19 @@ open class ProductAPI {
      product.variant.count
      
      - parameter productId: (query) Retrieves products&#39; variants specified by product id 
+     - parameter categoryId: (query) Counts products’ variants specified by category id (optional)
+     - parameter storeId: (query) Retrieves variants specified by store id (optional)
      - parameter createdFrom: (query) Retrieve entities from their creation date (optional)
      - parameter createdTo: (query) Retrieve entities to their creation date (optional)
      - parameter modifiedFrom: (query) Retrieve entities from their modification date (optional)
      - parameter modifiedTo: (query) Retrieve entities to their modification date (optional)
-     - parameter categoryId: (query) Counts products’ variants specified by category id (optional)
-     - parameter storeId: (query) Retrieves variants specified by store id (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @available(*, deprecated, message: "This operation is deprecated.")
     @discardableResult
-    open class func productVariantCount(productId: String, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, categoryId: String? = nil, storeId: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ProductVariantCount200Response?, _ error: Error?) -> Void)) -> RequestTask {
-        return productVariantCountWithRequestBuilder(productId: productId, createdFrom: createdFrom, createdTo: createdTo, modifiedFrom: modifiedFrom, modifiedTo: modifiedTo, categoryId: categoryId, storeId: storeId).execute(apiResponseQueue) { result in
+    open class func productVariantCount(productId: String, categoryId: String? = nil, storeId: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ProductVariantCount200Response?, _ error: Error?) -> Void)) -> RequestTask {
+        return productVariantCountWithRequestBuilder(productId: productId, categoryId: categoryId, storeId: storeId, createdFrom: createdFrom, createdTo: createdTo, modifiedFrom: modifiedFrom, modifiedTo: modifiedTo).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -2769,29 +2769,29 @@ open class ProductAPI {
        - type: apiKey x-api-key (HEADER)
        - name: ApiKeyAuth
      - parameter productId: (query) Retrieves products&#39; variants specified by product id 
+     - parameter categoryId: (query) Counts products’ variants specified by category id (optional)
+     - parameter storeId: (query) Retrieves variants specified by store id (optional)
      - parameter createdFrom: (query) Retrieve entities from their creation date (optional)
      - parameter createdTo: (query) Retrieve entities to their creation date (optional)
      - parameter modifiedFrom: (query) Retrieve entities from their modification date (optional)
      - parameter modifiedTo: (query) Retrieve entities to their modification date (optional)
-     - parameter categoryId: (query) Counts products’ variants specified by category id (optional)
-     - parameter storeId: (query) Retrieves variants specified by store id (optional)
      - returns: RequestBuilder<ProductVariantCount200Response> 
      */
     @available(*, deprecated, message: "This operation is deprecated.")
-    open class func productVariantCountWithRequestBuilder(productId: String, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, categoryId: String? = nil, storeId: String? = nil) -> RequestBuilder<ProductVariantCount200Response> {
+    open class func productVariantCountWithRequestBuilder(productId: String, categoryId: String? = nil, storeId: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil) -> RequestBuilder<ProductVariantCount200Response> {
         let localVariablePath = "/product.variant.count.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "product_id": (wrappedValue: productId.encodeToJSON(), isExplode: true),
+            "category_id": (wrappedValue: categoryId?.encodeToJSON(), isExplode: true),
+            "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
             "created_from": (wrappedValue: createdFrom?.encodeToJSON(), isExplode: true),
             "created_to": (wrappedValue: createdTo?.encodeToJSON(), isExplode: true),
             "modified_from": (wrappedValue: modifiedFrom?.encodeToJSON(), isExplode: true),
             "modified_to": (wrappedValue: modifiedTo?.encodeToJSON(), isExplode: true),
-            "category_id": (wrappedValue: categoryId?.encodeToJSON(), isExplode: true),
-            "product_id": (wrappedValue: productId.encodeToJSON(), isExplode: true),
-            "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -3030,16 +3030,16 @@ open class ProductAPI {
      product.variant.info
      
      - parameter id: (query) Retrieves variant&#39;s info specified by variant id 
+     - parameter storeId: (query) Retrieves variant info specified by store id (optional)
      - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,name,description,price")
      - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
-     - parameter storeId: (query) Retrieves variant info specified by store id (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @available(*, deprecated, message: "This operation is deprecated.")
     @discardableResult
-    open class func productVariantInfo(id: String, params: String? = nil, exclude: String? = nil, storeId: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ProductInfo200Response?, _ error: Error?) -> Void)) -> RequestTask {
-        return productVariantInfoWithRequestBuilder(id: id, params: params, exclude: exclude, storeId: storeId).execute(apiResponseQueue) { result in
+    open class func productVariantInfo(id: String, storeId: String? = nil, params: String? = nil, exclude: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ProductInfo200Response?, _ error: Error?) -> Void)) -> RequestTask {
+        return productVariantInfoWithRequestBuilder(id: id, storeId: storeId, params: params, exclude: exclude).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -3060,23 +3060,23 @@ open class ProductAPI {
        - type: apiKey x-api-key (HEADER)
        - name: ApiKeyAuth
      - parameter id: (query) Retrieves variant&#39;s info specified by variant id 
+     - parameter storeId: (query) Retrieves variant info specified by store id (optional)
      - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,name,description,price")
      - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
-     - parameter storeId: (query) Retrieves variant info specified by store id (optional)
      - returns: RequestBuilder<ProductInfo200Response> 
      */
     @available(*, deprecated, message: "This operation is deprecated.")
-    open class func productVariantInfoWithRequestBuilder(id: String, params: String? = nil, exclude: String? = nil, storeId: String? = nil) -> RequestBuilder<ProductInfo200Response> {
+    open class func productVariantInfoWithRequestBuilder(id: String, storeId: String? = nil, params: String? = nil, exclude: String? = nil) -> RequestBuilder<ProductInfo200Response> {
         let localVariablePath = "/product.variant.info.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "params": (wrappedValue: params?.encodeToJSON(), isExplode: true),
-            "exclude": (wrappedValue: exclude?.encodeToJSON(), isExplode: true),
             "id": (wrappedValue: id.encodeToJSON(), isExplode: true),
             "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
+            "params": (wrappedValue: params?.encodeToJSON(), isExplode: true),
+            "exclude": (wrappedValue: exclude?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -3095,22 +3095,22 @@ open class ProductAPI {
      
      - parameter start: (query) This parameter sets the number from which you want to get entities (optional, default to 0)
      - parameter count: (query) This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 (optional, default to 10)
-     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,name,description,price")
-     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
+     - parameter productId: (query) Retrieves products&#39; variants specified by product id (optional)
+     - parameter categoryId: (query) Retrieves products’ variants specified by category id (optional)
+     - parameter storeId: (query) Retrieves variants specified by store id (optional)
      - parameter createdFrom: (query) Retrieve entities from their creation date (optional)
      - parameter createdTo: (query) Retrieve entities to their creation date (optional)
      - parameter modifiedFrom: (query) Retrieve entities from their modification date (optional)
      - parameter modifiedTo: (query) Retrieve entities to their modification date (optional)
-     - parameter categoryId: (query) Retrieves products’ variants specified by category id (optional)
-     - parameter productId: (query) Retrieves products&#39; variants specified by product id (optional)
-     - parameter storeId: (query) Retrieves variants specified by store id (optional)
+     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,name,description,price")
+     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @available(*, deprecated, message: "This operation is deprecated.")
     @discardableResult
-    open class func productVariantList(start: Int? = nil, count: Int? = nil, params: String? = nil, exclude: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, categoryId: String? = nil, productId: String? = nil, storeId: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ProductVariantList200Response?, _ error: Error?) -> Void)) -> RequestTask {
-        return productVariantListWithRequestBuilder(start: start, count: count, params: params, exclude: exclude, createdFrom: createdFrom, createdTo: createdTo, modifiedFrom: modifiedFrom, modifiedTo: modifiedTo, categoryId: categoryId, productId: productId, storeId: storeId).execute(apiResponseQueue) { result in
+    open class func productVariantList(start: Int? = nil, count: Int? = nil, productId: String? = nil, categoryId: String? = nil, storeId: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, params: String? = nil, exclude: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ProductVariantList200Response?, _ error: Error?) -> Void)) -> RequestTask {
+        return productVariantListWithRequestBuilder(start: start, count: count, productId: productId, categoryId: categoryId, storeId: storeId, createdFrom: createdFrom, createdTo: createdTo, modifiedFrom: modifiedFrom, modifiedTo: modifiedTo, params: params, exclude: exclude).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -3132,19 +3132,19 @@ open class ProductAPI {
        - name: ApiKeyAuth
      - parameter start: (query) This parameter sets the number from which you want to get entities (optional, default to 0)
      - parameter count: (query) This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 (optional, default to 10)
-     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,name,description,price")
-     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
+     - parameter productId: (query) Retrieves products&#39; variants specified by product id (optional)
+     - parameter categoryId: (query) Retrieves products’ variants specified by category id (optional)
+     - parameter storeId: (query) Retrieves variants specified by store id (optional)
      - parameter createdFrom: (query) Retrieve entities from their creation date (optional)
      - parameter createdTo: (query) Retrieve entities to their creation date (optional)
      - parameter modifiedFrom: (query) Retrieve entities from their modification date (optional)
      - parameter modifiedTo: (query) Retrieve entities to their modification date (optional)
-     - parameter categoryId: (query) Retrieves products’ variants specified by category id (optional)
-     - parameter productId: (query) Retrieves products&#39; variants specified by product id (optional)
-     - parameter storeId: (query) Retrieves variants specified by store id (optional)
+     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,name,description,price")
+     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
      - returns: RequestBuilder<ProductVariantList200Response> 
      */
     @available(*, deprecated, message: "This operation is deprecated.")
-    open class func productVariantListWithRequestBuilder(start: Int? = nil, count: Int? = nil, params: String? = nil, exclude: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, categoryId: String? = nil, productId: String? = nil, storeId: String? = nil) -> RequestBuilder<ProductVariantList200Response> {
+    open class func productVariantListWithRequestBuilder(start: Int? = nil, count: Int? = nil, productId: String? = nil, categoryId: String? = nil, storeId: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, params: String? = nil, exclude: String? = nil) -> RequestBuilder<ProductVariantList200Response> {
         let localVariablePath = "/product.variant.list.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -3153,15 +3153,15 @@ open class ProductAPI {
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
             "start": (wrappedValue: start?.encodeToJSON(), isExplode: true),
             "count": (wrappedValue: count?.encodeToJSON(), isExplode: true),
-            "params": (wrappedValue: params?.encodeToJSON(), isExplode: true),
-            "exclude": (wrappedValue: exclude?.encodeToJSON(), isExplode: true),
+            "product_id": (wrappedValue: productId?.encodeToJSON(), isExplode: true),
+            "category_id": (wrappedValue: categoryId?.encodeToJSON(), isExplode: true),
+            "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
             "created_from": (wrappedValue: createdFrom?.encodeToJSON(), isExplode: true),
             "created_to": (wrappedValue: createdTo?.encodeToJSON(), isExplode: true),
             "modified_from": (wrappedValue: modifiedFrom?.encodeToJSON(), isExplode: true),
             "modified_to": (wrappedValue: modifiedTo?.encodeToJSON(), isExplode: true),
-            "category_id": (wrappedValue: categoryId?.encodeToJSON(), isExplode: true),
-            "product_id": (wrappedValue: productId?.encodeToJSON(), isExplode: true),
-            "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
+            "params": (wrappedValue: params?.encodeToJSON(), isExplode: true),
+            "exclude": (wrappedValue: exclude?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [

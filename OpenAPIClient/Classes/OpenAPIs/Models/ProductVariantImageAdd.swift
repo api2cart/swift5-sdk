@@ -22,6 +22,8 @@ public struct ProductVariantImageAdd: Codable, JSONEncodable, Hashable {
     public var productId: String?
     /** Defines product's variants specified by variant id */
     public var productVariantId: String
+    /** Store Id */
+    public var storeId: String?
     /** Defines image's name */
     public var imageName: String
     /** Defines image's types that are specified by comma-separated list */
@@ -36,14 +38,13 @@ public struct ProductVariantImageAdd: Codable, JSONEncodable, Hashable {
     public var mime: String?
     /** Defines image’s position in the list */
     public var position: Int? = 0
-    /** Store Id */
-    public var storeId: String?
     /** Defines option id of the product variant for which the image will be added */
     public var optionId: String?
 
-    public init(productId: String? = nil, productVariantId: String, imageName: String, type: ModelType = .base, url: String? = nil, content: String? = nil, label: String? = nil, mime: String? = nil, position: Int? = 0, storeId: String? = nil, optionId: String? = nil) {
+    public init(productId: String? = nil, productVariantId: String, storeId: String? = nil, imageName: String, type: ModelType = .base, url: String? = nil, content: String? = nil, label: String? = nil, mime: String? = nil, position: Int? = 0, optionId: String? = nil) {
         self.productId = productId
         self.productVariantId = productVariantId
+        self.storeId = storeId
         self.imageName = imageName
         self.type = type
         self.url = url
@@ -51,13 +52,13 @@ public struct ProductVariantImageAdd: Codable, JSONEncodable, Hashable {
         self.label = label
         self.mime = mime
         self.position = position
-        self.storeId = storeId
         self.optionId = optionId
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case productId = "product_id"
         case productVariantId = "product_variant_id"
+        case storeId = "store_id"
         case imageName = "image_name"
         case type
         case url
@@ -65,7 +66,6 @@ public struct ProductVariantImageAdd: Codable, JSONEncodable, Hashable {
         case label
         case mime
         case position
-        case storeId = "store_id"
         case optionId = "option_id"
     }
 
@@ -75,6 +75,7 @@ public struct ProductVariantImageAdd: Codable, JSONEncodable, Hashable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(productId, forKey: .productId)
         try container.encode(productVariantId, forKey: .productVariantId)
+        try container.encodeIfPresent(storeId, forKey: .storeId)
         try container.encode(imageName, forKey: .imageName)
         try container.encode(type, forKey: .type)
         try container.encodeIfPresent(url, forKey: .url)
@@ -82,7 +83,6 @@ public struct ProductVariantImageAdd: Codable, JSONEncodable, Hashable {
         try container.encodeIfPresent(label, forKey: .label)
         try container.encodeIfPresent(mime, forKey: .mime)
         try container.encodeIfPresent(position, forKey: .position)
-        try container.encodeIfPresent(storeId, forKey: .storeId)
         try container.encodeIfPresent(optionId, forKey: .optionId)
     }
 }

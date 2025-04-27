@@ -246,19 +246,19 @@ open class WebhookAPI {
     /**
      webhook.list
      
-     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,entity,action,callback")
      - parameter start: (query) This parameter sets the number from which you want to get entities (optional, default to 0)
      - parameter count: (query) This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 (optional, default to 10)
      - parameter entity: (query) The entity you want to filter webhooks by (e.g. order or product) (optional)
      - parameter action: (query) The action you want to filter webhooks by (e.g. add, update, or delete) (optional)
      - parameter active: (query) The webhook status you want to filter webhooks by (optional)
      - parameter ids: (query) List of сomma-separated webhook ids (optional)
+     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,entity,action,callback")
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func webhookList(params: String? = nil, start: Int? = nil, count: Int? = nil, entity: String? = nil, action: String? = nil, active: Bool? = nil, ids: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: WebhookList200Response?, _ error: Error?) -> Void)) -> RequestTask {
-        return webhookListWithRequestBuilder(params: params, start: start, count: count, entity: entity, action: action, active: active, ids: ids).execute(apiResponseQueue) { result in
+    open class func webhookList(start: Int? = nil, count: Int? = nil, entity: String? = nil, action: String? = nil, active: Bool? = nil, ids: String? = nil, params: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: WebhookList200Response?, _ error: Error?) -> Void)) -> RequestTask {
+        return webhookListWithRequestBuilder(start: start, count: count, entity: entity, action: action, active: active, ids: ids, params: params).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -278,29 +278,29 @@ open class WebhookAPI {
      - API Key:
        - type: apiKey x-api-key (HEADER)
        - name: ApiKeyAuth
-     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,entity,action,callback")
      - parameter start: (query) This parameter sets the number from which you want to get entities (optional, default to 0)
      - parameter count: (query) This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 (optional, default to 10)
      - parameter entity: (query) The entity you want to filter webhooks by (e.g. order or product) (optional)
      - parameter action: (query) The action you want to filter webhooks by (e.g. add, update, or delete) (optional)
      - parameter active: (query) The webhook status you want to filter webhooks by (optional)
      - parameter ids: (query) List of сomma-separated webhook ids (optional)
+     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,entity,action,callback")
      - returns: RequestBuilder<WebhookList200Response> 
      */
-    open class func webhookListWithRequestBuilder(params: String? = nil, start: Int? = nil, count: Int? = nil, entity: String? = nil, action: String? = nil, active: Bool? = nil, ids: String? = nil) -> RequestBuilder<WebhookList200Response> {
+    open class func webhookListWithRequestBuilder(start: Int? = nil, count: Int? = nil, entity: String? = nil, action: String? = nil, active: Bool? = nil, ids: String? = nil, params: String? = nil) -> RequestBuilder<WebhookList200Response> {
         let localVariablePath = "/webhook.list.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "params": (wrappedValue: params?.encodeToJSON(), isExplode: true),
             "start": (wrappedValue: start?.encodeToJSON(), isExplode: true),
             "count": (wrappedValue: count?.encodeToJSON(), isExplode: true),
             "entity": (wrappedValue: entity?.encodeToJSON(), isExplode: true),
             "action": (wrappedValue: action?.encodeToJSON(), isExplode: true),
             "active": (wrappedValue: active?.encodeToJSON(), isExplode: true),
             "ids": (wrappedValue: ids?.encodeToJSON(), isExplode: true),
+            "params": (wrappedValue: params?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [

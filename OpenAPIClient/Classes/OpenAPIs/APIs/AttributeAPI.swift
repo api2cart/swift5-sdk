@@ -105,8 +105,8 @@ open class AttributeAPI {
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
             "type": (wrappedValue: type.encodeToJSON(), isExplode: true),
-            "code": (wrappedValue: code?.encodeToJSON(), isExplode: true),
             "name": (wrappedValue: name.encodeToJSON(), isExplode: true),
+            "code": (wrappedValue: code?.encodeToJSON(), isExplode: true),
             "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
             "lang_id": (wrappedValue: langId?.encodeToJSON(), isExplode: true),
             "visible": (wrappedValue: visible?.encodeToJSON(), isExplode: true),
@@ -261,15 +261,15 @@ open class AttributeAPI {
      
      - parameter start: (query) This parameter sets the number from which you want to get entities (optional, default to 0)
      - parameter count: (query) This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 (optional, default to 10)
+     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
      - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,name")
      - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
-     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func attributeAttributesetList(start: Int? = nil, count: Int? = nil, params: String? = nil, exclude: String? = nil, responseFields: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseAttributeAttributesetList?, _ error: Error?) -> Void)) -> RequestTask {
-        return attributeAttributesetListWithRequestBuilder(start: start, count: count, params: params, exclude: exclude, responseFields: responseFields).execute(apiResponseQueue) { result in
+    open class func attributeAttributesetList(start: Int? = nil, count: Int? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseAttributeAttributesetList?, _ error: Error?) -> Void)) -> RequestTask {
+        return attributeAttributesetListWithRequestBuilder(start: start, count: count, responseFields: responseFields, params: params, exclude: exclude).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -291,12 +291,12 @@ open class AttributeAPI {
        - name: ApiKeyAuth
      - parameter start: (query) This parameter sets the number from which you want to get entities (optional, default to 0)
      - parameter count: (query) This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 (optional, default to 10)
+     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
      - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,name")
      - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
-     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
      - returns: RequestBuilder<ModelResponseAttributeAttributesetList> 
      */
-    open class func attributeAttributesetListWithRequestBuilder(start: Int? = nil, count: Int? = nil, params: String? = nil, exclude: String? = nil, responseFields: String? = nil) -> RequestBuilder<ModelResponseAttributeAttributesetList> {
+    open class func attributeAttributesetListWithRequestBuilder(start: Int? = nil, count: Int? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil) -> RequestBuilder<ModelResponseAttributeAttributesetList> {
         let localVariablePath = "/attribute.attributeset.list.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -305,9 +305,9 @@ open class AttributeAPI {
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
             "start": (wrappedValue: start?.encodeToJSON(), isExplode: true),
             "count": (wrappedValue: count?.encodeToJSON(), isExplode: true),
+            "response_fields": (wrappedValue: responseFields?.encodeToJSON(), isExplode: true),
             "params": (wrappedValue: params?.encodeToJSON(), isExplode: true),
             "exclude": (wrappedValue: exclude?.encodeToJSON(), isExplode: true),
-            "response_fields": (wrappedValue: responseFields?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -433,8 +433,8 @@ open class AttributeAPI {
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
             "id": (wrappedValue: id.encodeToJSON(), isExplode: true),
+            "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -453,17 +453,17 @@ open class AttributeAPI {
      
      - parameter start: (query) This parameter sets the number from which you want to get entities (optional, default to 0)
      - parameter count: (query) This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 (optional, default to 10)
+     - parameter attributeSetId: (query) Attribute set id (optional)
      - parameter langId: (query) Language id (optional)
+     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
      - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,name")
      - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
-     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
-     - parameter attributeSetId: (query) Attribute set id (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func attributeGroupList(start: Int? = nil, count: Int? = nil, langId: String? = nil, params: String? = nil, exclude: String? = nil, responseFields: String? = nil, attributeSetId: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseAttributeGroupList?, _ error: Error?) -> Void)) -> RequestTask {
-        return attributeGroupListWithRequestBuilder(start: start, count: count, langId: langId, params: params, exclude: exclude, responseFields: responseFields, attributeSetId: attributeSetId).execute(apiResponseQueue) { result in
+    open class func attributeGroupList(start: Int? = nil, count: Int? = nil, attributeSetId: String? = nil, langId: String? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseAttributeGroupList?, _ error: Error?) -> Void)) -> RequestTask {
+        return attributeGroupListWithRequestBuilder(start: start, count: count, attributeSetId: attributeSetId, langId: langId, responseFields: responseFields, params: params, exclude: exclude).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -485,14 +485,14 @@ open class AttributeAPI {
        - name: ApiKeyAuth
      - parameter start: (query) This parameter sets the number from which you want to get entities (optional, default to 0)
      - parameter count: (query) This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 (optional, default to 10)
+     - parameter attributeSetId: (query) Attribute set id (optional)
      - parameter langId: (query) Language id (optional)
+     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
      - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,name")
      - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
-     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
-     - parameter attributeSetId: (query) Attribute set id (optional)
      - returns: RequestBuilder<ModelResponseAttributeGroupList> 
      */
-    open class func attributeGroupListWithRequestBuilder(start: Int? = nil, count: Int? = nil, langId: String? = nil, params: String? = nil, exclude: String? = nil, responseFields: String? = nil, attributeSetId: String? = nil) -> RequestBuilder<ModelResponseAttributeGroupList> {
+    open class func attributeGroupListWithRequestBuilder(start: Int? = nil, count: Int? = nil, attributeSetId: String? = nil, langId: String? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil) -> RequestBuilder<ModelResponseAttributeGroupList> {
         let localVariablePath = "/attribute.group.list.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -501,11 +501,11 @@ open class AttributeAPI {
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
             "start": (wrappedValue: start?.encodeToJSON(), isExplode: true),
             "count": (wrappedValue: count?.encodeToJSON(), isExplode: true),
+            "attribute_set_id": (wrappedValue: attributeSetId?.encodeToJSON(), isExplode: true),
             "lang_id": (wrappedValue: langId?.encodeToJSON(), isExplode: true),
+            "response_fields": (wrappedValue: responseFields?.encodeToJSON(), isExplode: true),
             "params": (wrappedValue: params?.encodeToJSON(), isExplode: true),
             "exclude": (wrappedValue: exclude?.encodeToJSON(), isExplode: true),
-            "response_fields": (wrappedValue: responseFields?.encodeToJSON(), isExplode: true),
-            "attribute_set_id": (wrappedValue: attributeSetId?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -526,15 +526,15 @@ open class AttributeAPI {
      - parameter attributeSetId: (query) Attribute set id (optional)
      - parameter storeId: (query) Store Id (optional)
      - parameter langId: (query) Language id (optional)
+     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
      - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "force_all")
      - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
-     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func attributeInfo(id: String, attributeSetId: String? = nil, storeId: String? = nil, langId: String? = nil, params: String? = nil, exclude: String? = nil, responseFields: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: AttributeInfo200Response?, _ error: Error?) -> Void)) -> RequestTask {
-        return attributeInfoWithRequestBuilder(id: id, attributeSetId: attributeSetId, storeId: storeId, langId: langId, params: params, exclude: exclude, responseFields: responseFields).execute(apiResponseQueue) { result in
+    open class func attributeInfo(id: String, attributeSetId: String? = nil, storeId: String? = nil, langId: String? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: AttributeInfo200Response?, _ error: Error?) -> Void)) -> RequestTask {
+        return attributeInfoWithRequestBuilder(id: id, attributeSetId: attributeSetId, storeId: storeId, langId: langId, responseFields: responseFields, params: params, exclude: exclude).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -558,12 +558,12 @@ open class AttributeAPI {
      - parameter attributeSetId: (query) Attribute set id (optional)
      - parameter storeId: (query) Store Id (optional)
      - parameter langId: (query) Language id (optional)
+     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
      - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "force_all")
      - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
-     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
      - returns: RequestBuilder<AttributeInfo200Response> 
      */
-    open class func attributeInfoWithRequestBuilder(id: String, attributeSetId: String? = nil, storeId: String? = nil, langId: String? = nil, params: String? = nil, exclude: String? = nil, responseFields: String? = nil) -> RequestBuilder<AttributeInfo200Response> {
+    open class func attributeInfoWithRequestBuilder(id: String, attributeSetId: String? = nil, storeId: String? = nil, langId: String? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil) -> RequestBuilder<AttributeInfo200Response> {
         let localVariablePath = "/attribute.info.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -574,9 +574,9 @@ open class AttributeAPI {
             "attribute_set_id": (wrappedValue: attributeSetId?.encodeToJSON(), isExplode: true),
             "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
             "lang_id": (wrappedValue: langId?.encodeToJSON(), isExplode: true),
+            "response_fields": (wrappedValue: responseFields?.encodeToJSON(), isExplode: true),
             "params": (wrappedValue: params?.encodeToJSON(), isExplode: true),
             "exclude": (wrappedValue: exclude?.encodeToJSON(), isExplode: true),
-            "response_fields": (wrappedValue: responseFields?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -595,23 +595,23 @@ open class AttributeAPI {
      
      - parameter start: (query) This parameter sets the number from which you want to get entities (optional, default to 0)
      - parameter count: (query) This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 (optional, default to 10)
-     - parameter type: (query) Defines attribute&#39;s type (optional)
      - parameter attributeIds: (query) Filter attributes by ids (optional)
      - parameter attributeSetId: (query) Filter items by attribute set id (optional)
      - parameter storeId: (query) Store Id (optional)
      - parameter langId: (query) Retrieves attributes on specified language id (optional)
-     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,name,code,type")
-     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
-     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
+     - parameter type: (query) Defines attribute&#39;s type (optional)
      - parameter visible: (query) Filter items by visibility status (optional)
      - parameter _required: (query) Defines if the option is required (optional)
      - parameter system: (query) True if attribute is system (optional)
+     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
+     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,name,code,type")
+     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func attributeList(start: Int? = nil, count: Int? = nil, type: String? = nil, attributeIds: String? = nil, attributeSetId: String? = nil, storeId: String? = nil, langId: String? = nil, params: String? = nil, exclude: String? = nil, responseFields: String? = nil, visible: Bool? = nil, _required: Bool? = nil, system: Bool? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseAttributeList?, _ error: Error?) -> Void)) -> RequestTask {
-        return attributeListWithRequestBuilder(start: start, count: count, type: type, attributeIds: attributeIds, attributeSetId: attributeSetId, storeId: storeId, langId: langId, params: params, exclude: exclude, responseFields: responseFields, visible: visible, _required: _required, system: system).execute(apiResponseQueue) { result in
+    open class func attributeList(start: Int? = nil, count: Int? = nil, attributeIds: String? = nil, attributeSetId: String? = nil, storeId: String? = nil, langId: String? = nil, type: String? = nil, visible: Bool? = nil, _required: Bool? = nil, system: Bool? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseAttributeList?, _ error: Error?) -> Void)) -> RequestTask {
+        return attributeListWithRequestBuilder(start: start, count: count, attributeIds: attributeIds, attributeSetId: attributeSetId, storeId: storeId, langId: langId, type: type, visible: visible, _required: _required, system: system, responseFields: responseFields, params: params, exclude: exclude).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -633,20 +633,20 @@ open class AttributeAPI {
        - name: ApiKeyAuth
      - parameter start: (query) This parameter sets the number from which you want to get entities (optional, default to 0)
      - parameter count: (query) This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 (optional, default to 10)
-     - parameter type: (query) Defines attribute&#39;s type (optional)
      - parameter attributeIds: (query) Filter attributes by ids (optional)
      - parameter attributeSetId: (query) Filter items by attribute set id (optional)
      - parameter storeId: (query) Store Id (optional)
      - parameter langId: (query) Retrieves attributes on specified language id (optional)
-     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,name,code,type")
-     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
-     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
+     - parameter type: (query) Defines attribute&#39;s type (optional)
      - parameter visible: (query) Filter items by visibility status (optional)
      - parameter _required: (query) Defines if the option is required (optional)
      - parameter system: (query) True if attribute is system (optional)
+     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
+     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,name,code,type")
+     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
      - returns: RequestBuilder<ModelResponseAttributeList> 
      */
-    open class func attributeListWithRequestBuilder(start: Int? = nil, count: Int? = nil, type: String? = nil, attributeIds: String? = nil, attributeSetId: String? = nil, storeId: String? = nil, langId: String? = nil, params: String? = nil, exclude: String? = nil, responseFields: String? = nil, visible: Bool? = nil, _required: Bool? = nil, system: Bool? = nil) -> RequestBuilder<ModelResponseAttributeList> {
+    open class func attributeListWithRequestBuilder(start: Int? = nil, count: Int? = nil, attributeIds: String? = nil, attributeSetId: String? = nil, storeId: String? = nil, langId: String? = nil, type: String? = nil, visible: Bool? = nil, _required: Bool? = nil, system: Bool? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil) -> RequestBuilder<ModelResponseAttributeList> {
         let localVariablePath = "/attribute.list.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -655,17 +655,17 @@ open class AttributeAPI {
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
             "start": (wrappedValue: start?.encodeToJSON(), isExplode: true),
             "count": (wrappedValue: count?.encodeToJSON(), isExplode: true),
-            "type": (wrappedValue: type?.encodeToJSON(), isExplode: true),
             "attribute_ids": (wrappedValue: attributeIds?.encodeToJSON(), isExplode: true),
             "attribute_set_id": (wrappedValue: attributeSetId?.encodeToJSON(), isExplode: true),
             "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
             "lang_id": (wrappedValue: langId?.encodeToJSON(), isExplode: true),
-            "params": (wrappedValue: params?.encodeToJSON(), isExplode: true),
-            "exclude": (wrappedValue: exclude?.encodeToJSON(), isExplode: true),
-            "response_fields": (wrappedValue: responseFields?.encodeToJSON(), isExplode: true),
+            "type": (wrappedValue: type?.encodeToJSON(), isExplode: true),
             "visible": (wrappedValue: visible?.encodeToJSON(), isExplode: true),
             "required": (wrappedValue: _required?.encodeToJSON(), isExplode: true),
             "system": (wrappedValue: system?.encodeToJSON(), isExplode: true),
+            "response_fields": (wrappedValue: responseFields?.encodeToJSON(), isExplode: true),
+            "params": (wrappedValue: params?.encodeToJSON(), isExplode: true),
+            "exclude": (wrappedValue: exclude?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [

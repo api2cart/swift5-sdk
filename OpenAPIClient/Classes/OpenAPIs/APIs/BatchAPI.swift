@@ -17,18 +17,18 @@ open class BatchAPI {
      
      - parameter count: (query) This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 (optional, default to 10)
      - parameter pageCursor: (query) Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) (optional)
+     - parameter ids: (query) Filter batch jobs by ids (optional)
      - parameter createdFrom: (query) Retrieve entities from their creation date (optional)
      - parameter createdTo: (query) Retrieve entities to their creation date (optional)
      - parameter processedFrom: (query) Retrieve entities according to their processing datetime (optional)
      - parameter processedTo: (query) Retrieve entities according to their processing datetime (optional)
-     - parameter ids: (query) Filter batch jobs by ids (optional)
      - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "{return_code,return_message,pagination,result}")
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func batchJobList(count: Int? = nil, pageCursor: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, processedFrom: String? = nil, processedTo: String? = nil, ids: String? = nil, responseFields: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseBatchJobList?, _ error: Error?) -> Void)) -> RequestTask {
-        return batchJobListWithRequestBuilder(count: count, pageCursor: pageCursor, createdFrom: createdFrom, createdTo: createdTo, processedFrom: processedFrom, processedTo: processedTo, ids: ids, responseFields: responseFields).execute(apiResponseQueue) { result in
+    open class func batchJobList(count: Int? = nil, pageCursor: String? = nil, ids: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, processedFrom: String? = nil, processedTo: String? = nil, responseFields: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseBatchJobList?, _ error: Error?) -> Void)) -> RequestTask {
+        return batchJobListWithRequestBuilder(count: count, pageCursor: pageCursor, ids: ids, createdFrom: createdFrom, createdTo: createdTo, processedFrom: processedFrom, processedTo: processedTo, responseFields: responseFields).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -50,15 +50,15 @@ open class BatchAPI {
        - name: ApiKeyAuth
      - parameter count: (query) This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 (optional, default to 10)
      - parameter pageCursor: (query) Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) (optional)
+     - parameter ids: (query) Filter batch jobs by ids (optional)
      - parameter createdFrom: (query) Retrieve entities from their creation date (optional)
      - parameter createdTo: (query) Retrieve entities to their creation date (optional)
      - parameter processedFrom: (query) Retrieve entities according to their processing datetime (optional)
      - parameter processedTo: (query) Retrieve entities according to their processing datetime (optional)
-     - parameter ids: (query) Filter batch jobs by ids (optional)
      - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "{return_code,return_message,pagination,result}")
      - returns: RequestBuilder<ModelResponseBatchJobList> 
      */
-    open class func batchJobListWithRequestBuilder(count: Int? = nil, pageCursor: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, processedFrom: String? = nil, processedTo: String? = nil, ids: String? = nil, responseFields: String? = nil) -> RequestBuilder<ModelResponseBatchJobList> {
+    open class func batchJobListWithRequestBuilder(count: Int? = nil, pageCursor: String? = nil, ids: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, processedFrom: String? = nil, processedTo: String? = nil, responseFields: String? = nil) -> RequestBuilder<ModelResponseBatchJobList> {
         let localVariablePath = "/batch.job.list.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -67,11 +67,11 @@ open class BatchAPI {
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
             "count": (wrappedValue: count?.encodeToJSON(), isExplode: true),
             "page_cursor": (wrappedValue: pageCursor?.encodeToJSON(), isExplode: true),
+            "ids": (wrappedValue: ids?.encodeToJSON(), isExplode: true),
             "created_from": (wrappedValue: createdFrom?.encodeToJSON(), isExplode: true),
             "created_to": (wrappedValue: createdTo?.encodeToJSON(), isExplode: true),
             "processed_from": (wrappedValue: processedFrom?.encodeToJSON(), isExplode: true),
             "processed_to": (wrappedValue: processedTo?.encodeToJSON(), isExplode: true),
-            "ids": (wrappedValue: ids?.encodeToJSON(), isExplode: true),
             "response_fields": (wrappedValue: responseFields?.encodeToJSON(), isExplode: true),
         ])
 

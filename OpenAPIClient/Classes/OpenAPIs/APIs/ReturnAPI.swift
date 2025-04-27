@@ -149,15 +149,15 @@ open class ReturnAPI {
      - parameter id: (query) Entity id 
      - parameter orderId: (query) Defines the order id (optional)
      - parameter storeId: (query) Store Id (optional)
+     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
      - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,order_products")
      - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
-     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func returnInfo(id: String, orderId: String? = nil, storeId: String? = nil, params: String? = nil, exclude: String? = nil, responseFields: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ReturnInfo200Response?, _ error: Error?) -> Void)) -> RequestTask {
-        return returnInfoWithRequestBuilder(id: id, orderId: orderId, storeId: storeId, params: params, exclude: exclude, responseFields: responseFields).execute(apiResponseQueue) { result in
+    open class func returnInfo(id: String, orderId: String? = nil, storeId: String? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ReturnInfo200Response?, _ error: Error?) -> Void)) -> RequestTask {
+        return returnInfoWithRequestBuilder(id: id, orderId: orderId, storeId: storeId, responseFields: responseFields, params: params, exclude: exclude).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -180,12 +180,12 @@ open class ReturnAPI {
      - parameter id: (query) Entity id 
      - parameter orderId: (query) Defines the order id (optional)
      - parameter storeId: (query) Store Id (optional)
+     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
      - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,order_products")
      - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
-     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
      - returns: RequestBuilder<ReturnInfo200Response> 
      */
-    open class func returnInfoWithRequestBuilder(id: String, orderId: String? = nil, storeId: String? = nil, params: String? = nil, exclude: String? = nil, responseFields: String? = nil) -> RequestBuilder<ReturnInfo200Response> {
+    open class func returnInfoWithRequestBuilder(id: String, orderId: String? = nil, storeId: String? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil) -> RequestBuilder<ReturnInfo200Response> {
         let localVariablePath = "/return.info.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -195,9 +195,9 @@ open class ReturnAPI {
             "id": (wrappedValue: id.encodeToJSON(), isExplode: true),
             "order_id": (wrappedValue: orderId?.encodeToJSON(), isExplode: true),
             "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
+            "response_fields": (wrappedValue: responseFields?.encodeToJSON(), isExplode: true),
             "params": (wrappedValue: params?.encodeToJSON(), isExplode: true),
             "exclude": (wrappedValue: exclude?.encodeToJSON(), isExplode: true),
-            "response_fields": (wrappedValue: responseFields?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -217,9 +217,6 @@ open class ReturnAPI {
      - parameter start: (query) This parameter sets the number from which you want to get entities (optional, default to 0)
      - parameter count: (query) This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 (optional, default to 10)
      - parameter pageCursor: (query) Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) (optional)
-     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,order_products")
-     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
-     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
      - parameter orderId: (query) Defines the order id (optional)
      - parameter orderIds: (query) Retrieves return requests specified by order ids (optional)
      - parameter customerId: (query) Retrieves return requests specified by customer id (optional)
@@ -230,14 +227,17 @@ open class ReturnAPI {
      - parameter createdTo: (query) Retrieve entities to their creation date (optional)
      - parameter modifiedFrom: (query) Retrieve entities from their modification date (optional)
      - parameter modifiedTo: (query) Retrieve entities to their modification date (optional)
+     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
+     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,order_products")
+     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
      - parameter reportRequestId: (query) Report request id (optional)
      - parameter disableReportCache: (query) Disable report cache for current request (optional, default to false)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func returnList(start: Int? = nil, count: Int? = nil, pageCursor: String? = nil, params: String? = nil, exclude: String? = nil, responseFields: String? = nil, orderId: String? = nil, orderIds: String? = nil, customerId: String? = nil, storeId: String? = nil, status: String? = nil, returnType: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, reportRequestId: String? = nil, disableReportCache: Bool? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseReturnList?, _ error: Error?) -> Void)) -> RequestTask {
-        return returnListWithRequestBuilder(start: start, count: count, pageCursor: pageCursor, params: params, exclude: exclude, responseFields: responseFields, orderId: orderId, orderIds: orderIds, customerId: customerId, storeId: storeId, status: status, returnType: returnType, createdFrom: createdFrom, createdTo: createdTo, modifiedFrom: modifiedFrom, modifiedTo: modifiedTo, reportRequestId: reportRequestId, disableReportCache: disableReportCache).execute(apiResponseQueue) { result in
+    open class func returnList(start: Int? = nil, count: Int? = nil, pageCursor: String? = nil, orderId: String? = nil, orderIds: String? = nil, customerId: String? = nil, storeId: String? = nil, status: String? = nil, returnType: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil, reportRequestId: String? = nil, disableReportCache: Bool? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseReturnList?, _ error: Error?) -> Void)) -> RequestTask {
+        return returnListWithRequestBuilder(start: start, count: count, pageCursor: pageCursor, orderId: orderId, orderIds: orderIds, customerId: customerId, storeId: storeId, status: status, returnType: returnType, createdFrom: createdFrom, createdTo: createdTo, modifiedFrom: modifiedFrom, modifiedTo: modifiedTo, responseFields: responseFields, params: params, exclude: exclude, reportRequestId: reportRequestId, disableReportCache: disableReportCache).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -260,9 +260,6 @@ open class ReturnAPI {
      - parameter start: (query) This parameter sets the number from which you want to get entities (optional, default to 0)
      - parameter count: (query) This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 (optional, default to 10)
      - parameter pageCursor: (query) Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) (optional)
-     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,order_products")
-     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
-     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
      - parameter orderId: (query) Defines the order id (optional)
      - parameter orderIds: (query) Retrieves return requests specified by order ids (optional)
      - parameter customerId: (query) Retrieves return requests specified by customer id (optional)
@@ -273,11 +270,14 @@ open class ReturnAPI {
      - parameter createdTo: (query) Retrieve entities to their creation date (optional)
      - parameter modifiedFrom: (query) Retrieve entities from their modification date (optional)
      - parameter modifiedTo: (query) Retrieve entities to their modification date (optional)
+     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
+     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,order_products")
+     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
      - parameter reportRequestId: (query) Report request id (optional)
      - parameter disableReportCache: (query) Disable report cache for current request (optional, default to false)
      - returns: RequestBuilder<ModelResponseReturnList> 
      */
-    open class func returnListWithRequestBuilder(start: Int? = nil, count: Int? = nil, pageCursor: String? = nil, params: String? = nil, exclude: String? = nil, responseFields: String? = nil, orderId: String? = nil, orderIds: String? = nil, customerId: String? = nil, storeId: String? = nil, status: String? = nil, returnType: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, reportRequestId: String? = nil, disableReportCache: Bool? = nil) -> RequestBuilder<ModelResponseReturnList> {
+    open class func returnListWithRequestBuilder(start: Int? = nil, count: Int? = nil, pageCursor: String? = nil, orderId: String? = nil, orderIds: String? = nil, customerId: String? = nil, storeId: String? = nil, status: String? = nil, returnType: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil, reportRequestId: String? = nil, disableReportCache: Bool? = nil) -> RequestBuilder<ModelResponseReturnList> {
         let localVariablePath = "/return.list.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -287,9 +287,6 @@ open class ReturnAPI {
             "start": (wrappedValue: start?.encodeToJSON(), isExplode: true),
             "count": (wrappedValue: count?.encodeToJSON(), isExplode: true),
             "page_cursor": (wrappedValue: pageCursor?.encodeToJSON(), isExplode: true),
-            "params": (wrappedValue: params?.encodeToJSON(), isExplode: true),
-            "exclude": (wrappedValue: exclude?.encodeToJSON(), isExplode: true),
-            "response_fields": (wrappedValue: responseFields?.encodeToJSON(), isExplode: true),
             "order_id": (wrappedValue: orderId?.encodeToJSON(), isExplode: true),
             "order_ids": (wrappedValue: orderIds?.encodeToJSON(), isExplode: true),
             "customer_id": (wrappedValue: customerId?.encodeToJSON(), isExplode: true),
@@ -300,6 +297,9 @@ open class ReturnAPI {
             "created_to": (wrappedValue: createdTo?.encodeToJSON(), isExplode: true),
             "modified_from": (wrappedValue: modifiedFrom?.encodeToJSON(), isExplode: true),
             "modified_to": (wrappedValue: modifiedTo?.encodeToJSON(), isExplode: true),
+            "response_fields": (wrappedValue: responseFields?.encodeToJSON(), isExplode: true),
+            "params": (wrappedValue: params?.encodeToJSON(), isExplode: true),
+            "exclude": (wrappedValue: exclude?.encodeToJSON(), isExplode: true),
             "report_request_id": (wrappedValue: reportRequestId?.encodeToJSON(), isExplode: true),
             "disable_report_cache": (wrappedValue: disableReportCache?.encodeToJSON(), isExplode: true),
         ])
