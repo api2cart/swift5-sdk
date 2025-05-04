@@ -18,6 +18,7 @@ public struct CartCreate: Codable, JSONEncodable, Hashable {
         case aceShop = "AceShop"
         case amazonSP = "AmazonSP"
         case aspDotNetStorefront = "AspDotNetStorefront"
+        case bigCartel = "BigCartel"
         case bigcommerceApi = "BigcommerceApi"
         case bol = "Bol"
         case commerceHQ = "CommerceHQ"
