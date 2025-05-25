@@ -52,6 +52,7 @@ public struct CartCreate: Codable, JSONEncodable, Hashable {
         case sspremium = "SSPremium"
         case salla = "Salla"
         case shopify = "Shopify"
+        case shopee = "Shopee"
         case shoplazza = "Shoplazza"
         case shopline = "Shopline"
         case shopware = "Shopware"
