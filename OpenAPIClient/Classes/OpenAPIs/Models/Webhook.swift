@@ -19,6 +19,7 @@ public struct Webhook: Codable, JSONEncodable, Hashable {
     public var active: Bool?
     public var callback: String?
     public var fields: String?
+    public var responseFields: String?
     public var createdAt: String?
     public var updatedAt: String?
     public var entity: String?
@@ -26,7 +27,7 @@ public struct Webhook: Codable, JSONEncodable, Hashable {
     public var additionalFields: AnyCodable?
     public var customFields: AnyCodable?
 
-    public init(id: Int? = nil, label: String? = nil, storeId: String? = nil, langId: String? = nil, active: Bool? = nil, callback: String? = nil, fields: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, entity: String? = nil, action: String? = nil, additionalFields: AnyCodable? = nil, customFields: AnyCodable? = nil) {
+    public init(id: Int? = nil, label: String? = nil, storeId: String? = nil, langId: String? = nil, active: Bool? = nil, callback: String? = nil, fields: String? = nil, responseFields: String? = nil, createdAt: String? = nil, updatedAt: String? = nil, entity: String? = nil, action: String? = nil, additionalFields: AnyCodable? = nil, customFields: AnyCodable? = nil) {
         self.id = id
         self.label = label
         self.storeId = storeId
@@ -34,6 +35,7 @@ public struct Webhook: Codable, JSONEncodable, Hashable {
         self.active = active
         self.callback = callback
         self.fields = fields
+        self.responseFields = responseFields
         self.createdAt = createdAt
         self.updatedAt = updatedAt
         self.entity = entity
@@ -50,6 +52,7 @@ public struct Webhook: Codable, JSONEncodable, Hashable {
         case active
         case callback
         case fields
+        case responseFields = "response_fields"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
         case entity
@@ -69,6 +72,7 @@ public struct Webhook: Codable, JSONEncodable, Hashable {
         try container.encodeIfPresent(active, forKey: .active)
         try container.encodeIfPresent(callback, forKey: .callback)
         try container.encodeIfPresent(fields, forKey: .fields)
+        try container.encodeIfPresent(responseFields, forKey: .responseFields)
         try container.encodeIfPresent(createdAt, forKey: .createdAt)
         try container.encodeIfPresent(updatedAt, forKey: .updatedAt)
         try container.encodeIfPresent(entity, forKey: .entity)
