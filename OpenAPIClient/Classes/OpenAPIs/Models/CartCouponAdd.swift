@@ -59,8 +59,10 @@ public struct CartCouponAdd: Codable, JSONEncodable, Hashable {
     public var includeTax: Bool? = false
     /** Store Id */
     public var storeId: String?
+    /** Defines whether the coupon provides free cash on delivery */
+    public var freeCashOnDelivery: Bool?
 
-    public init(code: String, actionType: ActionType, actionApplyTo: ActionApplyTo, actionScope: ActionScope, actionAmount: Double, codes: [String]? = nil, name: String? = nil, dateStart: String? = "now", dateEnd: String? = nil, usageLimit: Int? = nil, usageLimitPerCustomer: Int? = nil, actionConditionEntity: String? = nil, actionConditionKey: String? = nil, actionConditionOperator: String? = nil, actionConditionValue: String? = nil, includeTax: Bool? = false, storeId: String? = nil) {
+    public init(code: String, actionType: ActionType, actionApplyTo: ActionApplyTo, actionScope: ActionScope, actionAmount: Double, codes: [String]? = nil, name: String? = nil, dateStart: String? = "now", dateEnd: String? = nil, usageLimit: Int? = nil, usageLimitPerCustomer: Int? = nil, actionConditionEntity: String? = nil, actionConditionKey: String? = nil, actionConditionOperator: String? = nil, actionConditionValue: String? = nil, includeTax: Bool? = false, storeId: String? = nil, freeCashOnDelivery: Bool? = nil) {
         self.code = code
         self.actionType = actionType
         self.actionApplyTo = actionApplyTo
@@ -78,6 +80,7 @@ public struct CartCouponAdd: Codable, JSONEncodable, Hashable {
         self.actionConditionValue = actionConditionValue
         self.includeTax = includeTax
         self.storeId = storeId
+        self.freeCashOnDelivery = freeCashOnDelivery
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -98,6 +101,7 @@ public struct CartCouponAdd: Codable, JSONEncodable, Hashable {
         case actionConditionValue = "action_condition_value"
         case includeTax = "include_tax"
         case storeId = "store_id"
+        case freeCashOnDelivery = "free_cash_on_delivery"
     }
 
     // Encodable protocol methods
@@ -121,6 +125,7 @@ public struct CartCouponAdd: Codable, JSONEncodable, Hashable {
         try container.encodeIfPresent(actionConditionValue, forKey: .actionConditionValue)
         try container.encodeIfPresent(includeTax, forKey: .includeTax)
         try container.encodeIfPresent(storeId, forKey: .storeId)
+        try container.encodeIfPresent(freeCashOnDelivery, forKey: .freeCashOnDelivery)
     }
 }
 
