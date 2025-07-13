@@ -195,6 +195,7 @@ open class CustomerAPI {
      - parameter groupId: (query) Customer group_id (optional)
      - parameter storeId: (query) Counts customer specified by store id (optional)
      - parameter avail: (query) Defines category&#39;s visibility status (optional, default to true)
+     - parameter includeGuests: (query) Indicates whether to include guest customers in the total count. (optional, default to false)
      - parameter findValue: (query) Entity search that is specified by some value (optional)
      - parameter findWhere: (query) Counts customers that are searched specified by field (optional)
      - parameter createdFrom: (query) Retrieve entities from their creation date (optional)
@@ -205,8 +206,8 @@ open class CustomerAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func customerCount(ids: String? = nil, sinceId: String? = nil, customerListId: String? = nil, groupId: String? = nil, storeId: String? = nil, avail: Bool? = nil, findValue: String? = nil, findWhere: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: CustomerCount200Response?, _ error: Error?) -> Void)) -> RequestTask {
-        return customerCountWithRequestBuilder(ids: ids, sinceId: sinceId, customerListId: customerListId, groupId: groupId, storeId: storeId, avail: avail, findValue: findValue, findWhere: findWhere, createdFrom: createdFrom, createdTo: createdTo, modifiedFrom: modifiedFrom, modifiedTo: modifiedTo).execute(apiResponseQueue) { result in
+    open class func customerCount(ids: String? = nil, sinceId: String? = nil, customerListId: String? = nil, groupId: String? = nil, storeId: String? = nil, avail: Bool? = nil, includeGuests: Bool? = nil, findValue: String? = nil, findWhere: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: CustomerCount200Response?, _ error: Error?) -> Void)) -> RequestTask {
+        return customerCountWithRequestBuilder(ids: ids, sinceId: sinceId, customerListId: customerListId, groupId: groupId, storeId: storeId, avail: avail, includeGuests: includeGuests, findValue: findValue, findWhere: findWhere, createdFrom: createdFrom, createdTo: createdTo, modifiedFrom: modifiedFrom, modifiedTo: modifiedTo).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -232,6 +233,7 @@ open class CustomerAPI {
      - parameter groupId: (query) Customer group_id (optional)
      - parameter storeId: (query) Counts customer specified by store id (optional)
      - parameter avail: (query) Defines category&#39;s visibility status (optional, default to true)
+     - parameter includeGuests: (query) Indicates whether to include guest customers in the total count. (optional, default to false)
      - parameter findValue: (query) Entity search that is specified by some value (optional)
      - parameter findWhere: (query) Counts customers that are searched specified by field (optional)
      - parameter createdFrom: (query) Retrieve entities from their creation date (optional)
@@ -240,7 +242,7 @@ open class CustomerAPI {
      - parameter modifiedTo: (query) Retrieve entities to their modification date (optional)
      - returns: RequestBuilder<CustomerCount200Response> 
      */
-    open class func customerCountWithRequestBuilder(ids: String? = nil, sinceId: String? = nil, customerListId: String? = nil, groupId: String? = nil, storeId: String? = nil, avail: Bool? = nil, findValue: String? = nil, findWhere: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil) -> RequestBuilder<CustomerCount200Response> {
+    open class func customerCountWithRequestBuilder(ids: String? = nil, sinceId: String? = nil, customerListId: String? = nil, groupId: String? = nil, storeId: String? = nil, avail: Bool? = nil, includeGuests: Bool? = nil, findValue: String? = nil, findWhere: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil) -> RequestBuilder<CustomerCount200Response> {
         let localVariablePath = "/customer.count.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -253,6 +255,7 @@ open class CustomerAPI {
             "group_id": (wrappedValue: groupId?.encodeToJSON(), isExplode: true),
             "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
             "avail": (wrappedValue: avail?.encodeToJSON(), isExplode: true),
+            "include_guests": (wrappedValue: includeGuests?.encodeToJSON(), isExplode: true),
             "find_value": (wrappedValue: findValue?.encodeToJSON(), isExplode: true),
             "find_where": (wrappedValue: findWhere?.encodeToJSON(), isExplode: true),
             "created_from": (wrappedValue: createdFrom?.encodeToJSON(), isExplode: true),
@@ -332,12 +335,13 @@ open class CustomerAPI {
      - parameter findWhere: (query) Entity search that is specified by the comma-separated unique fields (optional, default to "email")
      - parameter findParams: (query) Entity search that is specified by comma-separated parameters (optional, default to "whole_words")
      - parameter storeId: (query) Store Id (optional)
+     - parameter includeGuests: (query) Indicates whether to search among guest customers when looking up a customer. (optional, default to false)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func customerFind(findValue: String, findWhere: String? = nil, findParams: String? = nil, storeId: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: CustomerFind200Response?, _ error: Error?) -> Void)) -> RequestTask {
-        return customerFindWithRequestBuilder(findValue: findValue, findWhere: findWhere, findParams: findParams, storeId: storeId).execute(apiResponseQueue) { result in
+    open class func customerFind(findValue: String, findWhere: String? = nil, findParams: String? = nil, storeId: String? = nil, includeGuests: Bool? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: CustomerFind200Response?, _ error: Error?) -> Void)) -> RequestTask {
+        return customerFindWithRequestBuilder(findValue: findValue, findWhere: findWhere, findParams: findParams, storeId: storeId, includeGuests: includeGuests).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -361,9 +365,10 @@ open class CustomerAPI {
      - parameter findWhere: (query) Entity search that is specified by the comma-separated unique fields (optional, default to "email")
      - parameter findParams: (query) Entity search that is specified by comma-separated parameters (optional, default to "whole_words")
      - parameter storeId: (query) Store Id (optional)
+     - parameter includeGuests: (query) Indicates whether to search among guest customers when looking up a customer. (optional, default to false)
      - returns: RequestBuilder<CustomerFind200Response> 
      */
-    open class func customerFindWithRequestBuilder(findValue: String, findWhere: String? = nil, findParams: String? = nil, storeId: String? = nil) -> RequestBuilder<CustomerFind200Response> {
+    open class func customerFindWithRequestBuilder(findValue: String, findWhere: String? = nil, findParams: String? = nil, storeId: String? = nil, includeGuests: Bool? = nil) -> RequestBuilder<CustomerFind200Response> {
         let localVariablePath = "/customer.find.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -374,6 +379,7 @@ open class CustomerAPI {
             "find_where": (wrappedValue: findWhere?.encodeToJSON(), isExplode: true),
             "find_params": (wrappedValue: findParams?.encodeToJSON(), isExplode: true),
             "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
+            "include_guests": (wrappedValue: includeGuests?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -603,6 +609,7 @@ open class CustomerAPI {
      - parameter groupId: (query) Customer group_id (optional)
      - parameter storeId: (query) Retrieves customers specified by store id (optional)
      - parameter avail: (query) Defines category&#39;s visibility status (optional, default to true)
+     - parameter includeGuests: (query) Indicates whether to include guest customers in the list results. (optional, default to false)
      - parameter findValue: (query) Entity search that is specified by some value (optional)
      - parameter findWhere: (query) Customer search that is specified by field (optional)
      - parameter createdFrom: (query) Retrieve entities from their creation date (optional)
@@ -618,8 +625,8 @@ open class CustomerAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func customerList(start: Int? = nil, count: Int? = nil, pageCursor: String? = nil, ids: String? = nil, sinceId: String? = nil, customerListId: String? = nil, groupId: String? = nil, storeId: String? = nil, avail: Bool? = nil, findValue: String? = nil, findWhere: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, sortBy: String? = nil, sortDirection: String? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseCustomerList?, _ error: Error?) -> Void)) -> RequestTask {
-        return customerListWithRequestBuilder(start: start, count: count, pageCursor: pageCursor, ids: ids, sinceId: sinceId, customerListId: customerListId, groupId: groupId, storeId: storeId, avail: avail, findValue: findValue, findWhere: findWhere, createdFrom: createdFrom, createdTo: createdTo, modifiedFrom: modifiedFrom, modifiedTo: modifiedTo, sortBy: sortBy, sortDirection: sortDirection, responseFields: responseFields, params: params, exclude: exclude).execute(apiResponseQueue) { result in
+    open class func customerList(start: Int? = nil, count: Int? = nil, pageCursor: String? = nil, ids: String? = nil, sinceId: String? = nil, customerListId: String? = nil, groupId: String? = nil, storeId: String? = nil, avail: Bool? = nil, includeGuests: Bool? = nil, findValue: String? = nil, findWhere: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, sortBy: String? = nil, sortDirection: String? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseCustomerList?, _ error: Error?) -> Void)) -> RequestTask {
+        return customerListWithRequestBuilder(start: start, count: count, pageCursor: pageCursor, ids: ids, sinceId: sinceId, customerListId: customerListId, groupId: groupId, storeId: storeId, avail: avail, includeGuests: includeGuests, findValue: findValue, findWhere: findWhere, createdFrom: createdFrom, createdTo: createdTo, modifiedFrom: modifiedFrom, modifiedTo: modifiedTo, sortBy: sortBy, sortDirection: sortDirection, responseFields: responseFields, params: params, exclude: exclude).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -648,6 +655,7 @@ open class CustomerAPI {
      - parameter groupId: (query) Customer group_id (optional)
      - parameter storeId: (query) Retrieves customers specified by store id (optional)
      - parameter avail: (query) Defines category&#39;s visibility status (optional, default to true)
+     - parameter includeGuests: (query) Indicates whether to include guest customers in the list results. (optional, default to false)
      - parameter findValue: (query) Entity search that is specified by some value (optional)
      - parameter findWhere: (query) Customer search that is specified by field (optional)
      - parameter createdFrom: (query) Retrieve entities from their creation date (optional)
@@ -661,7 +669,7 @@ open class CustomerAPI {
      - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
      - returns: RequestBuilder<ModelResponseCustomerList> 
      */
-    open class func customerListWithRequestBuilder(start: Int? = nil, count: Int? = nil, pageCursor: String? = nil, ids: String? = nil, sinceId: String? = nil, customerListId: String? = nil, groupId: String? = nil, storeId: String? = nil, avail: Bool? = nil, findValue: String? = nil, findWhere: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, sortBy: String? = nil, sortDirection: String? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil) -> RequestBuilder<ModelResponseCustomerList> {
+    open class func customerListWithRequestBuilder(start: Int? = nil, count: Int? = nil, pageCursor: String? = nil, ids: String? = nil, sinceId: String? = nil, customerListId: String? = nil, groupId: String? = nil, storeId: String? = nil, avail: Bool? = nil, includeGuests: Bool? = nil, findValue: String? = nil, findWhere: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, sortBy: String? = nil, sortDirection: String? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil) -> RequestBuilder<ModelResponseCustomerList> {
         let localVariablePath = "/customer.list.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -677,6 +685,7 @@ open class CustomerAPI {
             "group_id": (wrappedValue: groupId?.encodeToJSON(), isExplode: true),
             "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
             "avail": (wrappedValue: avail?.encodeToJSON(), isExplode: true),
+            "include_guests": (wrappedValue: includeGuests?.encodeToJSON(), isExplode: true),
             "find_value": (wrappedValue: findValue?.encodeToJSON(), isExplode: true),
             "find_where": (wrappedValue: findWhere?.encodeToJSON(), isExplode: true),
             "created_from": (wrappedValue: createdFrom?.encodeToJSON(), isExplode: true),

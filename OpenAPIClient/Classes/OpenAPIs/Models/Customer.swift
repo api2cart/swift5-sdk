@@ -24,6 +24,7 @@ public struct Customer: Codable, JSONEncodable, Hashable {
     public var lastLogin: A2CDateTime?
     public var birthDay: A2CDateTime?
     public var status: String?
+    public var isGuest: Bool?
     public var newsLetterSubscription: Bool?
     public var consents: [CustomerConsent]?
     public var gender: String?
@@ -39,7 +40,7 @@ public struct Customer: Codable, JSONEncodable, Hashable {
     public var additionalFields: AnyCodable?
     public var customFields: AnyCodable?
 
-    public init(id: String? = nil, email: String? = nil, firstName: String? = nil, lastName: String? = nil, phone: String? = nil, createdTime: A2CDateTime? = nil, modifiedTime: A2CDateTime? = nil, group: [CustomerGroup]? = nil, login: String? = nil, lastLogin: A2CDateTime? = nil, birthDay: A2CDateTime? = nil, status: String? = nil, newsLetterSubscription: Bool? = nil, consents: [CustomerConsent]? = nil, gender: String? = nil, storesIds: [String]? = nil, website: String? = nil, fax: String? = nil, company: String? = nil, ipAddress: String? = nil, addressBook: [CustomerAddress]? = nil, langId: String? = nil, ordersCount: Int? = nil, lastOrderId: String? = nil, additionalFields: AnyCodable? = nil, customFields: AnyCodable? = nil) {
+    public init(id: String? = nil, email: String? = nil, firstName: String? = nil, lastName: String? = nil, phone: String? = nil, createdTime: A2CDateTime? = nil, modifiedTime: A2CDateTime? = nil, group: [CustomerGroup]? = nil, login: String? = nil, lastLogin: A2CDateTime? = nil, birthDay: A2CDateTime? = nil, status: String? = nil, isGuest: Bool? = nil, newsLetterSubscription: Bool? = nil, consents: [CustomerConsent]? = nil, gender: String? = nil, storesIds: [String]? = nil, website: String? = nil, fax: String? = nil, company: String? = nil, ipAddress: String? = nil, addressBook: [CustomerAddress]? = nil, langId: String? = nil, ordersCount: Int? = nil, lastOrderId: String? = nil, additionalFields: AnyCodable? = nil, customFields: AnyCodable? = nil) {
         self.id = id
         self.email = email
         self.firstName = firstName
@@ -52,6 +53,7 @@ public struct Customer: Codable, JSONEncodable, Hashable {
         self.lastLogin = lastLogin
         self.birthDay = birthDay
         self.status = status
+        self.isGuest = isGuest
         self.newsLetterSubscription = newsLetterSubscription
         self.consents = consents
         self.gender = gender
@@ -81,6 +83,7 @@ public struct Customer: Codable, JSONEncodable, Hashable {
         case lastLogin = "last_login"
         case birthDay = "birth_day"
         case status
+        case isGuest = "is_guest"
         case newsLetterSubscription = "news_letter_subscription"
         case consents
         case gender
@@ -113,6 +116,7 @@ public struct Customer: Codable, JSONEncodable, Hashable {
         try container.encodeIfPresent(lastLogin, forKey: .lastLogin)
         try container.encodeIfPresent(birthDay, forKey: .birthDay)
         try container.encodeIfPresent(status, forKey: .status)
+        try container.encodeIfPresent(isGuest, forKey: .isGuest)
         try container.encodeIfPresent(newsLetterSubscription, forKey: .newsLetterSubscription)
         try container.encodeIfPresent(consents, forKey: .consents)
         try container.encodeIfPresent(gender, forKey: .gender)
