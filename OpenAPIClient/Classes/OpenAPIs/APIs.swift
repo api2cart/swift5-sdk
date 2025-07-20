@@ -9,7 +9,7 @@ import Foundation
 import FoundationNetworking
 #endif
 open class OpenAPIClientAPI {
-    public static var basePath = "https://api.api2cart.com/v1.1"
+    public static var basePath = "https://api.api2cart.local.com/v1.1"
     public static var customHeaders: [String: String] = [:]
     public static var credential: URLCredential?
     public static var requestBuilderFactory: RequestBuilderFactory = URLSessionRequestBuilderFactory()
