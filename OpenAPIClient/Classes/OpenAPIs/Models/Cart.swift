@@ -15,6 +15,7 @@ public struct Cart: Codable, JSONEncodable, Hashable {
     public var name: String?
     public var url: String?
     public var version: String?
+    public var bridgeVersion: String?
     public var dbPrefix: String?
     public var storesInfo: [CartStoreInfo]?
     public var warehouses: [CartWarehouse]?
@@ -22,10 +23,11 @@ public struct Cart: Codable, JSONEncodable, Hashable {
     public var additionalFields: AnyCodable?
     public var customFields: AnyCodable?
 
-    public init(name: String? = nil, url: String? = nil, version: String? = nil, dbPrefix: String? = nil, storesInfo: [CartStoreInfo]? = nil, warehouses: [CartWarehouse]? = nil, shippingZones: [CartShippingZone]? = nil, additionalFields: AnyCodable? = nil, customFields: AnyCodable? = nil) {
+    public init(name: String? = nil, url: String? = nil, version: String? = nil, bridgeVersion: String? = nil, dbPrefix: String? = nil, storesInfo: [CartStoreInfo]? = nil, warehouses: [CartWarehouse]? = nil, shippingZones: [CartShippingZone]? = nil, additionalFields: AnyCodable? = nil, customFields: AnyCodable? = nil) {
         self.name = name
         self.url = url
         self.version = version
+        self.bridgeVersion = bridgeVersion
         self.dbPrefix = dbPrefix
         self.storesInfo = storesInfo
         self.warehouses = warehouses
@@ -38,6 +40,7 @@ public struct Cart: Codable, JSONEncodable, Hashable {
         case name
         case url
         case version
+        case bridgeVersion = "bridge_version"
         case dbPrefix = "db_prefix"
         case storesInfo = "stores_info"
         case warehouses
@@ -53,6 +56,7 @@ public struct Cart: Codable, JSONEncodable, Hashable {
         try container.encodeIfPresent(name, forKey: .name)
         try container.encodeIfPresent(url, forKey: .url)
         try container.encodeIfPresent(version, forKey: .version)
+        try container.encodeIfPresent(bridgeVersion, forKey: .bridgeVersion)
         try container.encodeIfPresent(dbPrefix, forKey: .dbPrefix)
         try container.encodeIfPresent(storesInfo, forKey: .storesInfo)
         try container.encodeIfPresent(warehouses, forKey: .warehouses)
