@@ -19,6 +19,7 @@ public struct AccountCartAdd: Codable, JSONEncodable, Hashable {
         case amazonSP = "AmazonSP"
         case aspDotNetStorefront = "AspDotNetStorefront"
         case bigCartel = "BigCartel"
+        case bricklink = "Bricklink"
         case bigcommerceApi = "BigcommerceApi"
         case bol = "Bol"
         case commerceHQ = "CommerceHQ"

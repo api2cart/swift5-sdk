@@ -422,6 +422,7 @@ open class CartAPI {
      - parameter storeId: (query) Filter coupons by store id (optional)
      - parameter langId: (query) Language id (optional)
      - parameter avail: (query) Filter coupons by avail status (optional)
+     - parameter status: (query) Defines coupon&#39;s status (optional)
      - parameter dateStartFrom: (query) Filter entity by date_start (greater or equal) (optional)
      - parameter dateStartTo: (query) Filter entity by date_start (less or equal) (optional)
      - parameter dateEndFrom: (query) Filter entity by date_end (greater or equal) (optional)
@@ -433,8 +434,8 @@ open class CartAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func cartCouponList(start: Int? = nil, count: Int? = nil, pageCursor: String? = nil, couponsIds: String? = nil, storeId: String? = nil, langId: String? = nil, avail: Bool? = nil, dateStartFrom: String? = nil, dateStartTo: String? = nil, dateEndFrom: String? = nil, dateEndTo: String? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseCartCouponList?, _ error: Error?) -> Void)) -> RequestTask {
-        return cartCouponListWithRequestBuilder(start: start, count: count, pageCursor: pageCursor, couponsIds: couponsIds, storeId: storeId, langId: langId, avail: avail, dateStartFrom: dateStartFrom, dateStartTo: dateStartTo, dateEndFrom: dateEndFrom, dateEndTo: dateEndTo, responseFields: responseFields, params: params, exclude: exclude).execute(apiResponseQueue) { result in
+    open class func cartCouponList(start: Int? = nil, count: Int? = nil, pageCursor: String? = nil, couponsIds: String? = nil, storeId: String? = nil, langId: String? = nil, avail: Bool? = nil, status: String? = nil, dateStartFrom: String? = nil, dateStartTo: String? = nil, dateEndFrom: String? = nil, dateEndTo: String? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseCartCouponList?, _ error: Error?) -> Void)) -> RequestTask {
+        return cartCouponListWithRequestBuilder(start: start, count: count, pageCursor: pageCursor, couponsIds: couponsIds, storeId: storeId, langId: langId, avail: avail, status: status, dateStartFrom: dateStartFrom, dateStartTo: dateStartTo, dateEndFrom: dateEndFrom, dateEndTo: dateEndTo, responseFields: responseFields, params: params, exclude: exclude).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -461,6 +462,7 @@ open class CartAPI {
      - parameter storeId: (query) Filter coupons by store id (optional)
      - parameter langId: (query) Language id (optional)
      - parameter avail: (query) Filter coupons by avail status (optional)
+     - parameter status: (query) Defines coupon&#39;s status (optional)
      - parameter dateStartFrom: (query) Filter entity by date_start (greater or equal) (optional)
      - parameter dateStartTo: (query) Filter entity by date_start (less or equal) (optional)
      - parameter dateEndFrom: (query) Filter entity by date_end (greater or equal) (optional)
@@ -470,7 +472,7 @@ open class CartAPI {
      - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
      - returns: RequestBuilder<ModelResponseCartCouponList> 
      */
-    open class func cartCouponListWithRequestBuilder(start: Int? = nil, count: Int? = nil, pageCursor: String? = nil, couponsIds: String? = nil, storeId: String? = nil, langId: String? = nil, avail: Bool? = nil, dateStartFrom: String? = nil, dateStartTo: String? = nil, dateEndFrom: String? = nil, dateEndTo: String? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil) -> RequestBuilder<ModelResponseCartCouponList> {
+    open class func cartCouponListWithRequestBuilder(start: Int? = nil, count: Int? = nil, pageCursor: String? = nil, couponsIds: String? = nil, storeId: String? = nil, langId: String? = nil, avail: Bool? = nil, status: String? = nil, dateStartFrom: String? = nil, dateStartTo: String? = nil, dateEndFrom: String? = nil, dateEndTo: String? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil) -> RequestBuilder<ModelResponseCartCouponList> {
         let localVariablePath = "/cart.coupon.list.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -484,6 +486,7 @@ open class CartAPI {
             "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
             "lang_id": (wrappedValue: langId?.encodeToJSON(), isExplode: true),
             "avail": (wrappedValue: avail?.encodeToJSON(), isExplode: true),
+            "status": (wrappedValue: status?.encodeToJSON(), isExplode: true),
             "date_start_from": (wrappedValue: dateStartFrom?.encodeToJSON(), isExplode: true),
             "date_start_to": (wrappedValue: dateStartTo?.encodeToJSON(), isExplode: true),
             "date_end_from": (wrappedValue: dateEndFrom?.encodeToJSON(), isExplode: true),
