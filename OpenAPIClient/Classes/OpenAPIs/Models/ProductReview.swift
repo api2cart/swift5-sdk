@@ -23,11 +23,12 @@ public struct ProductReview: Codable, JSONEncodable, Hashable {
     public var ratings: [ProductReviewRating]?
     public var status: String?
     public var createdTime: A2CDateTime?
+    public var modifiedTime: A2CDateTime?
     public var medias: [Media]?
     public var additionalFields: AnyCodable?
     public var customFields: AnyCodable?
 
-    public init(id: String? = nil, productId: String? = nil, customerId: String? = nil, nickName: String? = nil, email: String? = nil, summary: String? = nil, message: String? = nil, rating: Double? = nil, ratings: [ProductReviewRating]? = nil, status: String? = nil, createdTime: A2CDateTime? = nil, medias: [Media]? = nil, additionalFields: AnyCodable? = nil, customFields: AnyCodable? = nil) {
+    public init(id: String? = nil, productId: String? = nil, customerId: String? = nil, nickName: String? = nil, email: String? = nil, summary: String? = nil, message: String? = nil, rating: Double? = nil, ratings: [ProductReviewRating]? = nil, status: String? = nil, createdTime: A2CDateTime? = nil, modifiedTime: A2CDateTime? = nil, medias: [Media]? = nil, additionalFields: AnyCodable? = nil, customFields: AnyCodable? = nil) {
         self.id = id
         self.productId = productId
         self.customerId = customerId
@@ -39,6 +40,7 @@ public struct ProductReview: Codable, JSONEncodable, Hashable {
         self.ratings = ratings
         self.status = status
         self.createdTime = createdTime
+        self.modifiedTime = modifiedTime
         self.medias = medias
         self.additionalFields = additionalFields
         self.customFields = customFields
@@ -56,6 +58,7 @@ public struct ProductReview: Codable, JSONEncodable, Hashable {
         case ratings
         case status
         case createdTime = "created_time"
+        case modifiedTime = "modified_time"
         case medias
         case additionalFields = "additional_fields"
         case customFields = "custom_fields"
@@ -76,6 +79,7 @@ public struct ProductReview: Codable, JSONEncodable, Hashable {
         try container.encodeIfPresent(ratings, forKey: .ratings)
         try container.encodeIfPresent(status, forKey: .status)
         try container.encodeIfPresent(createdTime, forKey: .createdTime)
+        try container.encodeIfPresent(modifiedTime, forKey: .modifiedTime)
         try container.encodeIfPresent(medias, forKey: .medias)
         try container.encodeIfPresent(additionalFields, forKey: .additionalFields)
         try container.encodeIfPresent(customFields, forKey: .customFields)

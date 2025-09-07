@@ -1576,12 +1576,18 @@ open class ProductAPI {
      - parameter productId: (query) Defines products specified by product id 
      - parameter manufacturer: (query) Defines product’s manufacturer&#39;s name 
      - parameter storeId: (query) Store Id (optional)
+     - parameter metaTitle: (query) Defines unique meta title for each entity (optional)
+     - parameter metaKeywords: (query) Defines unique meta keywords for each entity (optional)
+     - parameter metaDescription: (query) Defines unique meta description of a entity (optional)
+     - parameter searchKeywords: (query) Defines unique search keywords (optional)
+     - parameter imageUrl: (query) Image Url (optional)
+     - parameter seoUrl: (query) Defines unique URL for SEO (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func productManufacturerAdd(productId: String, manufacturer: String, storeId: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ProductManufacturerAdd200Response?, _ error: Error?) -> Void)) -> RequestTask {
-        return productManufacturerAddWithRequestBuilder(productId: productId, manufacturer: manufacturer, storeId: storeId).execute(apiResponseQueue) { result in
+    open class func productManufacturerAdd(productId: String, manufacturer: String, storeId: String? = nil, metaTitle: String? = nil, metaKeywords: String? = nil, metaDescription: String? = nil, searchKeywords: String? = nil, imageUrl: String? = nil, seoUrl: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ProductManufacturerAdd200Response?, _ error: Error?) -> Void)) -> RequestTask {
+        return productManufacturerAddWithRequestBuilder(productId: productId, manufacturer: manufacturer, storeId: storeId, metaTitle: metaTitle, metaKeywords: metaKeywords, metaDescription: metaDescription, searchKeywords: searchKeywords, imageUrl: imageUrl, seoUrl: seoUrl).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -1604,9 +1610,15 @@ open class ProductAPI {
      - parameter productId: (query) Defines products specified by product id 
      - parameter manufacturer: (query) Defines product’s manufacturer&#39;s name 
      - parameter storeId: (query) Store Id (optional)
+     - parameter metaTitle: (query) Defines unique meta title for each entity (optional)
+     - parameter metaKeywords: (query) Defines unique meta keywords for each entity (optional)
+     - parameter metaDescription: (query) Defines unique meta description of a entity (optional)
+     - parameter searchKeywords: (query) Defines unique search keywords (optional)
+     - parameter imageUrl: (query) Image Url (optional)
+     - parameter seoUrl: (query) Defines unique URL for SEO (optional)
      - returns: RequestBuilder<ProductManufacturerAdd200Response> 
      */
-    open class func productManufacturerAddWithRequestBuilder(productId: String, manufacturer: String, storeId: String? = nil) -> RequestBuilder<ProductManufacturerAdd200Response> {
+    open class func productManufacturerAddWithRequestBuilder(productId: String, manufacturer: String, storeId: String? = nil, metaTitle: String? = nil, metaKeywords: String? = nil, metaDescription: String? = nil, searchKeywords: String? = nil, imageUrl: String? = nil, seoUrl: String? = nil) -> RequestBuilder<ProductManufacturerAdd200Response> {
         let localVariablePath = "/product.manufacturer.add.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -1616,6 +1628,12 @@ open class ProductAPI {
             "product_id": (wrappedValue: productId.encodeToJSON(), isExplode: true),
             "manufacturer": (wrappedValue: manufacturer.encodeToJSON(), isExplode: true),
             "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
+            "meta_title": (wrappedValue: metaTitle?.encodeToJSON(), isExplode: true),
+            "meta_keywords": (wrappedValue: metaKeywords?.encodeToJSON(), isExplode: true),
+            "meta_description": (wrappedValue: metaDescription?.encodeToJSON(), isExplode: true),
+            "search_keywords": (wrappedValue: searchKeywords?.encodeToJSON(), isExplode: true),
+            "image_url": (wrappedValue: imageUrl?.encodeToJSON(), isExplode: true),
+            "seo_url": (wrappedValue: seoUrl?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -2314,7 +2332,13 @@ open class ProductAPI {
      - parameter pageCursor: (query) Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) (optional)
      - parameter ids: (query) Retrieves reviews specified by ids (optional)
      - parameter storeId: (query) Store Id (optional)
+     - parameter langId: (query) Language id (optional)
      - parameter status: (query) Defines status (optional)
+     - parameter createdFrom: (query) Retrieve entities from their creation date (optional)
+     - parameter createdTo: (query) Retrieve entities to their creation date (optional)
+     - parameter customerId: (query) Retrieves orders specified by customer id (optional)
+     - parameter sortBy: (query) Set field to sort by (optional, default to "id")
+     - parameter sortDirection: (query) Set sorting direction (optional, default to "asc")
      - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
      - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,customer_id,email,message,status,product_id,nick_name,summary,rating,ratings,status,created_time")
      - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
@@ -2322,8 +2346,8 @@ open class ProductAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func productReviewList(productId: String, start: Int? = nil, count: Int? = nil, pageCursor: String? = nil, ids: String? = nil, storeId: String? = nil, status: String? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseProductReviewList?, _ error: Error?) -> Void)) -> RequestTask {
-        return productReviewListWithRequestBuilder(productId: productId, start: start, count: count, pageCursor: pageCursor, ids: ids, storeId: storeId, status: status, responseFields: responseFields, params: params, exclude: exclude).execute(apiResponseQueue) { result in
+    open class func productReviewList(productId: String, start: Int? = nil, count: Int? = nil, pageCursor: String? = nil, ids: String? = nil, storeId: String? = nil, langId: String? = nil, status: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, customerId: String? = nil, sortBy: String? = nil, sortDirection: String? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseProductReviewList?, _ error: Error?) -> Void)) -> RequestTask {
+        return productReviewListWithRequestBuilder(productId: productId, start: start, count: count, pageCursor: pageCursor, ids: ids, storeId: storeId, langId: langId, status: status, createdFrom: createdFrom, createdTo: createdTo, customerId: customerId, sortBy: sortBy, sortDirection: sortDirection, responseFields: responseFields, params: params, exclude: exclude).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -2349,13 +2373,19 @@ open class ProductAPI {
      - parameter pageCursor: (query) Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) (optional)
      - parameter ids: (query) Retrieves reviews specified by ids (optional)
      - parameter storeId: (query) Store Id (optional)
+     - parameter langId: (query) Language id (optional)
      - parameter status: (query) Defines status (optional)
+     - parameter createdFrom: (query) Retrieve entities from their creation date (optional)
+     - parameter createdTo: (query) Retrieve entities to their creation date (optional)
+     - parameter customerId: (query) Retrieves orders specified by customer id (optional)
+     - parameter sortBy: (query) Set field to sort by (optional, default to "id")
+     - parameter sortDirection: (query) Set sorting direction (optional, default to "asc")
      - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
      - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,customer_id,email,message,status,product_id,nick_name,summary,rating,ratings,status,created_time")
      - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
      - returns: RequestBuilder<ModelResponseProductReviewList> 
      */
-    open class func productReviewListWithRequestBuilder(productId: String, start: Int? = nil, count: Int? = nil, pageCursor: String? = nil, ids: String? = nil, storeId: String? = nil, status: String? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil) -> RequestBuilder<ModelResponseProductReviewList> {
+    open class func productReviewListWithRequestBuilder(productId: String, start: Int? = nil, count: Int? = nil, pageCursor: String? = nil, ids: String? = nil, storeId: String? = nil, langId: String? = nil, status: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, customerId: String? = nil, sortBy: String? = nil, sortDirection: String? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil) -> RequestBuilder<ModelResponseProductReviewList> {
         let localVariablePath = "/product.review.list.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -2368,7 +2398,13 @@ open class ProductAPI {
             "product_id": (wrappedValue: productId.encodeToJSON(), isExplode: true),
             "ids": (wrappedValue: ids?.encodeToJSON(), isExplode: true),
             "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
+            "lang_id": (wrappedValue: langId?.encodeToJSON(), isExplode: true),
             "status": (wrappedValue: status?.encodeToJSON(), isExplode: true),
+            "created_from": (wrappedValue: createdFrom?.encodeToJSON(), isExplode: true),
+            "created_to": (wrappedValue: createdTo?.encodeToJSON(), isExplode: true),
+            "customer_id": (wrappedValue: customerId?.encodeToJSON(), isExplode: true),
+            "sort_by": (wrappedValue: sortBy?.encodeToJSON(), isExplode: true),
+            "sort_direction": (wrappedValue: sortDirection?.encodeToJSON(), isExplode: true),
             "response_fields": (wrappedValue: responseFields?.encodeToJSON(), isExplode: true),
             "params": (wrappedValue: params?.encodeToJSON(), isExplode: true),
             "exclude": (wrappedValue: exclude?.encodeToJSON(), isExplode: true),

@@ -45,6 +45,7 @@ public struct ProductAddBatchPayloadInner: Codable, JSONEncodable, Hashable {
     public var manageStock: Bool?
     public var productType: String?
     public var marketplaceItemProperties: AnyCodable?
+    public var specifics: AnyCodable?
     public var isFreeShipping: Bool?
     public var taxable: Bool?
     public var status: String?
@@ -79,6 +80,7 @@ public struct ProductAddBatchPayloadInner: Codable, JSONEncodable, Hashable {
     public var harmonizedSystemCode: String?
     public var url: String?
     public var seoUrl: String?
+    public var externalProductLink: String?
     public var manufacturer: String?
     public var manufacturerId: String?
     public var backorderStatus: String?
@@ -86,7 +88,7 @@ public struct ProductAddBatchPayloadInner: Codable, JSONEncodable, Hashable {
     public var tags: [String]?
     public var files: [ProductAddFilesInner]?
 
-    public init(name: String? = nil, description: String? = nil, shortDescription: String? = nil, sku: String? = nil, model: String? = nil, asin: String? = nil, upc: String? = nil, ean: String? = nil, gtin: String? = nil, mpn: String? = nil, barcode: String? = nil, price: Double? = nil, oldPrice: Double? = nil, costPrice: Double? = nil, specialPrice: Double? = nil, spriceCreate: String? = nil, spriceExpire: String? = nil, advancedPrices: [ProductAddBatchPayloadInnerAdvancedPricesInner]? = nil, fixedCostShippingPrice: Double? = nil, quantity: Double? = nil, manageStock: Bool? = nil, productType: String? = nil, marketplaceItemProperties: AnyCodable? = nil, isFreeShipping: Bool? = nil, taxable: Bool? = nil, status: String? = nil, condition: String? = nil, visible: String? = nil, availableForView: Bool? = nil, availableForSale: Bool? = nil, isVirtual: Bool? = nil, inStock: Bool? = nil, type: String? = nil, downloadable: Bool? = nil, weight: Double? = nil, length: Double? = nil, width: Double? = nil, height: Double? = nil, weightUnit: String? = nil, dimensionsUnit: String? = nil, storeId: String? = nil, langId: String? = nil, categoryId: String? = nil, warehouseId: String? = nil, categoriesIds: [String]? = nil, relatedProductsIds: [String]? = nil, upSellProductsIds: [String]? = nil, crossSellProductsIds: [String]? = nil, storesIds: [String]? = nil, taxClassId: String? = nil, metaTitle: String? = nil, metaDescription: String? = nil, metaKeywords: [String]? = nil, searchKeywords: [String]? = nil, harmonizedSystemCode: String? = nil, url: String? = nil, seoUrl: String? = nil, manufacturer: String? = nil, manufacturerId: String? = nil, backorderStatus: String? = nil, images: [ProductAddBatchPayloadInnerImagesInner]? = nil, tags: [String]? = nil, files: [ProductAddFilesInner]? = nil) {
+    public init(name: String? = nil, description: String? = nil, shortDescription: String? = nil, sku: String? = nil, model: String? = nil, asin: String? = nil, upc: String? = nil, ean: String? = nil, gtin: String? = nil, mpn: String? = nil, barcode: String? = nil, price: Double? = nil, oldPrice: Double? = nil, costPrice: Double? = nil, specialPrice: Double? = nil, spriceCreate: String? = nil, spriceExpire: String? = nil, advancedPrices: [ProductAddBatchPayloadInnerAdvancedPricesInner]? = nil, fixedCostShippingPrice: Double? = nil, quantity: Double? = nil, manageStock: Bool? = nil, productType: String? = nil, marketplaceItemProperties: AnyCodable? = nil, specifics: AnyCodable? = nil, isFreeShipping: Bool? = nil, taxable: Bool? = nil, status: String? = nil, condition: String? = nil, visible: String? = nil, availableForView: Bool? = nil, availableForSale: Bool? = nil, isVirtual: Bool? = nil, inStock: Bool? = nil, type: String? = nil, downloadable: Bool? = nil, weight: Double? = nil, length: Double? = nil, width: Double? = nil, height: Double? = nil, weightUnit: String? = nil, dimensionsUnit: String? = nil, storeId: String? = nil, langId: String? = nil, categoryId: String? = nil, warehouseId: String? = nil, categoriesIds: [String]? = nil, relatedProductsIds: [String]? = nil, upSellProductsIds: [String]? = nil, crossSellProductsIds: [String]? = nil, storesIds: [String]? = nil, taxClassId: String? = nil, metaTitle: String? = nil, metaDescription: String? = nil, metaKeywords: [String]? = nil, searchKeywords: [String]? = nil, harmonizedSystemCode: String? = nil, url: String? = nil, seoUrl: String? = nil, externalProductLink: String? = nil, manufacturer: String? = nil, manufacturerId: String? = nil, backorderStatus: String? = nil, images: [ProductAddBatchPayloadInnerImagesInner]? = nil, tags: [String]? = nil, files: [ProductAddFilesInner]? = nil) {
         self.name = name
         self.description = description
         self.shortDescription = shortDescription
@@ -110,6 +112,7 @@ public struct ProductAddBatchPayloadInner: Codable, JSONEncodable, Hashable {
         self.manageStock = manageStock
         self.productType = productType
         self.marketplaceItemProperties = marketplaceItemProperties
+        self.specifics = specifics
         self.isFreeShipping = isFreeShipping
         self.taxable = taxable
         self.status = status
@@ -144,6 +147,7 @@ public struct ProductAddBatchPayloadInner: Codable, JSONEncodable, Hashable {
         self.harmonizedSystemCode = harmonizedSystemCode
         self.url = url
         self.seoUrl = seoUrl
+        self.externalProductLink = externalProductLink
         self.manufacturer = manufacturer
         self.manufacturerId = manufacturerId
         self.backorderStatus = backorderStatus
@@ -176,6 +180,7 @@ public struct ProductAddBatchPayloadInner: Codable, JSONEncodable, Hashable {
         case manageStock = "manage_stock"
         case productType = "product_type"
         case marketplaceItemProperties = "marketplace_item_properties"
+        case specifics
         case isFreeShipping = "is_free_shipping"
         case taxable
         case status
@@ -210,6 +215,7 @@ public struct ProductAddBatchPayloadInner: Codable, JSONEncodable, Hashable {
         case harmonizedSystemCode = "harmonized_system_code"
         case url
         case seoUrl = "seo_url"
+        case externalProductLink = "external_product_link"
         case manufacturer
         case manufacturerId = "manufacturer_id"
         case backorderStatus = "backorder_status"
@@ -245,6 +251,7 @@ public struct ProductAddBatchPayloadInner: Codable, JSONEncodable, Hashable {
         try container.encodeIfPresent(manageStock, forKey: .manageStock)
         try container.encodeIfPresent(productType, forKey: .productType)
         try container.encodeIfPresent(marketplaceItemProperties, forKey: .marketplaceItemProperties)
+        try container.encodeIfPresent(specifics, forKey: .specifics)
         try container.encodeIfPresent(isFreeShipping, forKey: .isFreeShipping)
         try container.encodeIfPresent(taxable, forKey: .taxable)
         try container.encodeIfPresent(status, forKey: .status)
@@ -279,6 +286,7 @@ public struct ProductAddBatchPayloadInner: Codable, JSONEncodable, Hashable {
         try container.encodeIfPresent(harmonizedSystemCode, forKey: .harmonizedSystemCode)
         try container.encodeIfPresent(url, forKey: .url)
         try container.encodeIfPresent(seoUrl, forKey: .seoUrl)
+        try container.encodeIfPresent(externalProductLink, forKey: .externalProductLink)
         try container.encodeIfPresent(manufacturer, forKey: .manufacturer)
         try container.encodeIfPresent(manufacturerId, forKey: .manufacturerId)
         try container.encodeIfPresent(backorderStatus, forKey: .backorderStatus)
