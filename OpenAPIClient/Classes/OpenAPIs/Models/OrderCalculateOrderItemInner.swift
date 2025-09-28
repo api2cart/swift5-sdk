@@ -18,12 +18,18 @@ public struct OrderCalculateOrderItemInner: Codable, JSONEncodable, Hashable {
     public var orderItemQuantity: Int
     /** Ordered product variant. Where x is order item ID */
     public var orderItemVariantId: String?
+    /** Index of the parent grouped/bundle product */
+    public var orderItemParent: Int?
+    /** Option name of the parent grouped/bundle product */
+    public var orderItemParentOptionName: String?
     public var orderItemOption: [OrderCalculateOrderItemInnerOrderItemOptionInner]?
 
-    public init(orderItemId: String, orderItemQuantity: Int, orderItemVariantId: String? = nil, orderItemOption: [OrderCalculateOrderItemInnerOrderItemOptionInner]? = nil) {
+    public init(orderItemId: String, orderItemQuantity: Int, orderItemVariantId: String? = nil, orderItemParent: Int? = nil, orderItemParentOptionName: String? = nil, orderItemOption: [OrderCalculateOrderItemInnerOrderItemOptionInner]? = nil) {
         self.orderItemId = orderItemId
         self.orderItemQuantity = orderItemQuantity
         self.orderItemVariantId = orderItemVariantId
+        self.orderItemParent = orderItemParent
+        self.orderItemParentOptionName = orderItemParentOptionName
         self.orderItemOption = orderItemOption
     }
 
@@ -31,6 +37,8 @@ public struct OrderCalculateOrderItemInner: Codable, JSONEncodable, Hashable {
         case orderItemId = "order_item_id"
         case orderItemQuantity = "order_item_quantity"
         case orderItemVariantId = "order_item_variant_id"
+        case orderItemParent = "order_item_parent"
+        case orderItemParentOptionName = "order_item_parent_option_name"
         case orderItemOption = "order_item_option"
     }
 
@@ -41,6 +49,8 @@ public struct OrderCalculateOrderItemInner: Codable, JSONEncodable, Hashable {
         try container.encode(orderItemId, forKey: .orderItemId)
         try container.encode(orderItemQuantity, forKey: .orderItemQuantity)
         try container.encodeIfPresent(orderItemVariantId, forKey: .orderItemVariantId)
+        try container.encodeIfPresent(orderItemParent, forKey: .orderItemParent)
+        try container.encodeIfPresent(orderItemParentOptionName, forKey: .orderItemParentOptionName)
         try container.encodeIfPresent(orderItemOption, forKey: .orderItemOption)
     }
 }

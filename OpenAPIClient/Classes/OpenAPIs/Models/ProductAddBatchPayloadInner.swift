@@ -32,6 +32,7 @@ public struct ProductAddBatchPayloadInner: Codable, JSONEncodable, Hashable {
     public var ean: String?
     public var gtin: String?
     public var mpn: String?
+    public var isbn: String?
     public var barcode: String?
     public var price: Double?
     public var oldPrice: Double?
@@ -39,8 +40,12 @@ public struct ProductAddBatchPayloadInner: Codable, JSONEncodable, Hashable {
     public var specialPrice: Double?
     public var spriceCreate: String?
     public var spriceExpire: String?
+    public var availFrom: String?
     public var advancedPrices: [ProductAddBatchPayloadInnerAdvancedPricesInner]?
     public var fixedCostShippingPrice: Double?
+    public var buyitnowPrice: Double?
+    public var reservePrice: Double?
+    public var bestOffer: Double?
     public var quantity: Double?
     public var manageStock: Bool?
     public var productType: String?
@@ -50,12 +55,15 @@ public struct ProductAddBatchPayloadInner: Codable, JSONEncodable, Hashable {
     public var taxable: Bool?
     public var status: String?
     public var condition: String?
+    public var conditionDescription: String?
     public var visible: String?
     public var availableForView: Bool?
     public var availableForSale: Bool?
     public var isVirtual: Bool?
     public var inStock: Bool?
     public var type: String?
+    public var listingType: String?
+    public var listingDuration: String?
     public var downloadable: Bool?
     public var weight: Double?
     public var length: Double?
@@ -73,6 +81,7 @@ public struct ProductAddBatchPayloadInner: Codable, JSONEncodable, Hashable {
     public var crossSellProductsIds: [String]?
     public var storesIds: [String]?
     public var taxClassId: String?
+    public var salesTax: ProductAddBatchPayloadInnerSalesTax?
     public var metaTitle: String?
     public var metaDescription: String?
     public var metaKeywords: [String]?
@@ -88,7 +97,7 @@ public struct ProductAddBatchPayloadInner: Codable, JSONEncodable, Hashable {
     public var tags: [String]?
     public var files: [ProductAddFilesInner]?
 
-    public init(name: String? = nil, description: String? = nil, shortDescription: String? = nil, sku: String? = nil, model: String? = nil, asin: String? = nil, upc: String? = nil, ean: String? = nil, gtin: String? = nil, mpn: String? = nil, barcode: String? = nil, price: Double? = nil, oldPrice: Double? = nil, costPrice: Double? = nil, specialPrice: Double? = nil, spriceCreate: String? = nil, spriceExpire: String? = nil, advancedPrices: [ProductAddBatchPayloadInnerAdvancedPricesInner]? = nil, fixedCostShippingPrice: Double? = nil, quantity: Double? = nil, manageStock: Bool? = nil, productType: String? = nil, marketplaceItemProperties: AnyCodable? = nil, specifics: AnyCodable? = nil, isFreeShipping: Bool? = nil, taxable: Bool? = nil, status: String? = nil, condition: String? = nil, visible: String? = nil, availableForView: Bool? = nil, availableForSale: Bool? = nil, isVirtual: Bool? = nil, inStock: Bool? = nil, type: String? = nil, downloadable: Bool? = nil, weight: Double? = nil, length: Double? = nil, width: Double? = nil, height: Double? = nil, weightUnit: String? = nil, dimensionsUnit: String? = nil, storeId: String? = nil, langId: String? = nil, categoryId: String? = nil, warehouseId: String? = nil, categoriesIds: [String]? = nil, relatedProductsIds: [String]? = nil, upSellProductsIds: [String]? = nil, crossSellProductsIds: [String]? = nil, storesIds: [String]? = nil, taxClassId: String? = nil, metaTitle: String? = nil, metaDescription: String? = nil, metaKeywords: [String]? = nil, searchKeywords: [String]? = nil, harmonizedSystemCode: String? = nil, url: String? = nil, seoUrl: String? = nil, externalProductLink: String? = nil, manufacturer: String? = nil, manufacturerId: String? = nil, backorderStatus: String? = nil, images: [ProductAddBatchPayloadInnerImagesInner]? = nil, tags: [String]? = nil, files: [ProductAddFilesInner]? = nil) {
+    public init(name: String? = nil, description: String? = nil, shortDescription: String? = nil, sku: String? = nil, model: String? = nil, asin: String? = nil, upc: String? = nil, ean: String? = nil, gtin: String? = nil, mpn: String? = nil, isbn: String? = nil, barcode: String? = nil, price: Double? = nil, oldPrice: Double? = nil, costPrice: Double? = nil, specialPrice: Double? = nil, spriceCreate: String? = nil, spriceExpire: String? = nil, availFrom: String? = nil, advancedPrices: [ProductAddBatchPayloadInnerAdvancedPricesInner]? = nil, fixedCostShippingPrice: Double? = nil, buyitnowPrice: Double? = nil, reservePrice: Double? = nil, bestOffer: Double? = nil, quantity: Double? = nil, manageStock: Bool? = nil, productType: String? = nil, marketplaceItemProperties: AnyCodable? = nil, specifics: AnyCodable? = nil, isFreeShipping: Bool? = nil, taxable: Bool? = nil, status: String? = nil, condition: String? = nil, conditionDescription: String? = nil, visible: String? = nil, availableForView: Bool? = nil, availableForSale: Bool? = nil, isVirtual: Bool? = nil, inStock: Bool? = nil, type: String? = nil, listingType: String? = nil, listingDuration: String? = nil, downloadable: Bool? = nil, weight: Double? = nil, length: Double? = nil, width: Double? = nil, height: Double? = nil, weightUnit: String? = nil, dimensionsUnit: String? = nil, storeId: String? = nil, langId: String? = nil, categoryId: String? = nil, warehouseId: String? = nil, categoriesIds: [String]? = nil, relatedProductsIds: [String]? = nil, upSellProductsIds: [String]? = nil, crossSellProductsIds: [String]? = nil, storesIds: [String]? = nil, taxClassId: String? = nil, salesTax: ProductAddBatchPayloadInnerSalesTax? = nil, metaTitle: String? = nil, metaDescription: String? = nil, metaKeywords: [String]? = nil, searchKeywords: [String]? = nil, harmonizedSystemCode: String? = nil, url: String? = nil, seoUrl: String? = nil, externalProductLink: String? = nil, manufacturer: String? = nil, manufacturerId: String? = nil, backorderStatus: String? = nil, images: [ProductAddBatchPayloadInnerImagesInner]? = nil, tags: [String]? = nil, files: [ProductAddFilesInner]? = nil) {
         self.name = name
         self.description = description
         self.shortDescription = shortDescription
@@ -99,6 +108,7 @@ public struct ProductAddBatchPayloadInner: Codable, JSONEncodable, Hashable {
         self.ean = ean
         self.gtin = gtin
         self.mpn = mpn
+        self.isbn = isbn
         self.barcode = barcode
         self.price = price
         self.oldPrice = oldPrice
@@ -106,8 +116,12 @@ public struct ProductAddBatchPayloadInner: Codable, JSONEncodable, Hashable {
         self.specialPrice = specialPrice
         self.spriceCreate = spriceCreate
         self.spriceExpire = spriceExpire
+        self.availFrom = availFrom
         self.advancedPrices = advancedPrices
         self.fixedCostShippingPrice = fixedCostShippingPrice
+        self.buyitnowPrice = buyitnowPrice
+        self.reservePrice = reservePrice
+        self.bestOffer = bestOffer
         self.quantity = quantity
         self.manageStock = manageStock
         self.productType = productType
@@ -117,12 +131,15 @@ public struct ProductAddBatchPayloadInner: Codable, JSONEncodable, Hashable {
         self.taxable = taxable
         self.status = status
         self.condition = condition
+        self.conditionDescription = conditionDescription
         self.visible = visible
         self.availableForView = availableForView
         self.availableForSale = availableForSale
         self.isVirtual = isVirtual
         self.inStock = inStock
         self.type = type
+        self.listingType = listingType
+        self.listingDuration = listingDuration
         self.downloadable = downloadable
         self.weight = weight
         self.length = length
@@ -140,6 +157,7 @@ public struct ProductAddBatchPayloadInner: Codable, JSONEncodable, Hashable {
         self.crossSellProductsIds = crossSellProductsIds
         self.storesIds = storesIds
         self.taxClassId = taxClassId
+        self.salesTax = salesTax
         self.metaTitle = metaTitle
         self.metaDescription = metaDescription
         self.metaKeywords = metaKeywords
@@ -167,6 +185,7 @@ public struct ProductAddBatchPayloadInner: Codable, JSONEncodable, Hashable {
         case ean
         case gtin
         case mpn
+        case isbn
         case barcode
         case price
         case oldPrice = "old_price"
@@ -174,8 +193,12 @@ public struct ProductAddBatchPayloadInner: Codable, JSONEncodable, Hashable {
         case specialPrice = "special_price"
         case spriceCreate = "sprice_create"
         case spriceExpire = "sprice_expire"
+        case availFrom = "avail_from"
         case advancedPrices = "advanced_prices"
         case fixedCostShippingPrice = "fixed_cost_shipping_price"
+        case buyitnowPrice = "buyitnow_price"
+        case reservePrice = "reserve_price"
+        case bestOffer = "best_offer"
         case quantity
         case manageStock = "manage_stock"
         case productType = "product_type"
@@ -185,12 +208,15 @@ public struct ProductAddBatchPayloadInner: Codable, JSONEncodable, Hashable {
         case taxable
         case status
         case condition
+        case conditionDescription = "condition_description"
         case visible
         case availableForView = "available_for_view"
         case availableForSale = "available_for_sale"
         case isVirtual = "is_virtual"
         case inStock = "in_stock"
         case type
+        case listingType = "listing_type"
+        case listingDuration = "listing_duration"
         case downloadable
         case weight
         case length
@@ -208,6 +234,7 @@ public struct ProductAddBatchPayloadInner: Codable, JSONEncodable, Hashable {
         case crossSellProductsIds = "cross_sell_products_ids"
         case storesIds = "stores_ids"
         case taxClassId = "tax_class_id"
+        case salesTax = "sales_tax"
         case metaTitle = "meta_title"
         case metaDescription = "meta_description"
         case metaKeywords = "meta_keywords"
@@ -238,6 +265,7 @@ public struct ProductAddBatchPayloadInner: Codable, JSONEncodable, Hashable {
         try container.encodeIfPresent(ean, forKey: .ean)
         try container.encodeIfPresent(gtin, forKey: .gtin)
         try container.encodeIfPresent(mpn, forKey: .mpn)
+        try container.encodeIfPresent(isbn, forKey: .isbn)
         try container.encodeIfPresent(barcode, forKey: .barcode)
         try container.encodeIfPresent(price, forKey: .price)
         try container.encodeIfPresent(oldPrice, forKey: .oldPrice)
@@ -245,8 +273,12 @@ public struct ProductAddBatchPayloadInner: Codable, JSONEncodable, Hashable {
         try container.encodeIfPresent(specialPrice, forKey: .specialPrice)
         try container.encodeIfPresent(spriceCreate, forKey: .spriceCreate)
         try container.encodeIfPresent(spriceExpire, forKey: .spriceExpire)
+        try container.encodeIfPresent(availFrom, forKey: .availFrom)
         try container.encodeIfPresent(advancedPrices, forKey: .advancedPrices)
         try container.encodeIfPresent(fixedCostShippingPrice, forKey: .fixedCostShippingPrice)
+        try container.encodeIfPresent(buyitnowPrice, forKey: .buyitnowPrice)
+        try container.encodeIfPresent(reservePrice, forKey: .reservePrice)
+        try container.encodeIfPresent(bestOffer, forKey: .bestOffer)
         try container.encodeIfPresent(quantity, forKey: .quantity)
         try container.encodeIfPresent(manageStock, forKey: .manageStock)
         try container.encodeIfPresent(productType, forKey: .productType)
@@ -256,12 +288,15 @@ public struct ProductAddBatchPayloadInner: Codable, JSONEncodable, Hashable {
         try container.encodeIfPresent(taxable, forKey: .taxable)
         try container.encodeIfPresent(status, forKey: .status)
         try container.encodeIfPresent(condition, forKey: .condition)
+        try container.encodeIfPresent(conditionDescription, forKey: .conditionDescription)
         try container.encodeIfPresent(visible, forKey: .visible)
         try container.encodeIfPresent(availableForView, forKey: .availableForView)
         try container.encodeIfPresent(availableForSale, forKey: .availableForSale)
         try container.encodeIfPresent(isVirtual, forKey: .isVirtual)
         try container.encodeIfPresent(inStock, forKey: .inStock)
         try container.encodeIfPresent(type, forKey: .type)
+        try container.encodeIfPresent(listingType, forKey: .listingType)
+        try container.encodeIfPresent(listingDuration, forKey: .listingDuration)
         try container.encodeIfPresent(downloadable, forKey: .downloadable)
         try container.encodeIfPresent(weight, forKey: .weight)
         try container.encodeIfPresent(length, forKey: .length)
@@ -279,6 +314,7 @@ public struct ProductAddBatchPayloadInner: Codable, JSONEncodable, Hashable {
         try container.encodeIfPresent(crossSellProductsIds, forKey: .crossSellProductsIds)
         try container.encodeIfPresent(storesIds, forKey: .storesIds)
         try container.encodeIfPresent(taxClassId, forKey: .taxClassId)
+        try container.encodeIfPresent(salesTax, forKey: .salesTax)
         try container.encodeIfPresent(metaTitle, forKey: .metaTitle)
         try container.encodeIfPresent(metaDescription, forKey: .metaDescription)
         try container.encodeIfPresent(metaKeywords, forKey: .metaKeywords)

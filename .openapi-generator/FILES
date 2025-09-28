@@ -216,6 +216,7 @@ OpenAPIClient/Classes/OpenAPIs/Models/OrderAddOrderItemInnerOrderItemOptionInner
 OpenAPIClient/Classes/OpenAPIs/Models/OrderAddOrderItemInnerOrderItemPropertyInner.swift
 OpenAPIClient/Classes/OpenAPIs/Models/OrderCalculate.swift
 OpenAPIClient/Classes/OpenAPIs/Models/OrderCalculate200Response.swift
+OpenAPIClient/Classes/OpenAPIs/Models/OrderCalculateBundle.swift
 OpenAPIClient/Classes/OpenAPIs/Models/OrderCalculateDiscount.swift
 OpenAPIClient/Classes/OpenAPIs/Models/OrderCalculateItem.swift
 OpenAPIClient/Classes/OpenAPIs/Models/OrderCalculateOrderItemInner.swift
@@ -284,6 +285,7 @@ OpenAPIClient/Classes/OpenAPIs/Models/ProductAddBatch.swift
 OpenAPIClient/Classes/OpenAPIs/Models/ProductAddBatchPayloadInner.swift
 OpenAPIClient/Classes/OpenAPIs/Models/ProductAddBatchPayloadInnerAdvancedPricesInner.swift
 OpenAPIClient/Classes/OpenAPIs/Models/ProductAddBatchPayloadInnerImagesInner.swift
+OpenAPIClient/Classes/OpenAPIs/Models/ProductAddBatchPayloadInnerSalesTax.swift
 OpenAPIClient/Classes/OpenAPIs/Models/ProductAddBestOffer.swift
 OpenAPIClient/Classes/OpenAPIs/Models/ProductAddCertificationsInner.swift
 OpenAPIClient/Classes/OpenAPIs/Models/ProductAddCertificationsInnerFilesInner.swift
@@ -660,6 +662,7 @@ docs/OrderAddOrderItemInnerOrderItemOptionInner.md
 docs/OrderAddOrderItemInnerOrderItemPropertyInner.md
 docs/OrderCalculate.md
 docs/OrderCalculate200Response.md
+docs/OrderCalculateBundle.md
 docs/OrderCalculateDiscount.md
 docs/OrderCalculateItem.md
 docs/OrderCalculateOrderItemInner.md
@@ -729,6 +732,7 @@ docs/ProductAddBatch.md
 docs/ProductAddBatchPayloadInner.md
 docs/ProductAddBatchPayloadInnerAdvancedPricesInner.md
 docs/ProductAddBatchPayloadInnerImagesInner.md
+docs/ProductAddBatchPayloadInnerSalesTax.md
 docs/ProductAddBestOffer.md
 docs/ProductAddCertificationsInner.md
 docs/ProductAddCertificationsInnerFilesInner.md
