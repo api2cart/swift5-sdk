@@ -66,6 +66,7 @@ public struct AccountCartAdd: Codable, JSONEncodable, Hashable {
         case tikTokShop = "TikTokShop"
         case tomatocart = "Tomatocart"
         case ubercart = "Ubercart"
+        case unas = "Unas"
         case virtuemart = "Virtuemart"
         case volusion = "Volusion"
         case wpecommerce = "WPecommerce"
