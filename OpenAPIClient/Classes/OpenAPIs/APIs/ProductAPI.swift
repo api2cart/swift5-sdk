@@ -711,6 +711,7 @@ open class ProductAPI {
     /**
      product.count
      
+     - parameter sku: (query) Filter by product&#39;s sku (optional)
      - parameter productIds: (query) Counts products specified by product ids (optional)
      - parameter sinceId: (query) Retrieve entities starting from the specified id. (optional)
      - parameter categoriesIds: (query) Defines product add that is specified by comma-separated categories id (optional)
@@ -724,6 +725,7 @@ open class ProductAPI {
      - parameter modifiedFrom: (query) Retrieve entities from their modification date (optional)
      - parameter modifiedTo: (query) Retrieve entities to their modification date (optional)
      - parameter brandName: (query) Retrieves brands specified by brand name (optional)
+     - parameter manufacturerId: (query) Defines product&#39;s manufacturer by manufacturer_id (optional)
      - parameter productAttributes: (query) Defines product attributes (optional)
      - parameter status: (query) Defines product&#39;s status (optional)
      - parameter type: (query) Defines products&#39;s type (optional)
@@ -738,8 +740,8 @@ open class ProductAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func productCount(productIds: String? = nil, sinceId: String? = nil, categoriesIds: String? = nil, categoryId: String? = nil, storeId: String? = nil, langId: String? = nil, availView: Bool? = nil, availSale: Bool? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, brandName: String? = nil, productAttributes: [String]? = nil, status: String? = nil, type: String? = nil, visible: String? = nil, findValue: String? = nil, findWhere: String? = nil, reportRequestId: String? = nil, returnGlobal: Bool? = nil, disableReportCache: Bool? = nil, useLatestApiVersion: Bool? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ProductCount200Response?, _ error: Error?) -> Void)) -> RequestTask {
-        return productCountWithRequestBuilder(productIds: productIds, sinceId: sinceId, categoriesIds: categoriesIds, categoryId: categoryId, storeId: storeId, langId: langId, availView: availView, availSale: availSale, createdFrom: createdFrom, createdTo: createdTo, modifiedFrom: modifiedFrom, modifiedTo: modifiedTo, brandName: brandName, productAttributes: productAttributes, status: status, type: type, visible: visible, findValue: findValue, findWhere: findWhere, reportRequestId: reportRequestId, returnGlobal: returnGlobal, disableReportCache: disableReportCache, useLatestApiVersion: useLatestApiVersion).execute(apiResponseQueue) { result in
+    open class func productCount(sku: String? = nil, productIds: String? = nil, sinceId: String? = nil, categoriesIds: String? = nil, categoryId: String? = nil, storeId: String? = nil, langId: String? = nil, availView: Bool? = nil, availSale: Bool? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, brandName: String? = nil, manufacturerId: String? = nil, productAttributes: [String]? = nil, status: String? = nil, type: String? = nil, visible: String? = nil, findValue: String? = nil, findWhere: String? = nil, reportRequestId: String? = nil, returnGlobal: Bool? = nil, disableReportCache: Bool? = nil, useLatestApiVersion: Bool? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ProductCount200Response?, _ error: Error?) -> Void)) -> RequestTask {
+        return productCountWithRequestBuilder(sku: sku, productIds: productIds, sinceId: sinceId, categoriesIds: categoriesIds, categoryId: categoryId, storeId: storeId, langId: langId, availView: availView, availSale: availSale, createdFrom: createdFrom, createdTo: createdTo, modifiedFrom: modifiedFrom, modifiedTo: modifiedTo, brandName: brandName, manufacturerId: manufacturerId, productAttributes: productAttributes, status: status, type: type, visible: visible, findValue: findValue, findWhere: findWhere, reportRequestId: reportRequestId, returnGlobal: returnGlobal, disableReportCache: disableReportCache, useLatestApiVersion: useLatestApiVersion).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -759,6 +761,7 @@ open class ProductAPI {
      - API Key:
        - type: apiKey x-api-key (HEADER)
        - name: ApiKeyAuth
+     - parameter sku: (query) Filter by product&#39;s sku (optional)
      - parameter productIds: (query) Counts products specified by product ids (optional)
      - parameter sinceId: (query) Retrieve entities starting from the specified id. (optional)
      - parameter categoriesIds: (query) Defines product add that is specified by comma-separated categories id (optional)
@@ -772,6 +775,7 @@ open class ProductAPI {
      - parameter modifiedFrom: (query) Retrieve entities from their modification date (optional)
      - parameter modifiedTo: (query) Retrieve entities to their modification date (optional)
      - parameter brandName: (query) Retrieves brands specified by brand name (optional)
+     - parameter manufacturerId: (query) Defines product&#39;s manufacturer by manufacturer_id (optional)
      - parameter productAttributes: (query) Defines product attributes (optional)
      - parameter status: (query) Defines product&#39;s status (optional)
      - parameter type: (query) Defines products&#39;s type (optional)
@@ -784,13 +788,14 @@ open class ProductAPI {
      - parameter useLatestApiVersion: (query) Use the latest platform API version (optional, default to false)
      - returns: RequestBuilder<ProductCount200Response> 
      */
-    open class func productCountWithRequestBuilder(productIds: String? = nil, sinceId: String? = nil, categoriesIds: String? = nil, categoryId: String? = nil, storeId: String? = nil, langId: String? = nil, availView: Bool? = nil, availSale: Bool? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, brandName: String? = nil, productAttributes: [String]? = nil, status: String? = nil, type: String? = nil, visible: String? = nil, findValue: String? = nil, findWhere: String? = nil, reportRequestId: String? = nil, returnGlobal: Bool? = nil, disableReportCache: Bool? = nil, useLatestApiVersion: Bool? = nil) -> RequestBuilder<ProductCount200Response> {
+    open class func productCountWithRequestBuilder(sku: String? = nil, productIds: String? = nil, sinceId: String? = nil, categoriesIds: String? = nil, categoryId: String? = nil, storeId: String? = nil, langId: String? = nil, availView: Bool? = nil, availSale: Bool? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, brandName: String? = nil, manufacturerId: String? = nil, productAttributes: [String]? = nil, status: String? = nil, type: String? = nil, visible: String? = nil, findValue: String? = nil, findWhere: String? = nil, reportRequestId: String? = nil, returnGlobal: Bool? = nil, disableReportCache: Bool? = nil, useLatestApiVersion: Bool? = nil) -> RequestBuilder<ProductCount200Response> {
         let localVariablePath = "/product.count.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "sku": (wrappedValue: sku?.encodeToJSON(), isExplode: true),
             "product_ids": (wrappedValue: productIds?.encodeToJSON(), isExplode: true),
             "since_id": (wrappedValue: sinceId?.encodeToJSON(), isExplode: true),
             "categories_ids": (wrappedValue: categoriesIds?.encodeToJSON(), isExplode: true),
@@ -804,6 +809,7 @@ open class ProductAPI {
             "modified_from": (wrappedValue: modifiedFrom?.encodeToJSON(), isExplode: true),
             "modified_to": (wrappedValue: modifiedTo?.encodeToJSON(), isExplode: true),
             "brand_name": (wrappedValue: brandName?.encodeToJSON(), isExplode: true),
+            "manufacturer_id": (wrappedValue: manufacturerId?.encodeToJSON(), isExplode: true),
             "product_attributes": (wrappedValue: productAttributes?.encodeToJSON(), isExplode: true),
             "status": (wrappedValue: status?.encodeToJSON(), isExplode: true),
             "type": (wrappedValue: type?.encodeToJSON(), isExplode: true),
@@ -1437,6 +1443,7 @@ open class ProductAPI {
      - parameter sku: (query) Filter by product&#39;s sku (optional)
      - parameter brandName: (query) Retrieves brands specified by brand name (optional)
      - parameter productAttributes: (query) Defines product attributes (optional)
+     - parameter manufacturerId: (query) Defines product&#39;s manufacturer by manufacturer_id (optional)
      - parameter status: (query) Defines product&#39;s status (optional)
      - parameter type: (query) Defines products&#39;s type (optional)
      - parameter visible: (query) Filter items by visibility status (optional, default to "everywhere")
@@ -1457,8 +1464,8 @@ open class ProductAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func productList(start: Int? = nil, count: Int? = nil, pageCursor: String? = nil, productIds: String? = nil, sinceId: String? = nil, categoriesIds: String? = nil, categoryId: String? = nil, storeId: String? = nil, langId: String? = nil, currencyId: String? = nil, availView: Bool? = nil, availSale: Bool? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, sku: String? = nil, brandName: String? = nil, productAttributes: [String]? = nil, status: String? = nil, type: String? = nil, visible: String? = nil, findValue: String? = nil, findWhere: String? = nil, returnGlobal: Bool? = nil, params: String? = nil, responseFields: String? = nil, exclude: String? = nil, sortBy: String? = nil, sortDirection: String? = nil, reportRequestId: String? = nil, disableCache: Bool? = nil, disableReportCache: Bool? = nil, useLatestApiVersion: Bool? = nil, productType: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseProductList?, _ error: Error?) -> Void)) -> RequestTask {
-        return productListWithRequestBuilder(start: start, count: count, pageCursor: pageCursor, productIds: productIds, sinceId: sinceId, categoriesIds: categoriesIds, categoryId: categoryId, storeId: storeId, langId: langId, currencyId: currencyId, availView: availView, availSale: availSale, createdFrom: createdFrom, createdTo: createdTo, modifiedFrom: modifiedFrom, modifiedTo: modifiedTo, sku: sku, brandName: brandName, productAttributes: productAttributes, status: status, type: type, visible: visible, findValue: findValue, findWhere: findWhere, returnGlobal: returnGlobal, params: params, responseFields: responseFields, exclude: exclude, sortBy: sortBy, sortDirection: sortDirection, reportRequestId: reportRequestId, disableCache: disableCache, disableReportCache: disableReportCache, useLatestApiVersion: useLatestApiVersion, productType: productType).execute(apiResponseQueue) { result in
+    open class func productList(start: Int? = nil, count: Int? = nil, pageCursor: String? = nil, productIds: String? = nil, sinceId: String? = nil, categoriesIds: String? = nil, categoryId: String? = nil, storeId: String? = nil, langId: String? = nil, currencyId: String? = nil, availView: Bool? = nil, availSale: Bool? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, sku: String? = nil, brandName: String? = nil, productAttributes: [String]? = nil, manufacturerId: String? = nil, status: String? = nil, type: String? = nil, visible: String? = nil, findValue: String? = nil, findWhere: String? = nil, returnGlobal: Bool? = nil, params: String? = nil, responseFields: String? = nil, exclude: String? = nil, sortBy: String? = nil, sortDirection: String? = nil, reportRequestId: String? = nil, disableCache: Bool? = nil, disableReportCache: Bool? = nil, useLatestApiVersion: Bool? = nil, productType: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseProductList?, _ error: Error?) -> Void)) -> RequestTask {
+        return productListWithRequestBuilder(start: start, count: count, pageCursor: pageCursor, productIds: productIds, sinceId: sinceId, categoriesIds: categoriesIds, categoryId: categoryId, storeId: storeId, langId: langId, currencyId: currencyId, availView: availView, availSale: availSale, createdFrom: createdFrom, createdTo: createdTo, modifiedFrom: modifiedFrom, modifiedTo: modifiedTo, sku: sku, brandName: brandName, productAttributes: productAttributes, manufacturerId: manufacturerId, status: status, type: type, visible: visible, findValue: findValue, findWhere: findWhere, returnGlobal: returnGlobal, params: params, responseFields: responseFields, exclude: exclude, sortBy: sortBy, sortDirection: sortDirection, reportRequestId: reportRequestId, disableCache: disableCache, disableReportCache: disableReportCache, useLatestApiVersion: useLatestApiVersion, productType: productType).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -1497,6 +1504,7 @@ open class ProductAPI {
      - parameter sku: (query) Filter by product&#39;s sku (optional)
      - parameter brandName: (query) Retrieves brands specified by brand name (optional)
      - parameter productAttributes: (query) Defines product attributes (optional)
+     - parameter manufacturerId: (query) Defines product&#39;s manufacturer by manufacturer_id (optional)
      - parameter status: (query) Defines product&#39;s status (optional)
      - parameter type: (query) Defines products&#39;s type (optional)
      - parameter visible: (query) Filter items by visibility status (optional, default to "everywhere")
@@ -1515,7 +1523,7 @@ open class ProductAPI {
      - parameter productType: (query) A categorization for the product (optional)
      - returns: RequestBuilder<ModelResponseProductList> 
      */
-    open class func productListWithRequestBuilder(start: Int? = nil, count: Int? = nil, pageCursor: String? = nil, productIds: String? = nil, sinceId: String? = nil, categoriesIds: String? = nil, categoryId: String? = nil, storeId: String? = nil, langId: String? = nil, currencyId: String? = nil, availView: Bool? = nil, availSale: Bool? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, sku: String? = nil, brandName: String? = nil, productAttributes: [String]? = nil, status: String? = nil, type: String? = nil, visible: String? = nil, findValue: String? = nil, findWhere: String? = nil, returnGlobal: Bool? = nil, params: String? = nil, responseFields: String? = nil, exclude: String? = nil, sortBy: String? = nil, sortDirection: String? = nil, reportRequestId: String? = nil, disableCache: Bool? = nil, disableReportCache: Bool? = nil, useLatestApiVersion: Bool? = nil, productType: String? = nil) -> RequestBuilder<ModelResponseProductList> {
+    open class func productListWithRequestBuilder(start: Int? = nil, count: Int? = nil, pageCursor: String? = nil, productIds: String? = nil, sinceId: String? = nil, categoriesIds: String? = nil, categoryId: String? = nil, storeId: String? = nil, langId: String? = nil, currencyId: String? = nil, availView: Bool? = nil, availSale: Bool? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, sku: String? = nil, brandName: String? = nil, productAttributes: [String]? = nil, manufacturerId: String? = nil, status: String? = nil, type: String? = nil, visible: String? = nil, findValue: String? = nil, findWhere: String? = nil, returnGlobal: Bool? = nil, params: String? = nil, responseFields: String? = nil, exclude: String? = nil, sortBy: String? = nil, sortDirection: String? = nil, reportRequestId: String? = nil, disableCache: Bool? = nil, disableReportCache: Bool? = nil, useLatestApiVersion: Bool? = nil, productType: String? = nil) -> RequestBuilder<ModelResponseProductList> {
         let localVariablePath = "/product.list.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -1541,6 +1549,7 @@ open class ProductAPI {
             "sku": (wrappedValue: sku?.encodeToJSON(), isExplode: true),
             "brand_name": (wrappedValue: brandName?.encodeToJSON(), isExplode: true),
             "product_attributes": (wrappedValue: productAttributes?.encodeToJSON(), isExplode: true),
+            "manufacturer_id": (wrappedValue: manufacturerId?.encodeToJSON(), isExplode: true),
             "status": (wrappedValue: status?.encodeToJSON(), isExplode: true),
             "type": (wrappedValue: type?.encodeToJSON(), isExplode: true),
             "visible": (wrappedValue: visible?.encodeToJSON(), isExplode: true),
