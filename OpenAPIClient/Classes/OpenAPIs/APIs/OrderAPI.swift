@@ -1493,12 +1493,13 @@ open class OrderAPI {
      - parameter createInvoice: (query) Determines whether an invoice should be created if it has not already been created (optional)
      - parameter origin: (query) The source of the order (optional)
      - parameter tags: (query) Order tags (optional)
+     - parameter idempotencyKey: (query) A unique identifier associated with a specific request. Repeated requests with the same &lt;strong&gt;idempotency_key&lt;/strong&gt; return a cached response without re-executing the business logic. &lt;strong&gt;Please note that the cache lifetime is 15 minutes.&lt;/strong&gt; (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func orderUpdate(orderId: String, storeId: String? = nil, orderStatus: String? = nil, financialStatus: String? = nil, fulfillmentStatus: String? = nil, cancellationReason: String? = nil, orderPaymentMethod: String? = nil, comment: String? = nil, adminComment: String? = nil, adminPrivateComment: String? = nil, invoiceAdminComment: String? = nil, dateModified: String? = nil, dateFinished: String? = nil, sendNotifications: Bool? = nil, createInvoice: Bool? = nil, origin: String? = nil, tags: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: AccountConfigUpdate200Response?, _ error: Error?) -> Void)) -> RequestTask {
-        return orderUpdateWithRequestBuilder(orderId: orderId, storeId: storeId, orderStatus: orderStatus, financialStatus: financialStatus, fulfillmentStatus: fulfillmentStatus, cancellationReason: cancellationReason, orderPaymentMethod: orderPaymentMethod, comment: comment, adminComment: adminComment, adminPrivateComment: adminPrivateComment, invoiceAdminComment: invoiceAdminComment, dateModified: dateModified, dateFinished: dateFinished, sendNotifications: sendNotifications, createInvoice: createInvoice, origin: origin, tags: tags).execute(apiResponseQueue) { result in
+    open class func orderUpdate(orderId: String, storeId: String? = nil, orderStatus: String? = nil, financialStatus: String? = nil, fulfillmentStatus: String? = nil, cancellationReason: String? = nil, orderPaymentMethod: String? = nil, comment: String? = nil, adminComment: String? = nil, adminPrivateComment: String? = nil, invoiceAdminComment: String? = nil, dateModified: String? = nil, dateFinished: String? = nil, sendNotifications: Bool? = nil, createInvoice: Bool? = nil, origin: String? = nil, tags: String? = nil, idempotencyKey: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: AccountConfigUpdate200Response?, _ error: Error?) -> Void)) -> RequestTask {
+        return orderUpdateWithRequestBuilder(orderId: orderId, storeId: storeId, orderStatus: orderStatus, financialStatus: financialStatus, fulfillmentStatus: fulfillmentStatus, cancellationReason: cancellationReason, orderPaymentMethod: orderPaymentMethod, comment: comment, adminComment: adminComment, adminPrivateComment: adminPrivateComment, invoiceAdminComment: invoiceAdminComment, dateModified: dateModified, dateFinished: dateFinished, sendNotifications: sendNotifications, createInvoice: createInvoice, origin: origin, tags: tags, idempotencyKey: idempotencyKey).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -1535,9 +1536,10 @@ open class OrderAPI {
      - parameter createInvoice: (query) Determines whether an invoice should be created if it has not already been created (optional)
      - parameter origin: (query) The source of the order (optional)
      - parameter tags: (query) Order tags (optional)
+     - parameter idempotencyKey: (query) A unique identifier associated with a specific request. Repeated requests with the same &lt;strong&gt;idempotency_key&lt;/strong&gt; return a cached response without re-executing the business logic. &lt;strong&gt;Please note that the cache lifetime is 15 minutes.&lt;/strong&gt; (optional)
      - returns: RequestBuilder<AccountConfigUpdate200Response> 
      */
-    open class func orderUpdateWithRequestBuilder(orderId: String, storeId: String? = nil, orderStatus: String? = nil, financialStatus: String? = nil, fulfillmentStatus: String? = nil, cancellationReason: String? = nil, orderPaymentMethod: String? = nil, comment: String? = nil, adminComment: String? = nil, adminPrivateComment: String? = nil, invoiceAdminComment: String? = nil, dateModified: String? = nil, dateFinished: String? = nil, sendNotifications: Bool? = nil, createInvoice: Bool? = nil, origin: String? = nil, tags: String? = nil) -> RequestBuilder<AccountConfigUpdate200Response> {
+    open class func orderUpdateWithRequestBuilder(orderId: String, storeId: String? = nil, orderStatus: String? = nil, financialStatus: String? = nil, fulfillmentStatus: String? = nil, cancellationReason: String? = nil, orderPaymentMethod: String? = nil, comment: String? = nil, adminComment: String? = nil, adminPrivateComment: String? = nil, invoiceAdminComment: String? = nil, dateModified: String? = nil, dateFinished: String? = nil, sendNotifications: Bool? = nil, createInvoice: Bool? = nil, origin: String? = nil, tags: String? = nil, idempotencyKey: String? = nil) -> RequestBuilder<AccountConfigUpdate200Response> {
         let localVariablePath = "/order.update.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -1561,6 +1563,7 @@ open class OrderAPI {
             "create_invoice": (wrappedValue: createInvoice?.encodeToJSON(), isExplode: true),
             "origin": (wrappedValue: origin?.encodeToJSON(), isExplode: true),
             "tags": (wrappedValue: tags?.encodeToJSON(), isExplode: true),
+            "idempotency_key": (wrappedValue: idempotencyKey?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [

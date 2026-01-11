@@ -83,12 +83,13 @@ open class WebhookAPI {
      - parameter active: (query) Webhook status (optional, default to true)
      - parameter langId: (query) Language id (optional)
      - parameter storeId: (query) Defines store id where the webhook should be assigned (optional)
+     - parameter idempotencyKey: (query) A unique identifier associated with a specific request. Repeated requests with the same &lt;strong&gt;idempotency_key&lt;/strong&gt; return a cached response without re-executing the business logic. &lt;strong&gt;Please note that the cache lifetime is 15 minutes.&lt;/strong&gt; (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func webhookCreate(entity: String, action: String, callback: String? = nil, label: String? = nil, fields: String? = nil, responseFields: String? = nil, active: Bool? = nil, langId: String? = nil, storeId: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: BasketLiveShippingServiceCreate200Response?, _ error: Error?) -> Void)) -> RequestTask {
-        return webhookCreateWithRequestBuilder(entity: entity, action: action, callback: callback, label: label, fields: fields, responseFields: responseFields, active: active, langId: langId, storeId: storeId).execute(apiResponseQueue) { result in
+    open class func webhookCreate(entity: String, action: String, callback: String? = nil, label: String? = nil, fields: String? = nil, responseFields: String? = nil, active: Bool? = nil, langId: String? = nil, storeId: String? = nil, idempotencyKey: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: BasketLiveShippingServiceCreate200Response?, _ error: Error?) -> Void)) -> RequestTask {
+        return webhookCreateWithRequestBuilder(entity: entity, action: action, callback: callback, label: label, fields: fields, responseFields: responseFields, active: active, langId: langId, storeId: storeId, idempotencyKey: idempotencyKey).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -117,9 +118,10 @@ open class WebhookAPI {
      - parameter active: (query) Webhook status (optional, default to true)
      - parameter langId: (query) Language id (optional)
      - parameter storeId: (query) Defines store id where the webhook should be assigned (optional)
+     - parameter idempotencyKey: (query) A unique identifier associated with a specific request. Repeated requests with the same &lt;strong&gt;idempotency_key&lt;/strong&gt; return a cached response without re-executing the business logic. &lt;strong&gt;Please note that the cache lifetime is 15 minutes.&lt;/strong&gt; (optional)
      - returns: RequestBuilder<BasketLiveShippingServiceCreate200Response> 
      */
-    open class func webhookCreateWithRequestBuilder(entity: String, action: String, callback: String? = nil, label: String? = nil, fields: String? = nil, responseFields: String? = nil, active: Bool? = nil, langId: String? = nil, storeId: String? = nil) -> RequestBuilder<BasketLiveShippingServiceCreate200Response> {
+    open class func webhookCreateWithRequestBuilder(entity: String, action: String, callback: String? = nil, label: String? = nil, fields: String? = nil, responseFields: String? = nil, active: Bool? = nil, langId: String? = nil, storeId: String? = nil, idempotencyKey: String? = nil) -> RequestBuilder<BasketLiveShippingServiceCreate200Response> {
         let localVariablePath = "/webhook.create.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -135,6 +137,7 @@ open class WebhookAPI {
             "active": (wrappedValue: active?.encodeToJSON(), isExplode: true),
             "lang_id": (wrappedValue: langId?.encodeToJSON(), isExplode: true),
             "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
+            "idempotency_key": (wrappedValue: idempotencyKey?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -330,12 +333,13 @@ open class WebhookAPI {
      - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
      - parameter active: (query) Webhook status (optional)
      - parameter langId: (query) Language id (optional)
+     - parameter idempotencyKey: (query) A unique identifier associated with a specific request. Repeated requests with the same &lt;strong&gt;idempotency_key&lt;/strong&gt; return a cached response without re-executing the business logic. &lt;strong&gt;Please note that the cache lifetime is 15 minutes.&lt;/strong&gt; (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func webhookUpdate(id: String, callback: String? = nil, label: String? = nil, fields: String? = nil, responseFields: String? = nil, active: Bool? = nil, langId: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ProductImageUpdate200Response?, _ error: Error?) -> Void)) -> RequestTask {
-        return webhookUpdateWithRequestBuilder(id: id, callback: callback, label: label, fields: fields, responseFields: responseFields, active: active, langId: langId).execute(apiResponseQueue) { result in
+    open class func webhookUpdate(id: String, callback: String? = nil, label: String? = nil, fields: String? = nil, responseFields: String? = nil, active: Bool? = nil, langId: String? = nil, idempotencyKey: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ProductImageUpdate200Response?, _ error: Error?) -> Void)) -> RequestTask {
+        return webhookUpdateWithRequestBuilder(id: id, callback: callback, label: label, fields: fields, responseFields: responseFields, active: active, langId: langId, idempotencyKey: idempotencyKey).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -362,9 +366,10 @@ open class WebhookAPI {
      - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
      - parameter active: (query) Webhook status (optional)
      - parameter langId: (query) Language id (optional)
+     - parameter idempotencyKey: (query) A unique identifier associated with a specific request. Repeated requests with the same &lt;strong&gt;idempotency_key&lt;/strong&gt; return a cached response without re-executing the business logic. &lt;strong&gt;Please note that the cache lifetime is 15 minutes.&lt;/strong&gt; (optional)
      - returns: RequestBuilder<ProductImageUpdate200Response> 
      */
-    open class func webhookUpdateWithRequestBuilder(id: String, callback: String? = nil, label: String? = nil, fields: String? = nil, responseFields: String? = nil, active: Bool? = nil, langId: String? = nil) -> RequestBuilder<ProductImageUpdate200Response> {
+    open class func webhookUpdateWithRequestBuilder(id: String, callback: String? = nil, label: String? = nil, fields: String? = nil, responseFields: String? = nil, active: Bool? = nil, langId: String? = nil, idempotencyKey: String? = nil) -> RequestBuilder<ProductImageUpdate200Response> {
         let localVariablePath = "/webhook.update.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -378,6 +383,7 @@ open class WebhookAPI {
             "response_fields": (wrappedValue: responseFields?.encodeToJSON(), isExplode: true),
             "active": (wrappedValue: active?.encodeToJSON(), isExplode: true),
             "lang_id": (wrappedValue: langId?.encodeToJSON(), isExplode: true),
+            "idempotency_key": (wrappedValue: idempotencyKey?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [

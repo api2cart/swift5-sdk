@@ -85,12 +85,13 @@ open class BasketAPI {
      - parameter variantId: (query) Defines product&#39;s variants specified by variant id (optional)
      - parameter quantity: (query) Defines new items quantity (optional, default to 0)
      - parameter storeId: (query) Store Id (optional)
+     - parameter idempotencyKey: (query) A unique identifier associated with a specific request. Repeated requests with the same &lt;strong&gt;idempotency_key&lt;/strong&gt; return a cached response without re-executing the business logic. &lt;strong&gt;Please note that the cache lifetime is 15 minutes.&lt;/strong&gt; (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func basketItemAdd(customerId: String, productId: String, variantId: String? = nil, quantity: Double? = nil, storeId: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: BasketItemAdd200Response?, _ error: Error?) -> Void)) -> RequestTask {
-        return basketItemAddWithRequestBuilder(customerId: customerId, productId: productId, variantId: variantId, quantity: quantity, storeId: storeId).execute(apiResponseQueue) { result in
+    open class func basketItemAdd(customerId: String, productId: String, variantId: String? = nil, quantity: Double? = nil, storeId: String? = nil, idempotencyKey: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: BasketItemAdd200Response?, _ error: Error?) -> Void)) -> RequestTask {
+        return basketItemAddWithRequestBuilder(customerId: customerId, productId: productId, variantId: variantId, quantity: quantity, storeId: storeId, idempotencyKey: idempotencyKey).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -115,9 +116,10 @@ open class BasketAPI {
      - parameter variantId: (query) Defines product&#39;s variants specified by variant id (optional)
      - parameter quantity: (query) Defines new items quantity (optional, default to 0)
      - parameter storeId: (query) Store Id (optional)
+     - parameter idempotencyKey: (query) A unique identifier associated with a specific request. Repeated requests with the same &lt;strong&gt;idempotency_key&lt;/strong&gt; return a cached response without re-executing the business logic. &lt;strong&gt;Please note that the cache lifetime is 15 minutes.&lt;/strong&gt; (optional)
      - returns: RequestBuilder<BasketItemAdd200Response> 
      */
-    open class func basketItemAddWithRequestBuilder(customerId: String, productId: String, variantId: String? = nil, quantity: Double? = nil, storeId: String? = nil) -> RequestBuilder<BasketItemAdd200Response> {
+    open class func basketItemAddWithRequestBuilder(customerId: String, productId: String, variantId: String? = nil, quantity: Double? = nil, storeId: String? = nil, idempotencyKey: String? = nil) -> RequestBuilder<BasketItemAdd200Response> {
         let localVariablePath = "/basket.item.add.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -129,6 +131,7 @@ open class BasketAPI {
             "variant_id": (wrappedValue: variantId?.encodeToJSON(), isExplode: true),
             "quantity": (wrappedValue: quantity?.encodeToJSON(), isExplode: true),
             "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
+            "idempotency_key": (wrappedValue: idempotencyKey?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -148,12 +151,13 @@ open class BasketAPI {
      - parameter name: (query) Shipping Service Name 
      - parameter callback: (query) Callback url that returns shipping rates. It should be able to accept POST requests with json data. 
      - parameter storeId: (query) Store Id (optional)
+     - parameter idempotencyKey: (query) A unique identifier associated with a specific request. Repeated requests with the same &lt;strong&gt;idempotency_key&lt;/strong&gt; return a cached response without re-executing the business logic. &lt;strong&gt;Please note that the cache lifetime is 15 minutes.&lt;/strong&gt; (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func basketLiveShippingServiceCreate(name: String, callback: String, storeId: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: BasketLiveShippingServiceCreate200Response?, _ error: Error?) -> Void)) -> RequestTask {
-        return basketLiveShippingServiceCreateWithRequestBuilder(name: name, callback: callback, storeId: storeId).execute(apiResponseQueue) { result in
+    open class func basketLiveShippingServiceCreate(name: String, callback: String, storeId: String? = nil, idempotencyKey: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: BasketLiveShippingServiceCreate200Response?, _ error: Error?) -> Void)) -> RequestTask {
+        return basketLiveShippingServiceCreateWithRequestBuilder(name: name, callback: callback, storeId: storeId, idempotencyKey: idempotencyKey).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -176,9 +180,10 @@ open class BasketAPI {
      - parameter name: (query) Shipping Service Name 
      - parameter callback: (query) Callback url that returns shipping rates. It should be able to accept POST requests with json data. 
      - parameter storeId: (query) Store Id (optional)
+     - parameter idempotencyKey: (query) A unique identifier associated with a specific request. Repeated requests with the same &lt;strong&gt;idempotency_key&lt;/strong&gt; return a cached response without re-executing the business logic. &lt;strong&gt;Please note that the cache lifetime is 15 minutes.&lt;/strong&gt; (optional)
      - returns: RequestBuilder<BasketLiveShippingServiceCreate200Response> 
      */
-    open class func basketLiveShippingServiceCreateWithRequestBuilder(name: String, callback: String, storeId: String? = nil) -> RequestBuilder<BasketLiveShippingServiceCreate200Response> {
+    open class func basketLiveShippingServiceCreateWithRequestBuilder(name: String, callback: String, storeId: String? = nil, idempotencyKey: String? = nil) -> RequestBuilder<BasketLiveShippingServiceCreate200Response> {
         let localVariablePath = "/basket.live_shipping_service.create.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -188,6 +193,7 @@ open class BasketAPI {
             "name": (wrappedValue: name.encodeToJSON(), isExplode: true),
             "callback": (wrappedValue: callback.encodeToJSON(), isExplode: true),
             "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
+            "idempotency_key": (wrappedValue: idempotencyKey?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [

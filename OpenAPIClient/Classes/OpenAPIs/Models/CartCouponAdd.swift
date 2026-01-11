@@ -63,8 +63,10 @@ public struct CartCouponAdd: Codable, JSONEncodable, Hashable {
     public var freeCashOnDelivery: Bool?
     /** Retrieves orders specified by customer id */
     public var customerId: String?
+    /** A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong> */
+    public var idempotencyKey: String?
 
-    public init(code: String, actionType: ActionType, actionApplyTo: ActionApplyTo, actionScope: ActionScope, actionAmount: Double, codes: [String]? = nil, name: String? = nil, dateStart: String? = "now", dateEnd: String? = nil, usageLimit: Int? = nil, usageLimitPerCustomer: Int? = nil, actionConditionEntity: String? = nil, actionConditionKey: String? = nil, actionConditionOperator: String? = nil, actionConditionValue: String? = nil, includeTax: Bool? = false, storeId: String? = nil, freeCashOnDelivery: Bool? = nil, customerId: String? = nil) {
+    public init(code: String, actionType: ActionType, actionApplyTo: ActionApplyTo, actionScope: ActionScope, actionAmount: Double, codes: [String]? = nil, name: String? = nil, dateStart: String? = "now", dateEnd: String? = nil, usageLimit: Int? = nil, usageLimitPerCustomer: Int? = nil, actionConditionEntity: String? = nil, actionConditionKey: String? = nil, actionConditionOperator: String? = nil, actionConditionValue: String? = nil, includeTax: Bool? = false, storeId: String? = nil, freeCashOnDelivery: Bool? = nil, customerId: String? = nil, idempotencyKey: String? = nil) {
         self.code = code
         self.actionType = actionType
         self.actionApplyTo = actionApplyTo
@@ -84,6 +86,7 @@ public struct CartCouponAdd: Codable, JSONEncodable, Hashable {
         self.storeId = storeId
         self.freeCashOnDelivery = freeCashOnDelivery
         self.customerId = customerId
+        self.idempotencyKey = idempotencyKey
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -106,6 +109,7 @@ public struct CartCouponAdd: Codable, JSONEncodable, Hashable {
         case storeId = "store_id"
         case freeCashOnDelivery = "free_cash_on_delivery"
         case customerId = "customer_id"
+        case idempotencyKey = "idempotency_key"
     }
 
     // Encodable protocol methods
@@ -131,6 +135,7 @@ public struct CartCouponAdd: Codable, JSONEncodable, Hashable {
         try container.encodeIfPresent(storeId, forKey: .storeId)
         try container.encodeIfPresent(freeCashOnDelivery, forKey: .freeCashOnDelivery)
         try container.encodeIfPresent(customerId, forKey: .customerId)
+        try container.encodeIfPresent(idempotencyKey, forKey: .idempotencyKey)
     }
 }
 

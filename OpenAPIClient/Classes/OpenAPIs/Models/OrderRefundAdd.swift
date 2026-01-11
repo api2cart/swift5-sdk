@@ -32,8 +32,10 @@ public struct OrderRefundAdd: Codable, JSONEncodable, Hashable {
     public var date: String?
     /** Indicates whether refund type is online */
     public var isOnline: Bool? = false
+    /** A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong> */
+    public var idempotencyKey: String?
 
-    public init(orderId: String? = nil, items: [OrderRefundAddItemsInner]? = nil, totalPrice: Double? = nil, shippingPrice: Double? = nil, feePrice: Double? = nil, message: String? = nil, itemRestock: Bool? = false, sendNotifications: Bool? = false, date: String? = nil, isOnline: Bool? = false) {
+    public init(orderId: String? = nil, items: [OrderRefundAddItemsInner]? = nil, totalPrice: Double? = nil, shippingPrice: Double? = nil, feePrice: Double? = nil, message: String? = nil, itemRestock: Bool? = false, sendNotifications: Bool? = false, date: String? = nil, isOnline: Bool? = false, idempotencyKey: String? = nil) {
         self.orderId = orderId
         self.items = items
         self.totalPrice = totalPrice
@@ -44,6 +46,7 @@ public struct OrderRefundAdd: Codable, JSONEncodable, Hashable {
         self.sendNotifications = sendNotifications
         self.date = date
         self.isOnline = isOnline
+        self.idempotencyKey = idempotencyKey
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -57,6 +60,7 @@ public struct OrderRefundAdd: Codable, JSONEncodable, Hashable {
         case sendNotifications = "send_notifications"
         case date
         case isOnline = "is_online"
+        case idempotencyKey = "idempotency_key"
     }
 
     // Encodable protocol methods
@@ -73,6 +77,7 @@ public struct OrderRefundAdd: Codable, JSONEncodable, Hashable {
         try container.encodeIfPresent(sendNotifications, forKey: .sendNotifications)
         try container.encodeIfPresent(date, forKey: .date)
         try container.encodeIfPresent(isOnline, forKey: .isOnline)
+        try container.encodeIfPresent(idempotencyKey, forKey: .idempotencyKey)
     }
 }
 

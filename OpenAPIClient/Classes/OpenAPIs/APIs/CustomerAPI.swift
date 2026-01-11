@@ -279,12 +279,13 @@ open class CustomerAPI {
      customer.delete
      
      - parameter id: (query) Identifies customer specified by the id 
+     - parameter storeId: (query) Store Id (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func customerDelete(id: String, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: CustomerDelete200Response?, _ error: Error?) -> Void)) -> RequestTask {
-        return customerDeleteWithRequestBuilder(id: id).execute(apiResponseQueue) { result in
+    open class func customerDelete(id: String, storeId: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: CustomerDelete200Response?, _ error: Error?) -> Void)) -> RequestTask {
+        return customerDeleteWithRequestBuilder(id: id, storeId: storeId).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -305,9 +306,10 @@ open class CustomerAPI {
        - type: apiKey x-api-key (HEADER)
        - name: ApiKeyAuth
      - parameter id: (query) Identifies customer specified by the id 
+     - parameter storeId: (query) Store Id (optional)
      - returns: RequestBuilder<CustomerDelete200Response> 
      */
-    open class func customerDeleteWithRequestBuilder(id: String) -> RequestBuilder<CustomerDelete200Response> {
+    open class func customerDeleteWithRequestBuilder(id: String, storeId: String? = nil) -> RequestBuilder<CustomerDelete200Response> {
         let localVariablePath = "/customer.delete.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -315,6 +317,7 @@ open class CustomerAPI {
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
             "id": (wrappedValue: id.encodeToJSON(), isExplode: true),
+            "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -399,12 +402,13 @@ open class CustomerAPI {
      - parameter name: (query) Customer group name 
      - parameter storeId: (query) Store Id (optional)
      - parameter storesIds: (query) Assign customer group to the stores that is specified by comma-separated stores&#39; id (optional)
+     - parameter idempotencyKey: (query) A unique identifier associated with a specific request. Repeated requests with the same &lt;strong&gt;idempotency_key&lt;/strong&gt; return a cached response without re-executing the business logic. &lt;strong&gt;Please note that the cache lifetime is 15 minutes.&lt;/strong&gt; (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func customerGroupAdd(name: String, storeId: String? = nil, storesIds: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: CustomerGroupAdd200Response?, _ error: Error?) -> Void)) -> RequestTask {
-        return customerGroupAddWithRequestBuilder(name: name, storeId: storeId, storesIds: storesIds).execute(apiResponseQueue) { result in
+    open class func customerGroupAdd(name: String, storeId: String? = nil, storesIds: String? = nil, idempotencyKey: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: CustomerGroupAdd200Response?, _ error: Error?) -> Void)) -> RequestTask {
+        return customerGroupAddWithRequestBuilder(name: name, storeId: storeId, storesIds: storesIds, idempotencyKey: idempotencyKey).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -427,9 +431,10 @@ open class CustomerAPI {
      - parameter name: (query) Customer group name 
      - parameter storeId: (query) Store Id (optional)
      - parameter storesIds: (query) Assign customer group to the stores that is specified by comma-separated stores&#39; id (optional)
+     - parameter idempotencyKey: (query) A unique identifier associated with a specific request. Repeated requests with the same &lt;strong&gt;idempotency_key&lt;/strong&gt; return a cached response without re-executing the business logic. &lt;strong&gt;Please note that the cache lifetime is 15 minutes.&lt;/strong&gt; (optional)
      - returns: RequestBuilder<CustomerGroupAdd200Response> 
      */
-    open class func customerGroupAddWithRequestBuilder(name: String, storeId: String? = nil, storesIds: String? = nil) -> RequestBuilder<CustomerGroupAdd200Response> {
+    open class func customerGroupAddWithRequestBuilder(name: String, storeId: String? = nil, storesIds: String? = nil, idempotencyKey: String? = nil) -> RequestBuilder<CustomerGroupAdd200Response> {
         let localVariablePath = "/customer.group.add.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -439,6 +444,7 @@ open class CustomerAPI {
             "name": (wrappedValue: name.encodeToJSON(), isExplode: true),
             "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
             "stores_ids": (wrappedValue: storesIds?.encodeToJSON(), isExplode: true),
+            "idempotency_key": (wrappedValue: idempotencyKey?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [

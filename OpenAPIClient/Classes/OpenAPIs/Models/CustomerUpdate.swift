@@ -45,9 +45,11 @@ public struct CustomerUpdate: Codable, JSONEncodable, Hashable {
     public var status: String?
     /** Store Id */
     public var storeId: String?
+    /** A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong> */
+    public var idempotencyKey: String?
     public var address: [CustomerUpdateAddressInner]?
 
-    public init(id: String? = nil, groupId: String? = nil, groupIds: String? = nil, group: String? = nil, email: String? = nil, phone: String? = nil, firstName: String? = nil, lastName: String? = nil, birthDay: String? = nil, newsLetterSubscription: Bool? = nil, consents: [CustomerAddConsentsInner]? = nil, tags: String? = nil, gender: String? = nil, note: String? = nil, status: String? = nil, storeId: String? = nil, address: [CustomerUpdateAddressInner]? = nil) {
+    public init(id: String? = nil, groupId: String? = nil, groupIds: String? = nil, group: String? = nil, email: String? = nil, phone: String? = nil, firstName: String? = nil, lastName: String? = nil, birthDay: String? = nil, newsLetterSubscription: Bool? = nil, consents: [CustomerAddConsentsInner]? = nil, tags: String? = nil, gender: String? = nil, note: String? = nil, status: String? = nil, storeId: String? = nil, idempotencyKey: String? = nil, address: [CustomerUpdateAddressInner]? = nil) {
         self.id = id
         self.groupId = groupId
         self.groupIds = groupIds
@@ -64,6 +66,7 @@ public struct CustomerUpdate: Codable, JSONEncodable, Hashable {
         self.note = note
         self.status = status
         self.storeId = storeId
+        self.idempotencyKey = idempotencyKey
         self.address = address
     }
 
@@ -84,6 +87,7 @@ public struct CustomerUpdate: Codable, JSONEncodable, Hashable {
         case note
         case status
         case storeId = "store_id"
+        case idempotencyKey = "idempotency_key"
         case address
     }
 
@@ -107,6 +111,7 @@ public struct CustomerUpdate: Codable, JSONEncodable, Hashable {
         try container.encodeIfPresent(note, forKey: .note)
         try container.encodeIfPresent(status, forKey: .status)
         try container.encodeIfPresent(storeId, forKey: .storeId)
+        try container.encodeIfPresent(idempotencyKey, forKey: .idempotencyKey)
         try container.encodeIfPresent(address, forKey: .address)
     }
 }

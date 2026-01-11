@@ -30,12 +30,13 @@ open class CategoryAPI {
      - parameter storeId: (query) Store Id (optional)
      - parameter storesIds: (query) Create category in the stores that is specified by comma-separated stores&#39; id (optional)
      - parameter langId: (query) Language id (optional)
+     - parameter idempotencyKey: (query) A unique identifier associated with a specific request. Repeated requests with the same &lt;strong&gt;idempotency_key&lt;/strong&gt; return a cached response without re-executing the business logic. &lt;strong&gt;Please note that the cache lifetime is 15 minutes.&lt;/strong&gt; (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func categoryAdd(name: String, description: String? = nil, shortDescription: String? = nil, parentId: String? = nil, avail: Bool? = nil, createdTime: String? = nil, modifiedTime: String? = nil, sortOrder: Int? = nil, metaTitle: String? = nil, metaDescription: String? = nil, metaKeywords: String? = nil, seoUrl: String? = nil, storeId: String? = nil, storesIds: String? = nil, langId: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: CategoryAdd200Response?, _ error: Error?) -> Void)) -> RequestTask {
-        return categoryAddWithRequestBuilder(name: name, description: description, shortDescription: shortDescription, parentId: parentId, avail: avail, createdTime: createdTime, modifiedTime: modifiedTime, sortOrder: sortOrder, metaTitle: metaTitle, metaDescription: metaDescription, metaKeywords: metaKeywords, seoUrl: seoUrl, storeId: storeId, storesIds: storesIds, langId: langId).execute(apiResponseQueue) { result in
+    open class func categoryAdd(name: String, description: String? = nil, shortDescription: String? = nil, parentId: String? = nil, avail: Bool? = nil, createdTime: String? = nil, modifiedTime: String? = nil, sortOrder: Int? = nil, metaTitle: String? = nil, metaDescription: String? = nil, metaKeywords: String? = nil, seoUrl: String? = nil, storeId: String? = nil, storesIds: String? = nil, langId: String? = nil, idempotencyKey: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: CategoryAdd200Response?, _ error: Error?) -> Void)) -> RequestTask {
+        return categoryAddWithRequestBuilder(name: name, description: description, shortDescription: shortDescription, parentId: parentId, avail: avail, createdTime: createdTime, modifiedTime: modifiedTime, sortOrder: sortOrder, metaTitle: metaTitle, metaDescription: metaDescription, metaKeywords: metaKeywords, seoUrl: seoUrl, storeId: storeId, storesIds: storesIds, langId: langId, idempotencyKey: idempotencyKey).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -70,9 +71,10 @@ open class CategoryAPI {
      - parameter storeId: (query) Store Id (optional)
      - parameter storesIds: (query) Create category in the stores that is specified by comma-separated stores&#39; id (optional)
      - parameter langId: (query) Language id (optional)
+     - parameter idempotencyKey: (query) A unique identifier associated with a specific request. Repeated requests with the same &lt;strong&gt;idempotency_key&lt;/strong&gt; return a cached response without re-executing the business logic. &lt;strong&gt;Please note that the cache lifetime is 15 minutes.&lt;/strong&gt; (optional)
      - returns: RequestBuilder<CategoryAdd200Response> 
      */
-    open class func categoryAddWithRequestBuilder(name: String, description: String? = nil, shortDescription: String? = nil, parentId: String? = nil, avail: Bool? = nil, createdTime: String? = nil, modifiedTime: String? = nil, sortOrder: Int? = nil, metaTitle: String? = nil, metaDescription: String? = nil, metaKeywords: String? = nil, seoUrl: String? = nil, storeId: String? = nil, storesIds: String? = nil, langId: String? = nil) -> RequestBuilder<CategoryAdd200Response> {
+    open class func categoryAddWithRequestBuilder(name: String, description: String? = nil, shortDescription: String? = nil, parentId: String? = nil, avail: Bool? = nil, createdTime: String? = nil, modifiedTime: String? = nil, sortOrder: Int? = nil, metaTitle: String? = nil, metaDescription: String? = nil, metaKeywords: String? = nil, seoUrl: String? = nil, storeId: String? = nil, storesIds: String? = nil, langId: String? = nil, idempotencyKey: String? = nil) -> RequestBuilder<CategoryAdd200Response> {
         let localVariablePath = "/category.add.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -94,6 +96,7 @@ open class CategoryAPI {
             "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
             "stores_ids": (wrappedValue: storesIds?.encodeToJSON(), isExplode: true),
             "lang_id": (wrappedValue: langId?.encodeToJSON(), isExplode: true),
+            "idempotency_key": (wrappedValue: idempotencyKey?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -163,12 +166,13 @@ open class CategoryAPI {
      - parameter categoryId: (query) Defines category assign, specified by category id 
      - parameter productId: (query) Defines category assign to the product, specified by product id 
      - parameter storeId: (query) Store Id (optional)
+     - parameter idempotencyKey: (query) A unique identifier associated with a specific request. Repeated requests with the same &lt;strong&gt;idempotency_key&lt;/strong&gt; return a cached response without re-executing the business logic. &lt;strong&gt;Please note that the cache lifetime is 15 minutes.&lt;/strong&gt; (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func categoryAssign(categoryId: String, productId: String, storeId: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: CategoryAssign200Response?, _ error: Error?) -> Void)) -> RequestTask {
-        return categoryAssignWithRequestBuilder(categoryId: categoryId, productId: productId, storeId: storeId).execute(apiResponseQueue) { result in
+    open class func categoryAssign(categoryId: String, productId: String, storeId: String? = nil, idempotencyKey: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: CategoryAssign200Response?, _ error: Error?) -> Void)) -> RequestTask {
+        return categoryAssignWithRequestBuilder(categoryId: categoryId, productId: productId, storeId: storeId, idempotencyKey: idempotencyKey).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -191,9 +195,10 @@ open class CategoryAPI {
      - parameter categoryId: (query) Defines category assign, specified by category id 
      - parameter productId: (query) Defines category assign to the product, specified by product id 
      - parameter storeId: (query) Store Id (optional)
+     - parameter idempotencyKey: (query) A unique identifier associated with a specific request. Repeated requests with the same &lt;strong&gt;idempotency_key&lt;/strong&gt; return a cached response without re-executing the business logic. &lt;strong&gt;Please note that the cache lifetime is 15 minutes.&lt;/strong&gt; (optional)
      - returns: RequestBuilder<CategoryAssign200Response> 
      */
-    open class func categoryAssignWithRequestBuilder(categoryId: String, productId: String, storeId: String? = nil) -> RequestBuilder<CategoryAssign200Response> {
+    open class func categoryAssignWithRequestBuilder(categoryId: String, productId: String, storeId: String? = nil, idempotencyKey: String? = nil) -> RequestBuilder<CategoryAssign200Response> {
         let localVariablePath = "/category.assign.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -203,6 +208,7 @@ open class CategoryAPI {
             "category_id": (wrappedValue: categoryId.encodeToJSON(), isExplode: true),
             "product_id": (wrappedValue: productId.encodeToJSON(), isExplode: true),
             "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
+            "idempotency_key": (wrappedValue: idempotencyKey?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -362,6 +368,56 @@ open class CategoryAPI {
     }
 
     /**
+     category.delete.batch
+     
+     - parameter categoryDeleteBatch: (body)  
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    @discardableResult
+    open class func categoryDeleteBatch(categoryDeleteBatch: CategoryDeleteBatch, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: CategoryAddBatch200Response?, _ error: Error?) -> Void)) -> RequestTask {
+        return categoryDeleteBatchWithRequestBuilder(categoryDeleteBatch: categoryDeleteBatch).execute(apiResponseQueue) { result in
+            switch result {
+            case let .success(response):
+                completion(response.body, nil)
+            case let .failure(error):
+                completion(nil, error)
+            }
+        }
+    }
+
+    /**
+     category.delete.batch
+     - POST /category.delete.batch.json
+     - Delete categories from the store.
+     - API Key:
+       - type: apiKey x-store-key (HEADER)
+       - name: StoreKeyAuth
+     - API Key:
+       - type: apiKey x-api-key (HEADER)
+       - name: ApiKeyAuth
+     - parameter categoryDeleteBatch: (body)  
+     - returns: RequestBuilder<CategoryAddBatch200Response> 
+     */
+    open class func categoryDeleteBatchWithRequestBuilder(categoryDeleteBatch: CategoryDeleteBatch) -> RequestBuilder<CategoryAddBatch200Response> {
+        let localVariablePath = "/category.delete.batch.json"
+        let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: categoryDeleteBatch)
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            "Content-Type": "application/json",
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<CategoryAddBatch200Response>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
+    }
+
+    /**
      category.find
      
      - parameter findValue: (query) Entity search that is specified by some value 
@@ -445,12 +501,13 @@ open class CategoryAPI {
      - parameter label: (query) Defines alternative text that has to be attached to the picture (optional)
      - parameter mime: (query) Mime type of image http://en.wikipedia.org/wiki/Internet_media_type. (optional)
      - parameter position: (query) Defines image’s position in the list (optional, default to 0)
+     - parameter idempotencyKey: (query) A unique identifier associated with a specific request. Repeated requests with the same &lt;strong&gt;idempotency_key&lt;/strong&gt; return a cached response without re-executing the business logic. &lt;strong&gt;Please note that the cache lifetime is 15 minutes.&lt;/strong&gt; (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func categoryImageAdd(categoryId: String, imageName: String, url: String, type: ModelType_categoryImageAdd, storeId: String? = nil, label: String? = nil, mime: String? = nil, position: Int? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: CategoryImageAdd200Response?, _ error: Error?) -> Void)) -> RequestTask {
-        return categoryImageAddWithRequestBuilder(categoryId: categoryId, imageName: imageName, url: url, type: type, storeId: storeId, label: label, mime: mime, position: position).execute(apiResponseQueue) { result in
+    open class func categoryImageAdd(categoryId: String, imageName: String, url: String, type: ModelType_categoryImageAdd, storeId: String? = nil, label: String? = nil, mime: String? = nil, position: Int? = nil, idempotencyKey: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: CategoryImageAdd200Response?, _ error: Error?) -> Void)) -> RequestTask {
+        return categoryImageAddWithRequestBuilder(categoryId: categoryId, imageName: imageName, url: url, type: type, storeId: storeId, label: label, mime: mime, position: position, idempotencyKey: idempotencyKey).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -478,9 +535,10 @@ open class CategoryAPI {
      - parameter label: (query) Defines alternative text that has to be attached to the picture (optional)
      - parameter mime: (query) Mime type of image http://en.wikipedia.org/wiki/Internet_media_type. (optional)
      - parameter position: (query) Defines image’s position in the list (optional, default to 0)
+     - parameter idempotencyKey: (query) A unique identifier associated with a specific request. Repeated requests with the same &lt;strong&gt;idempotency_key&lt;/strong&gt; return a cached response without re-executing the business logic. &lt;strong&gt;Please note that the cache lifetime is 15 minutes.&lt;/strong&gt; (optional)
      - returns: RequestBuilder<CategoryImageAdd200Response> 
      */
-    open class func categoryImageAddWithRequestBuilder(categoryId: String, imageName: String, url: String, type: ModelType_categoryImageAdd, storeId: String? = nil, label: String? = nil, mime: String? = nil, position: Int? = nil) -> RequestBuilder<CategoryImageAdd200Response> {
+    open class func categoryImageAddWithRequestBuilder(categoryId: String, imageName: String, url: String, type: ModelType_categoryImageAdd, storeId: String? = nil, label: String? = nil, mime: String? = nil, position: Int? = nil, idempotencyKey: String? = nil) -> RequestBuilder<CategoryImageAdd200Response> {
         let localVariablePath = "/category.image.add.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -495,6 +553,7 @@ open class CategoryAPI {
             "label": (wrappedValue: label?.encodeToJSON(), isExplode: true),
             "mime": (wrappedValue: mime?.encodeToJSON(), isExplode: true),
             "position": (wrappedValue: position?.encodeToJSON(), isExplode: true),
+            "idempotency_key": (wrappedValue: idempotencyKey?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -760,12 +819,13 @@ open class CategoryAPI {
      - parameter categoryId: (query) Defines category unassign, specified by category id 
      - parameter productId: (query) Defines category unassign to the product, specified by product id 
      - parameter storeId: (query) Store Id (optional)
+     - parameter idempotencyKey: (query) A unique identifier associated with a specific request. Repeated requests with the same &lt;strong&gt;idempotency_key&lt;/strong&gt; return a cached response without re-executing the business logic. &lt;strong&gt;Please note that the cache lifetime is 15 minutes.&lt;/strong&gt; (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func categoryUnassign(categoryId: String, productId: String, storeId: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: CategoryAssign200Response?, _ error: Error?) -> Void)) -> RequestTask {
-        return categoryUnassignWithRequestBuilder(categoryId: categoryId, productId: productId, storeId: storeId).execute(apiResponseQueue) { result in
+    open class func categoryUnassign(categoryId: String, productId: String, storeId: String? = nil, idempotencyKey: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: CategoryAssign200Response?, _ error: Error?) -> Void)) -> RequestTask {
+        return categoryUnassignWithRequestBuilder(categoryId: categoryId, productId: productId, storeId: storeId, idempotencyKey: idempotencyKey).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -788,9 +848,10 @@ open class CategoryAPI {
      - parameter categoryId: (query) Defines category unassign, specified by category id 
      - parameter productId: (query) Defines category unassign to the product, specified by product id 
      - parameter storeId: (query) Store Id (optional)
+     - parameter idempotencyKey: (query) A unique identifier associated with a specific request. Repeated requests with the same &lt;strong&gt;idempotency_key&lt;/strong&gt; return a cached response without re-executing the business logic. &lt;strong&gt;Please note that the cache lifetime is 15 minutes.&lt;/strong&gt; (optional)
      - returns: RequestBuilder<CategoryAssign200Response> 
      */
-    open class func categoryUnassignWithRequestBuilder(categoryId: String, productId: String, storeId: String? = nil) -> RequestBuilder<CategoryAssign200Response> {
+    open class func categoryUnassignWithRequestBuilder(categoryId: String, productId: String, storeId: String? = nil, idempotencyKey: String? = nil) -> RequestBuilder<CategoryAssign200Response> {
         let localVariablePath = "/category.unassign.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -800,6 +861,7 @@ open class CategoryAPI {
             "category_id": (wrappedValue: categoryId.encodeToJSON(), isExplode: true),
             "product_id": (wrappedValue: productId.encodeToJSON(), isExplode: true),
             "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
+            "idempotency_key": (wrappedValue: idempotencyKey?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -831,12 +893,13 @@ open class CategoryAPI {
      - parameter storeId: (query) Store Id (optional)
      - parameter storesIds: (query) Update category in the stores that is specified by comma-separated stores&#39; id (optional)
      - parameter langId: (query) Language id (optional)
+     - parameter idempotencyKey: (query) A unique identifier associated with a specific request. Repeated requests with the same &lt;strong&gt;idempotency_key&lt;/strong&gt; return a cached response without re-executing the business logic. &lt;strong&gt;Please note that the cache lifetime is 15 minutes.&lt;/strong&gt; (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func categoryUpdate(id: String, name: String? = nil, description: String? = nil, shortDescription: String? = nil, parentId: String? = nil, avail: Bool? = nil, sortOrder: Int? = nil, modifiedTime: String? = nil, metaTitle: String? = nil, metaDescription: String? = nil, metaKeywords: String? = nil, seoUrl: String? = nil, storeId: String? = nil, storesIds: String? = nil, langId: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: AccountConfigUpdate200Response?, _ error: Error?) -> Void)) -> RequestTask {
-        return categoryUpdateWithRequestBuilder(id: id, name: name, description: description, shortDescription: shortDescription, parentId: parentId, avail: avail, sortOrder: sortOrder, modifiedTime: modifiedTime, metaTitle: metaTitle, metaDescription: metaDescription, metaKeywords: metaKeywords, seoUrl: seoUrl, storeId: storeId, storesIds: storesIds, langId: langId).execute(apiResponseQueue) { result in
+    open class func categoryUpdate(id: String, name: String? = nil, description: String? = nil, shortDescription: String? = nil, parentId: String? = nil, avail: Bool? = nil, sortOrder: Int? = nil, modifiedTime: String? = nil, metaTitle: String? = nil, metaDescription: String? = nil, metaKeywords: String? = nil, seoUrl: String? = nil, storeId: String? = nil, storesIds: String? = nil, langId: String? = nil, idempotencyKey: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: AccountConfigUpdate200Response?, _ error: Error?) -> Void)) -> RequestTask {
+        return categoryUpdateWithRequestBuilder(id: id, name: name, description: description, shortDescription: shortDescription, parentId: parentId, avail: avail, sortOrder: sortOrder, modifiedTime: modifiedTime, metaTitle: metaTitle, metaDescription: metaDescription, metaKeywords: metaKeywords, seoUrl: seoUrl, storeId: storeId, storesIds: storesIds, langId: langId, idempotencyKey: idempotencyKey).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -871,9 +934,10 @@ open class CategoryAPI {
      - parameter storeId: (query) Store Id (optional)
      - parameter storesIds: (query) Update category in the stores that is specified by comma-separated stores&#39; id (optional)
      - parameter langId: (query) Language id (optional)
+     - parameter idempotencyKey: (query) A unique identifier associated with a specific request. Repeated requests with the same &lt;strong&gt;idempotency_key&lt;/strong&gt; return a cached response without re-executing the business logic. &lt;strong&gt;Please note that the cache lifetime is 15 minutes.&lt;/strong&gt; (optional)
      - returns: RequestBuilder<AccountConfigUpdate200Response> 
      */
-    open class func categoryUpdateWithRequestBuilder(id: String, name: String? = nil, description: String? = nil, shortDescription: String? = nil, parentId: String? = nil, avail: Bool? = nil, sortOrder: Int? = nil, modifiedTime: String? = nil, metaTitle: String? = nil, metaDescription: String? = nil, metaKeywords: String? = nil, seoUrl: String? = nil, storeId: String? = nil, storesIds: String? = nil, langId: String? = nil) -> RequestBuilder<AccountConfigUpdate200Response> {
+    open class func categoryUpdateWithRequestBuilder(id: String, name: String? = nil, description: String? = nil, shortDescription: String? = nil, parentId: String? = nil, avail: Bool? = nil, sortOrder: Int? = nil, modifiedTime: String? = nil, metaTitle: String? = nil, metaDescription: String? = nil, metaKeywords: String? = nil, seoUrl: String? = nil, storeId: String? = nil, storesIds: String? = nil, langId: String? = nil, idempotencyKey: String? = nil) -> RequestBuilder<AccountConfigUpdate200Response> {
         let localVariablePath = "/category.update.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -895,6 +959,7 @@ open class CategoryAPI {
             "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
             "stores_ids": (wrappedValue: storesIds?.encodeToJSON(), isExplode: true),
             "lang_id": (wrappedValue: langId?.encodeToJSON(), isExplode: true),
+            "idempotency_key": (wrappedValue: idempotencyKey?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [

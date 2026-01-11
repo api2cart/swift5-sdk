@@ -28,8 +28,10 @@ public struct OrderShipmentTrackingAdd: Codable, JSONEncodable, Hashable {
     public var trackingLink: String?
     /** Send notifications to customer after tracking was created */
     public var sendNotifications: Bool? = false
+    /** A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong> */
+    public var idempotencyKey: String?
 
-    public init(orderId: String? = nil, shipmentId: String, carrierId: String? = nil, storeId: String? = nil, trackingProvider: String? = nil, trackingNumber: String, trackingLink: String? = nil, sendNotifications: Bool? = false) {
+    public init(orderId: String? = nil, shipmentId: String, carrierId: String? = nil, storeId: String? = nil, trackingProvider: String? = nil, trackingNumber: String, trackingLink: String? = nil, sendNotifications: Bool? = false, idempotencyKey: String? = nil) {
         self.orderId = orderId
         self.shipmentId = shipmentId
         self.carrierId = carrierId
@@ -38,6 +40,7 @@ public struct OrderShipmentTrackingAdd: Codable, JSONEncodable, Hashable {
         self.trackingNumber = trackingNumber
         self.trackingLink = trackingLink
         self.sendNotifications = sendNotifications
+        self.idempotencyKey = idempotencyKey
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -49,6 +52,7 @@ public struct OrderShipmentTrackingAdd: Codable, JSONEncodable, Hashable {
         case trackingNumber = "tracking_number"
         case trackingLink = "tracking_link"
         case sendNotifications = "send_notifications"
+        case idempotencyKey = "idempotency_key"
     }
 
     // Encodable protocol methods
@@ -63,6 +67,7 @@ public struct OrderShipmentTrackingAdd: Codable, JSONEncodable, Hashable {
         try container.encode(trackingNumber, forKey: .trackingNumber)
         try container.encodeIfPresent(trackingLink, forKey: .trackingLink)
         try container.encodeIfPresent(sendNotifications, forKey: .sendNotifications)
+        try container.encodeIfPresent(idempotencyKey, forKey: .idempotencyKey)
     }
 }
 

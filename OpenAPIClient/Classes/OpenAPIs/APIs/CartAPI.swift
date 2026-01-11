@@ -223,12 +223,13 @@ open class CartAPI {
      - parameter includeTax: (query) Indicates whether to apply a discount for taxes. (optional, default to false)
      - parameter includeShipping: (query) Indicates whether to apply a discount for shipping. (optional, default to false)
      - parameter storeId: (query) Store Id (optional)
+     - parameter idempotencyKey: (query) A unique identifier associated with a specific request. Repeated requests with the same &lt;strong&gt;idempotency_key&lt;/strong&gt; return a cached response without re-executing the business logic. &lt;strong&gt;Please note that the cache lifetime is 15 minutes.&lt;/strong&gt; (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func cartCouponConditionAdd(couponId: String, entity: Entity_cartCouponConditionAdd, key: Key_cartCouponConditionAdd, _operator: String, value: String, target: String? = nil, includeTax: Bool? = nil, includeShipping: Bool? = nil, storeId: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: BasketLiveShippingServiceDelete200Response?, _ error: Error?) -> Void)) -> RequestTask {
-        return cartCouponConditionAddWithRequestBuilder(couponId: couponId, entity: entity, key: key, _operator: _operator, value: value, target: target, includeTax: includeTax, includeShipping: includeShipping, storeId: storeId).execute(apiResponseQueue) { result in
+    open class func cartCouponConditionAdd(couponId: String, entity: Entity_cartCouponConditionAdd, key: Key_cartCouponConditionAdd, _operator: String, value: String, target: String? = nil, includeTax: Bool? = nil, includeShipping: Bool? = nil, storeId: String? = nil, idempotencyKey: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: BasketLiveShippingServiceDelete200Response?, _ error: Error?) -> Void)) -> RequestTask {
+        return cartCouponConditionAddWithRequestBuilder(couponId: couponId, entity: entity, key: key, _operator: _operator, value: value, target: target, includeTax: includeTax, includeShipping: includeShipping, storeId: storeId, idempotencyKey: idempotencyKey).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -257,9 +258,10 @@ open class CartAPI {
      - parameter includeTax: (query) Indicates whether to apply a discount for taxes. (optional, default to false)
      - parameter includeShipping: (query) Indicates whether to apply a discount for shipping. (optional, default to false)
      - parameter storeId: (query) Store Id (optional)
+     - parameter idempotencyKey: (query) A unique identifier associated with a specific request. Repeated requests with the same &lt;strong&gt;idempotency_key&lt;/strong&gt; return a cached response without re-executing the business logic. &lt;strong&gt;Please note that the cache lifetime is 15 minutes.&lt;/strong&gt; (optional)
      - returns: RequestBuilder<BasketLiveShippingServiceDelete200Response> 
      */
-    open class func cartCouponConditionAddWithRequestBuilder(couponId: String, entity: Entity_cartCouponConditionAdd, key: Key_cartCouponConditionAdd, _operator: String, value: String, target: String? = nil, includeTax: Bool? = nil, includeShipping: Bool? = nil, storeId: String? = nil) -> RequestBuilder<BasketLiveShippingServiceDelete200Response> {
+    open class func cartCouponConditionAddWithRequestBuilder(couponId: String, entity: Entity_cartCouponConditionAdd, key: Key_cartCouponConditionAdd, _operator: String, value: String, target: String? = nil, includeTax: Bool? = nil, includeShipping: Bool? = nil, storeId: String? = nil, idempotencyKey: String? = nil) -> RequestBuilder<BasketLiveShippingServiceDelete200Response> {
         let localVariablePath = "/cart.coupon.condition.add.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -275,6 +277,7 @@ open class CartAPI {
             "include_tax": (wrappedValue: includeTax?.encodeToJSON(), isExplode: true),
             "include_shipping": (wrappedValue: includeShipping?.encodeToJSON(), isExplode: true),
             "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
+            "idempotency_key": (wrappedValue: idempotencyKey?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -569,12 +572,13 @@ open class CartAPI {
      - parameter recipientEmail: (query) Gift card recipient email (optional)
      - parameter recipientName: (query) Gift card recipient name (optional)
      - parameter ownerName: (query) Gift card owner name (optional)
+     - parameter idempotencyKey: (query) A unique identifier associated with a specific request. Repeated requests with the same &lt;strong&gt;idempotency_key&lt;/strong&gt; return a cached response without re-executing the business logic. &lt;strong&gt;Please note that the cache lifetime is 15 minutes.&lt;/strong&gt; (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func cartGiftcardAdd(amount: Double, code: String? = nil, ownerEmail: String? = nil, recipientEmail: String? = nil, recipientName: String? = nil, ownerName: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: CartGiftcardAdd200Response?, _ error: Error?) -> Void)) -> RequestTask {
-        return cartGiftcardAddWithRequestBuilder(amount: amount, code: code, ownerEmail: ownerEmail, recipientEmail: recipientEmail, recipientName: recipientName, ownerName: ownerName).execute(apiResponseQueue) { result in
+    open class func cartGiftcardAdd(amount: Double, code: String? = nil, ownerEmail: String? = nil, recipientEmail: String? = nil, recipientName: String? = nil, ownerName: String? = nil, idempotencyKey: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: CartGiftcardAdd200Response?, _ error: Error?) -> Void)) -> RequestTask {
+        return cartGiftcardAddWithRequestBuilder(amount: amount, code: code, ownerEmail: ownerEmail, recipientEmail: recipientEmail, recipientName: recipientName, ownerName: ownerName, idempotencyKey: idempotencyKey).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -600,9 +604,10 @@ open class CartAPI {
      - parameter recipientEmail: (query) Gift card recipient email (optional)
      - parameter recipientName: (query) Gift card recipient name (optional)
      - parameter ownerName: (query) Gift card owner name (optional)
+     - parameter idempotencyKey: (query) A unique identifier associated with a specific request. Repeated requests with the same &lt;strong&gt;idempotency_key&lt;/strong&gt; return a cached response without re-executing the business logic. &lt;strong&gt;Please note that the cache lifetime is 15 minutes.&lt;/strong&gt; (optional)
      - returns: RequestBuilder<CartGiftcardAdd200Response> 
      */
-    open class func cartGiftcardAddWithRequestBuilder(amount: Double, code: String? = nil, ownerEmail: String? = nil, recipientEmail: String? = nil, recipientName: String? = nil, ownerName: String? = nil) -> RequestBuilder<CartGiftcardAdd200Response> {
+    open class func cartGiftcardAddWithRequestBuilder(amount: Double, code: String? = nil, ownerEmail: String? = nil, recipientEmail: String? = nil, recipientName: String? = nil, ownerName: String? = nil, idempotencyKey: String? = nil) -> RequestBuilder<CartGiftcardAdd200Response> {
         let localVariablePath = "/cart.giftcard.add.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -615,6 +620,7 @@ open class CartAPI {
             "recipient_email": (wrappedValue: recipientEmail?.encodeToJSON(), isExplode: true),
             "recipient_name": (wrappedValue: recipientName?.encodeToJSON(), isExplode: true),
             "owner_name": (wrappedValue: ownerName?.encodeToJSON(), isExplode: true),
+            "idempotency_key": (wrappedValue: idempotencyKey?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -957,12 +963,13 @@ open class CartAPI {
      - parameter entity: (query) Entity (optional, default to "product")
      - parameter storeId: (query) Store Id (optional)
      - parameter langId: (query) Language id (optional)
+     - parameter idempotencyKey: (query) A unique identifier associated with a specific request. Repeated requests with the same &lt;strong&gt;idempotency_key&lt;/strong&gt; return a cached response without re-executing the business logic. &lt;strong&gt;Please note that the cache lifetime is 15 minutes.&lt;/strong&gt; (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func cartMetaDataSet(entityId: String, key: String, value: String, namespace: String, entity: String? = nil, storeId: String? = nil, langId: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: AttributeAdd200Response?, _ error: Error?) -> Void)) -> RequestTask {
-        return cartMetaDataSetWithRequestBuilder(entityId: entityId, key: key, value: value, namespace: namespace, entity: entity, storeId: storeId, langId: langId).execute(apiResponseQueue) { result in
+    open class func cartMetaDataSet(entityId: String, key: String, value: String, namespace: String, entity: String? = nil, storeId: String? = nil, langId: String? = nil, idempotencyKey: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: AttributeAdd200Response?, _ error: Error?) -> Void)) -> RequestTask {
+        return cartMetaDataSetWithRequestBuilder(entityId: entityId, key: key, value: value, namespace: namespace, entity: entity, storeId: storeId, langId: langId, idempotencyKey: idempotencyKey).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -989,9 +996,10 @@ open class CartAPI {
      - parameter entity: (query) Entity (optional, default to "product")
      - parameter storeId: (query) Store Id (optional)
      - parameter langId: (query) Language id (optional)
+     - parameter idempotencyKey: (query) A unique identifier associated with a specific request. Repeated requests with the same &lt;strong&gt;idempotency_key&lt;/strong&gt; return a cached response without re-executing the business logic. &lt;strong&gt;Please note that the cache lifetime is 15 minutes.&lt;/strong&gt; (optional)
      - returns: RequestBuilder<AttributeAdd200Response> 
      */
-    open class func cartMetaDataSetWithRequestBuilder(entityId: String, key: String, value: String, namespace: String, entity: String? = nil, storeId: String? = nil, langId: String? = nil) -> RequestBuilder<AttributeAdd200Response> {
+    open class func cartMetaDataSetWithRequestBuilder(entityId: String, key: String, value: String, namespace: String, entity: String? = nil, storeId: String? = nil, langId: String? = nil, idempotencyKey: String? = nil) -> RequestBuilder<AttributeAdd200Response> {
         let localVariablePath = "/cart.meta_data.set.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -1005,6 +1013,7 @@ open class CartAPI {
             "entity": (wrappedValue: entity?.encodeToJSON(), isExplode: true),
             "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
             "lang_id": (wrappedValue: langId?.encodeToJSON(), isExplode: true),
+            "idempotency_key": (wrappedValue: idempotencyKey?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -1201,12 +1210,13 @@ open class CartAPI {
      - parameter scope: (query) The page or pages on the online store where the script should be included (optional, default to "storefront")
      - parameter events: (query) Event for run scripts (optional)
      - parameter storeId: (query) Store Id (optional)
+     - parameter idempotencyKey: (query) A unique identifier associated with a specific request. Repeated requests with the same &lt;strong&gt;idempotency_key&lt;/strong&gt; return a cached response without re-executing the business logic. &lt;strong&gt;Please note that the cache lifetime is 15 minutes.&lt;/strong&gt; (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func cartScriptAdd(name: String? = nil, description: String? = nil, html: String? = nil, src: String? = nil, loadMethod: String? = nil, scope: String? = nil, events: String? = nil, storeId: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: CartScriptAdd200Response?, _ error: Error?) -> Void)) -> RequestTask {
-        return cartScriptAddWithRequestBuilder(name: name, description: description, html: html, src: src, loadMethod: loadMethod, scope: scope, events: events, storeId: storeId).execute(apiResponseQueue) { result in
+    open class func cartScriptAdd(name: String? = nil, description: String? = nil, html: String? = nil, src: String? = nil, loadMethod: String? = nil, scope: String? = nil, events: String? = nil, storeId: String? = nil, idempotencyKey: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: CartScriptAdd200Response?, _ error: Error?) -> Void)) -> RequestTask {
+        return cartScriptAddWithRequestBuilder(name: name, description: description, html: html, src: src, loadMethod: loadMethod, scope: scope, events: events, storeId: storeId, idempotencyKey: idempotencyKey).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -1234,9 +1244,10 @@ open class CartAPI {
      - parameter scope: (query) The page or pages on the online store where the script should be included (optional, default to "storefront")
      - parameter events: (query) Event for run scripts (optional)
      - parameter storeId: (query) Store Id (optional)
+     - parameter idempotencyKey: (query) A unique identifier associated with a specific request. Repeated requests with the same &lt;strong&gt;idempotency_key&lt;/strong&gt; return a cached response without re-executing the business logic. &lt;strong&gt;Please note that the cache lifetime is 15 minutes.&lt;/strong&gt; (optional)
      - returns: RequestBuilder<CartScriptAdd200Response> 
      */
-    open class func cartScriptAddWithRequestBuilder(name: String? = nil, description: String? = nil, html: String? = nil, src: String? = nil, loadMethod: String? = nil, scope: String? = nil, events: String? = nil, storeId: String? = nil) -> RequestBuilder<CartScriptAdd200Response> {
+    open class func cartScriptAddWithRequestBuilder(name: String? = nil, description: String? = nil, html: String? = nil, src: String? = nil, loadMethod: String? = nil, scope: String? = nil, events: String? = nil, storeId: String? = nil, idempotencyKey: String? = nil) -> RequestBuilder<CartScriptAdd200Response> {
         let localVariablePath = "/cart.script.add.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -1251,6 +1262,7 @@ open class CartAPI {
             "scope": (wrappedValue: scope?.encodeToJSON(), isExplode: true),
             "events": (wrappedValue: events?.encodeToJSON(), isExplode: true),
             "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
+            "idempotency_key": (wrappedValue: idempotencyKey?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
