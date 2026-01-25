@@ -16,13 +16,17 @@ public struct AccountCartList200ResponseResultCartsInner: Codable, JSONEncodable
     public var url: String?
     public var storeKey: String?
     public var cartId: String?
+    public var customLabel: String?
+    public var bridgeVersion: String?
     public var totalCalls: String?
 
-    public init(id: String? = nil, url: String? = nil, storeKey: String? = nil, cartId: String? = nil, totalCalls: String? = nil) {
+    public init(id: String? = nil, url: String? = nil, storeKey: String? = nil, cartId: String? = nil, customLabel: String? = nil, bridgeVersion: String? = nil, totalCalls: String? = nil) {
         self.id = id
         self.url = url
         self.storeKey = storeKey
         self.cartId = cartId
+        self.customLabel = customLabel
+        self.bridgeVersion = bridgeVersion
         self.totalCalls = totalCalls
     }
 
@@ -31,6 +35,8 @@ public struct AccountCartList200ResponseResultCartsInner: Codable, JSONEncodable
         case url
         case storeKey = "store_key"
         case cartId = "cart_id"
+        case customLabel = "custom_label"
+        case bridgeVersion = "bridge_version"
         case totalCalls = "total_calls"
     }
 
@@ -42,6 +48,8 @@ public struct AccountCartList200ResponseResultCartsInner: Codable, JSONEncodable
         try container.encodeIfPresent(url, forKey: .url)
         try container.encodeIfPresent(storeKey, forKey: .storeKey)
         try container.encodeIfPresent(cartId, forKey: .cartId)
+        try container.encodeIfPresent(customLabel, forKey: .customLabel)
+        try container.encodeIfPresent(bridgeVersion, forKey: .bridgeVersion)
         try container.encodeIfPresent(totalCalls, forKey: .totalCalls)
     }
 }
