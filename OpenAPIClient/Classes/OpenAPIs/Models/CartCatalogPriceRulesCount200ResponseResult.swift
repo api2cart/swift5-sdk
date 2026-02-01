@@ -12,9 +12,9 @@ import AnyCodable
 
 public struct CartCatalogPriceRulesCount200ResponseResult: Codable, JSONEncodable, Hashable {
 
-    public var catalogPriceRulesCount: String?
+    public var catalogPriceRulesCount: Int?
 
-    public init(catalogPriceRulesCount: String? = nil) {
+    public init(catalogPriceRulesCount: Int? = nil) {
         self.catalogPriceRulesCount = catalogPriceRulesCount
     }
 

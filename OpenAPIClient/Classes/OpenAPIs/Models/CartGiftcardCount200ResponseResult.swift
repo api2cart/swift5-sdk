@@ -12,9 +12,9 @@ import AnyCodable
 
 public struct CartGiftcardCount200ResponseResult: Codable, JSONEncodable, Hashable {
 
-    public var giftCardsCount: String?
+    public var giftCardsCount: Int?
 
-    public init(giftCardsCount: String? = nil) {
+    public init(giftCardsCount: Int? = nil) {
         self.giftCardsCount = giftCardsCount
     }
 
