@@ -36,6 +36,7 @@ public struct AccountCartAdd: Codable, JSONEncodable, Hashable {
         case gambio = "Gambio"
         case hybris = "Hybris"
         case jooCart = "JooCart"
+        case jumpseller = "Jumpseller"
         case lazada = "Lazada"
         case lightSpeed = "LightSpeed"
         case magento1212 = "Magento1212"

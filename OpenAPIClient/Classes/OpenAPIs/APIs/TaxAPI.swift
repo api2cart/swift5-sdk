@@ -84,6 +84,7 @@ open class TaxAPI {
      tax.class.list
      
      - parameter count: (query) This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 (optional, default to 10)
+     - parameter start: (query) This parameter sets the number from which you want to get entities (optional, default to 0)
      - parameter pageCursor: (query) Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) (optional)
      - parameter storeId: (query) Store Id (optional)
      - parameter findValue: (query) Entity search that is specified by some value (optional)
@@ -97,8 +98,8 @@ open class TaxAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func taxClassList(count: Int? = nil, pageCursor: String? = nil, storeId: String? = nil, findValue: String? = nil, findWhere: String? = nil, createdTo: String? = nil, createdFrom: String? = nil, modifiedTo: String? = nil, modifiedFrom: String? = nil, responseFields: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseTaxClassList?, _ error: Error?) -> Void)) -> RequestTask {
-        return taxClassListWithRequestBuilder(count: count, pageCursor: pageCursor, storeId: storeId, findValue: findValue, findWhere: findWhere, createdTo: createdTo, createdFrom: createdFrom, modifiedTo: modifiedTo, modifiedFrom: modifiedFrom, responseFields: responseFields).execute(apiResponseQueue) { result in
+    open class func taxClassList(count: Int? = nil, start: Int? = nil, pageCursor: String? = nil, storeId: String? = nil, findValue: String? = nil, findWhere: String? = nil, createdTo: String? = nil, createdFrom: String? = nil, modifiedTo: String? = nil, modifiedFrom: String? = nil, responseFields: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseTaxClassList?, _ error: Error?) -> Void)) -> RequestTask {
+        return taxClassListWithRequestBuilder(count: count, start: start, pageCursor: pageCursor, storeId: storeId, findValue: findValue, findWhere: findWhere, createdTo: createdTo, createdFrom: createdFrom, modifiedTo: modifiedTo, modifiedFrom: modifiedFrom, responseFields: responseFields).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -119,6 +120,7 @@ open class TaxAPI {
        - type: apiKey x-api-key (HEADER)
        - name: ApiKeyAuth
      - parameter count: (query) This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 (optional, default to 10)
+     - parameter start: (query) This parameter sets the number from which you want to get entities (optional, default to 0)
      - parameter pageCursor: (query) Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) (optional)
      - parameter storeId: (query) Store Id (optional)
      - parameter findValue: (query) Entity search that is specified by some value (optional)
@@ -130,7 +132,7 @@ open class TaxAPI {
      - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "{return_code,return_message,pagination,result}")
      - returns: RequestBuilder<ModelResponseTaxClassList> 
      */
-    open class func taxClassListWithRequestBuilder(count: Int? = nil, pageCursor: String? = nil, storeId: String? = nil, findValue: String? = nil, findWhere: String? = nil, createdTo: String? = nil, createdFrom: String? = nil, modifiedTo: String? = nil, modifiedFrom: String? = nil, responseFields: String? = nil) -> RequestBuilder<ModelResponseTaxClassList> {
+    open class func taxClassListWithRequestBuilder(count: Int? = nil, start: Int? = nil, pageCursor: String? = nil, storeId: String? = nil, findValue: String? = nil, findWhere: String? = nil, createdTo: String? = nil, createdFrom: String? = nil, modifiedTo: String? = nil, modifiedFrom: String? = nil, responseFields: String? = nil) -> RequestBuilder<ModelResponseTaxClassList> {
         let localVariablePath = "/tax.class.list.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -138,6 +140,7 @@ open class TaxAPI {
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
             "count": (wrappedValue: count?.encodeToJSON(), isExplode: true),
+            "start": (wrappedValue: start?.encodeToJSON(), isExplode: true),
             "page_cursor": (wrappedValue: pageCursor?.encodeToJSON(), isExplode: true),
             "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
             "find_value": (wrappedValue: findValue?.encodeToJSON(), isExplode: true),

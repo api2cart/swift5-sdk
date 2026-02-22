@@ -501,13 +501,14 @@ open class CategoryAPI {
      - parameter label: (query) Defines alternative text that has to be attached to the picture (optional)
      - parameter mime: (query) Mime type of image http://en.wikipedia.org/wiki/Internet_media_type. (optional)
      - parameter position: (query) Defines image’s position in the list (optional, default to 0)
+     - parameter applyToTranslations: (query) Defines whether to add image to all category translations (optional, default to true)
      - parameter idempotencyKey: (query) A unique identifier associated with a specific request. Repeated requests with the same &lt;strong&gt;idempotency_key&lt;/strong&gt; return a cached response without re-executing the business logic. &lt;strong&gt;Please note that the cache lifetime is 15 minutes.&lt;/strong&gt; (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func categoryImageAdd(categoryId: String, imageName: String, url: String, type: ModelType_categoryImageAdd, storeId: String? = nil, label: String? = nil, mime: String? = nil, position: Int? = nil, idempotencyKey: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: CategoryImageAdd200Response?, _ error: Error?) -> Void)) -> RequestTask {
-        return categoryImageAddWithRequestBuilder(categoryId: categoryId, imageName: imageName, url: url, type: type, storeId: storeId, label: label, mime: mime, position: position, idempotencyKey: idempotencyKey).execute(apiResponseQueue) { result in
+    open class func categoryImageAdd(categoryId: String, imageName: String, url: String, type: ModelType_categoryImageAdd, storeId: String? = nil, label: String? = nil, mime: String? = nil, position: Int? = nil, applyToTranslations: Bool? = nil, idempotencyKey: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: CategoryImageAdd200Response?, _ error: Error?) -> Void)) -> RequestTask {
+        return categoryImageAddWithRequestBuilder(categoryId: categoryId, imageName: imageName, url: url, type: type, storeId: storeId, label: label, mime: mime, position: position, applyToTranslations: applyToTranslations, idempotencyKey: idempotencyKey).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -535,10 +536,11 @@ open class CategoryAPI {
      - parameter label: (query) Defines alternative text that has to be attached to the picture (optional)
      - parameter mime: (query) Mime type of image http://en.wikipedia.org/wiki/Internet_media_type. (optional)
      - parameter position: (query) Defines image’s position in the list (optional, default to 0)
+     - parameter applyToTranslations: (query) Defines whether to add image to all category translations (optional, default to true)
      - parameter idempotencyKey: (query) A unique identifier associated with a specific request. Repeated requests with the same &lt;strong&gt;idempotency_key&lt;/strong&gt; return a cached response without re-executing the business logic. &lt;strong&gt;Please note that the cache lifetime is 15 minutes.&lt;/strong&gt; (optional)
      - returns: RequestBuilder<CategoryImageAdd200Response> 
      */
-    open class func categoryImageAddWithRequestBuilder(categoryId: String, imageName: String, url: String, type: ModelType_categoryImageAdd, storeId: String? = nil, label: String? = nil, mime: String? = nil, position: Int? = nil, idempotencyKey: String? = nil) -> RequestBuilder<CategoryImageAdd200Response> {
+    open class func categoryImageAddWithRequestBuilder(categoryId: String, imageName: String, url: String, type: ModelType_categoryImageAdd, storeId: String? = nil, label: String? = nil, mime: String? = nil, position: Int? = nil, applyToTranslations: Bool? = nil, idempotencyKey: String? = nil) -> RequestBuilder<CategoryImageAdd200Response> {
         let localVariablePath = "/category.image.add.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -553,6 +555,7 @@ open class CategoryAPI {
             "label": (wrappedValue: label?.encodeToJSON(), isExplode: true),
             "mime": (wrappedValue: mime?.encodeToJSON(), isExplode: true),
             "position": (wrappedValue: position?.encodeToJSON(), isExplode: true),
+            "apply_to_translations": (wrappedValue: applyToTranslations?.encodeToJSON(), isExplode: true),
             "idempotency_key": (wrappedValue: idempotencyKey?.encodeToJSON(), isExplode: true),
         ])
 
@@ -573,12 +576,13 @@ open class CategoryAPI {
      - parameter categoryId: (query) Defines category id where the image should be deleted 
      - parameter imageId: (query) Define image id 
      - parameter storeId: (query) Store Id (optional)
+     - parameter applyToTranslations: (query) Defines whether to delete image from all category translations (optional, default to true)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func categoryImageDelete(categoryId: String, imageId: String, storeId: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: AttributeDelete200Response?, _ error: Error?) -> Void)) -> RequestTask {
-        return categoryImageDeleteWithRequestBuilder(categoryId: categoryId, imageId: imageId, storeId: storeId).execute(apiResponseQueue) { result in
+    open class func categoryImageDelete(categoryId: String, imageId: String, storeId: String? = nil, applyToTranslations: Bool? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: AttributeDelete200Response?, _ error: Error?) -> Void)) -> RequestTask {
+        return categoryImageDeleteWithRequestBuilder(categoryId: categoryId, imageId: imageId, storeId: storeId, applyToTranslations: applyToTranslations).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -601,9 +605,10 @@ open class CategoryAPI {
      - parameter categoryId: (query) Defines category id where the image should be deleted 
      - parameter imageId: (query) Define image id 
      - parameter storeId: (query) Store Id (optional)
+     - parameter applyToTranslations: (query) Defines whether to delete image from all category translations (optional, default to true)
      - returns: RequestBuilder<AttributeDelete200Response> 
      */
-    open class func categoryImageDeleteWithRequestBuilder(categoryId: String, imageId: String, storeId: String? = nil) -> RequestBuilder<AttributeDelete200Response> {
+    open class func categoryImageDeleteWithRequestBuilder(categoryId: String, imageId: String, storeId: String? = nil, applyToTranslations: Bool? = nil) -> RequestBuilder<AttributeDelete200Response> {
         let localVariablePath = "/category.image.delete.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -613,6 +618,7 @@ open class CategoryAPI {
             "category_id": (wrappedValue: categoryId.encodeToJSON(), isExplode: true),
             "image_id": (wrappedValue: imageId.encodeToJSON(), isExplode: true),
             "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
+            "apply_to_translations": (wrappedValue: applyToTranslations?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
