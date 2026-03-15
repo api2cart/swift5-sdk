@@ -74,22 +74,13 @@ open class WebhookAPI {
     /**
      webhook.create
      
-     - parameter entity: (query) Specify the entity that you want to enable webhooks for (e.g product, order, customer, category) 
-     - parameter action: (query) Specify what action (event) will trigger the webhook (e.g add, delete, or update) 
-     - parameter callback: (query) Callback url that returns shipping rates. It should be able to accept POST requests with json data. (optional)
-     - parameter label: (query) The name you give to the webhook (optional)
-     - parameter fields: (query) Fields the webhook should send (optional, default to "force_all")
-     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
-     - parameter active: (query) Webhook status (optional, default to true)
-     - parameter langId: (query) Language id (optional)
-     - parameter storeId: (query) Defines store id where the webhook should be assigned (optional)
-     - parameter idempotencyKey: (query) A unique identifier associated with a specific request. Repeated requests with the same &lt;strong&gt;idempotency_key&lt;/strong&gt; return a cached response without re-executing the business logic. &lt;strong&gt;Please note that the cache lifetime is 15 minutes.&lt;/strong&gt; (optional)
+     - parameter webhookCreate: (body)  
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func webhookCreate(entity: String, action: String, callback: String? = nil, label: String? = nil, fields: String? = nil, responseFields: String? = nil, active: Bool? = nil, langId: String? = nil, storeId: String? = nil, idempotencyKey: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: BasketLiveShippingServiceCreate200Response?, _ error: Error?) -> Void)) -> RequestTask {
-        return webhookCreateWithRequestBuilder(entity: entity, action: action, callback: callback, label: label, fields: fields, responseFields: responseFields, active: active, langId: langId, storeId: storeId, idempotencyKey: idempotencyKey).execute(apiResponseQueue) { result in
+    open class func webhookCreate(webhookCreate: WebhookCreate, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: BasketLiveShippingServiceCreate200Response?, _ error: Error?) -> Void)) -> RequestTask {
+        return webhookCreateWithRequestBuilder(webhookCreate: webhookCreate).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -109,39 +100,18 @@ open class WebhookAPI {
      - API Key:
        - type: apiKey x-api-key (HEADER)
        - name: ApiKeyAuth
-     - parameter entity: (query) Specify the entity that you want to enable webhooks for (e.g product, order, customer, category) 
-     - parameter action: (query) Specify what action (event) will trigger the webhook (e.g add, delete, or update) 
-     - parameter callback: (query) Callback url that returns shipping rates. It should be able to accept POST requests with json data. (optional)
-     - parameter label: (query) The name you give to the webhook (optional)
-     - parameter fields: (query) Fields the webhook should send (optional, default to "force_all")
-     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
-     - parameter active: (query) Webhook status (optional, default to true)
-     - parameter langId: (query) Language id (optional)
-     - parameter storeId: (query) Defines store id where the webhook should be assigned (optional)
-     - parameter idempotencyKey: (query) A unique identifier associated with a specific request. Repeated requests with the same &lt;strong&gt;idempotency_key&lt;/strong&gt; return a cached response without re-executing the business logic. &lt;strong&gt;Please note that the cache lifetime is 15 minutes.&lt;/strong&gt; (optional)
+     - parameter webhookCreate: (body)  
      - returns: RequestBuilder<BasketLiveShippingServiceCreate200Response> 
      */
-    open class func webhookCreateWithRequestBuilder(entity: String, action: String, callback: String? = nil, label: String? = nil, fields: String? = nil, responseFields: String? = nil, active: Bool? = nil, langId: String? = nil, storeId: String? = nil, idempotencyKey: String? = nil) -> RequestBuilder<BasketLiveShippingServiceCreate200Response> {
+    open class func webhookCreateWithRequestBuilder(webhookCreate: WebhookCreate) -> RequestBuilder<BasketLiveShippingServiceCreate200Response> {
         let localVariablePath = "/webhook.create.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
-        let localVariableParameters: [String: Any]? = nil
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: webhookCreate)
 
-        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
-        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "entity": (wrappedValue: entity.encodeToJSON(), isExplode: true),
-            "action": (wrappedValue: action.encodeToJSON(), isExplode: true),
-            "callback": (wrappedValue: callback?.encodeToJSON(), isExplode: true),
-            "label": (wrappedValue: label?.encodeToJSON(), isExplode: true),
-            "fields": (wrappedValue: fields?.encodeToJSON(), isExplode: true),
-            "response_fields": (wrappedValue: responseFields?.encodeToJSON(), isExplode: true),
-            "active": (wrappedValue: active?.encodeToJSON(), isExplode: true),
-            "lang_id": (wrappedValue: langId?.encodeToJSON(), isExplode: true),
-            "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
-            "idempotency_key": (wrappedValue: idempotencyKey?.encodeToJSON(), isExplode: true),
-        ])
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
         let localVariableNillableHeaders: [String: Any?] = [
-            :
+            "Content-Type": "application/json",
         ]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
@@ -326,20 +296,13 @@ open class WebhookAPI {
     /**
      webhook.update
      
-     - parameter id: (query) Webhook id 
-     - parameter callback: (query) Callback url that returns shipping rates. It should be able to accept POST requests with json data. (optional)
-     - parameter label: (query) The name you give to the webhook (optional)
-     - parameter fields: (query) Fields the webhook should send (optional)
-     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
-     - parameter active: (query) Webhook status (optional)
-     - parameter langId: (query) Language id (optional)
-     - parameter idempotencyKey: (query) A unique identifier associated with a specific request. Repeated requests with the same &lt;strong&gt;idempotency_key&lt;/strong&gt; return a cached response without re-executing the business logic. &lt;strong&gt;Please note that the cache lifetime is 15 minutes.&lt;/strong&gt; (optional)
+     - parameter webhookUpdate: (body)  
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func webhookUpdate(id: String, callback: String? = nil, label: String? = nil, fields: String? = nil, responseFields: String? = nil, active: Bool? = nil, langId: String? = nil, idempotencyKey: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ProductImageUpdate200Response?, _ error: Error?) -> Void)) -> RequestTask {
-        return webhookUpdateWithRequestBuilder(id: id, callback: callback, label: label, fields: fields, responseFields: responseFields, active: active, langId: langId, idempotencyKey: idempotencyKey).execute(apiResponseQueue) { result in
+    open class func webhookUpdate(webhookUpdate: WebhookUpdate, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ProductImageUpdate200Response?, _ error: Error?) -> Void)) -> RequestTask {
+        return webhookUpdateWithRequestBuilder(webhookUpdate: webhookUpdate).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -359,35 +322,18 @@ open class WebhookAPI {
      - API Key:
        - type: apiKey x-api-key (HEADER)
        - name: ApiKeyAuth
-     - parameter id: (query) Webhook id 
-     - parameter callback: (query) Callback url that returns shipping rates. It should be able to accept POST requests with json data. (optional)
-     - parameter label: (query) The name you give to the webhook (optional)
-     - parameter fields: (query) Fields the webhook should send (optional)
-     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
-     - parameter active: (query) Webhook status (optional)
-     - parameter langId: (query) Language id (optional)
-     - parameter idempotencyKey: (query) A unique identifier associated with a specific request. Repeated requests with the same &lt;strong&gt;idempotency_key&lt;/strong&gt; return a cached response without re-executing the business logic. &lt;strong&gt;Please note that the cache lifetime is 15 minutes.&lt;/strong&gt; (optional)
+     - parameter webhookUpdate: (body)  
      - returns: RequestBuilder<ProductImageUpdate200Response> 
      */
-    open class func webhookUpdateWithRequestBuilder(id: String, callback: String? = nil, label: String? = nil, fields: String? = nil, responseFields: String? = nil, active: Bool? = nil, langId: String? = nil, idempotencyKey: String? = nil) -> RequestBuilder<ProductImageUpdate200Response> {
+    open class func webhookUpdateWithRequestBuilder(webhookUpdate: WebhookUpdate) -> RequestBuilder<ProductImageUpdate200Response> {
         let localVariablePath = "/webhook.update.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
-        let localVariableParameters: [String: Any]? = nil
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: webhookUpdate)
 
-        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
-        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "id": (wrappedValue: id.encodeToJSON(), isExplode: true),
-            "callback": (wrappedValue: callback?.encodeToJSON(), isExplode: true),
-            "label": (wrappedValue: label?.encodeToJSON(), isExplode: true),
-            "fields": (wrappedValue: fields?.encodeToJSON(), isExplode: true),
-            "response_fields": (wrappedValue: responseFields?.encodeToJSON(), isExplode: true),
-            "active": (wrappedValue: active?.encodeToJSON(), isExplode: true),
-            "lang_id": (wrappedValue: langId?.encodeToJSON(), isExplode: true),
-            "idempotency_key": (wrappedValue: idempotencyKey?.encodeToJSON(), isExplode: true),
-        ])
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
         let localVariableNillableHeaders: [String: Any?] = [
-            :
+            "Content-Type": "application/json",
         ]
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)

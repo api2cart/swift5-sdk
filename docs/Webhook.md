@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **updatedAt** | **String** |  | [optional] 
 **entity** | **String** |  | [optional] 
 **action** | **String** |  | [optional] 
+**filteringConditions** | **AnyCodable** |  | [optional] 
 **additionalFields** | **AnyCodable** |  | [optional] 
 **customFields** | **AnyCodable** |  | [optional] 
 

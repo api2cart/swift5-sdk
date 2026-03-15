@@ -227,12 +227,13 @@ open class OrderAPI {
      - parameter createdTo: (query) Retrieve entities to their creation date (optional)
      - parameter modifiedFrom: (query) Retrieve entities from their modification date (optional)
      - parameter modifiedTo: (query) Retrieve entities to their modification date (optional)
+     - parameter useLatestApiVersion: (query) Use the latest platform API version (optional, default to false)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func orderCount(orderIds: String? = nil, ids: String? = nil, customerId: String? = nil, storeId: String? = nil, customerEmail: String? = nil, orderStatus: String? = nil, orderStatusIds: [String]? = nil, ebayOrderStatus: String? = nil, financialStatus: String? = nil, financialStatusIds: [String]? = nil, fulfillmentChannel: String? = nil, fulfillmentStatus: String? = nil, shippingMethod: String? = nil, deliveryMethod: String? = nil, tags: String? = nil, shipNodeType: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: OrderCount200Response?, _ error: Error?) -> Void)) -> RequestTask {
-        return orderCountWithRequestBuilder(orderIds: orderIds, ids: ids, customerId: customerId, storeId: storeId, customerEmail: customerEmail, orderStatus: orderStatus, orderStatusIds: orderStatusIds, ebayOrderStatus: ebayOrderStatus, financialStatus: financialStatus, financialStatusIds: financialStatusIds, fulfillmentChannel: fulfillmentChannel, fulfillmentStatus: fulfillmentStatus, shippingMethod: shippingMethod, deliveryMethod: deliveryMethod, tags: tags, shipNodeType: shipNodeType, createdFrom: createdFrom, createdTo: createdTo, modifiedFrom: modifiedFrom, modifiedTo: modifiedTo).execute(apiResponseQueue) { result in
+    open class func orderCount(orderIds: String? = nil, ids: String? = nil, customerId: String? = nil, storeId: String? = nil, customerEmail: String? = nil, orderStatus: String? = nil, orderStatusIds: [String]? = nil, ebayOrderStatus: String? = nil, financialStatus: String? = nil, financialStatusIds: [String]? = nil, fulfillmentChannel: String? = nil, fulfillmentStatus: String? = nil, shippingMethod: String? = nil, deliveryMethod: String? = nil, tags: String? = nil, shipNodeType: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, useLatestApiVersion: Bool? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: OrderCount200Response?, _ error: Error?) -> Void)) -> RequestTask {
+        return orderCountWithRequestBuilder(orderIds: orderIds, ids: ids, customerId: customerId, storeId: storeId, customerEmail: customerEmail, orderStatus: orderStatus, orderStatusIds: orderStatusIds, ebayOrderStatus: ebayOrderStatus, financialStatus: financialStatus, financialStatusIds: financialStatusIds, fulfillmentChannel: fulfillmentChannel, fulfillmentStatus: fulfillmentStatus, shippingMethod: shippingMethod, deliveryMethod: deliveryMethod, tags: tags, shipNodeType: shipNodeType, createdFrom: createdFrom, createdTo: createdTo, modifiedFrom: modifiedFrom, modifiedTo: modifiedTo, useLatestApiVersion: useLatestApiVersion).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -272,9 +273,10 @@ open class OrderAPI {
      - parameter createdTo: (query) Retrieve entities to their creation date (optional)
      - parameter modifiedFrom: (query) Retrieve entities from their modification date (optional)
      - parameter modifiedTo: (query) Retrieve entities to their modification date (optional)
+     - parameter useLatestApiVersion: (query) Use the latest platform API version (optional, default to false)
      - returns: RequestBuilder<OrderCount200Response> 
      */
-    open class func orderCountWithRequestBuilder(orderIds: String? = nil, ids: String? = nil, customerId: String? = nil, storeId: String? = nil, customerEmail: String? = nil, orderStatus: String? = nil, orderStatusIds: [String]? = nil, ebayOrderStatus: String? = nil, financialStatus: String? = nil, financialStatusIds: [String]? = nil, fulfillmentChannel: String? = nil, fulfillmentStatus: String? = nil, shippingMethod: String? = nil, deliveryMethod: String? = nil, tags: String? = nil, shipNodeType: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil) -> RequestBuilder<OrderCount200Response> {
+    open class func orderCountWithRequestBuilder(orderIds: String? = nil, ids: String? = nil, customerId: String? = nil, storeId: String? = nil, customerEmail: String? = nil, orderStatus: String? = nil, orderStatusIds: [String]? = nil, ebayOrderStatus: String? = nil, financialStatus: String? = nil, financialStatusIds: [String]? = nil, fulfillmentChannel: String? = nil, fulfillmentStatus: String? = nil, shippingMethod: String? = nil, deliveryMethod: String? = nil, tags: String? = nil, shipNodeType: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, useLatestApiVersion: Bool? = nil) -> RequestBuilder<OrderCount200Response> {
         let localVariablePath = "/order.count.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -301,6 +303,7 @@ open class OrderAPI {
             "created_to": (wrappedValue: createdTo?.encodeToJSON(), isExplode: true),
             "modified_from": (wrappedValue: modifiedFrom?.encodeToJSON(), isExplode: true),
             "modified_to": (wrappedValue: modifiedTo?.encodeToJSON(), isExplode: true),
+            "use_latest_api_version": (wrappedValue: useLatestApiVersion?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
