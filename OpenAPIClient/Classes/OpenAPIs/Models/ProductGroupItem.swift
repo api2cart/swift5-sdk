@@ -14,13 +14,13 @@ public struct ProductGroupItem: Codable, JSONEncodable, Hashable {
 
     public var childItemId: String?
     public var productId: String?
-    public var defaultQtyInPack: String?
+    public var defaultQtyInPack: Double?
     public var isQtyInPackFixed: Bool?
     public var price: Double?
     public var additionalFields: AnyCodable?
     public var customFields: AnyCodable?
 
-    public init(childItemId: String? = nil, productId: String? = nil, defaultQtyInPack: String? = nil, isQtyInPackFixed: Bool? = nil, price: Double? = nil, additionalFields: AnyCodable? = nil, customFields: AnyCodable? = nil) {
+    public init(childItemId: String? = nil, productId: String? = nil, defaultQtyInPack: Double? = nil, isQtyInPackFixed: Bool? = nil, price: Double? = nil, additionalFields: AnyCodable? = nil, customFields: AnyCodable? = nil) {
         self.childItemId = childItemId
         self.productId = productId
         self.defaultQtyInPack = defaultQtyInPack
