@@ -18,6 +18,8 @@ open class AttributeAPI {
     public enum ModelType_attributeAdd: String, CaseIterable {
         case text = "text"
         case select = "select"
+        case media = "media"
+        case color = "color"
         case textarea = "textarea"
         case date = "date"
         case price = "price"
@@ -604,6 +606,7 @@ open class AttributeAPI {
      
      - parameter start: (query) This parameter sets the number from which you want to get entities (optional, default to 0)
      - parameter count: (query) This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 (optional, default to 10)
+     - parameter pageCursor: (query) Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) (optional)
      - parameter attributeIds: (query) Filter attributes by ids (optional)
      - parameter attributeSetId: (query) Filter items by attribute set id (optional)
      - parameter storeId: (query) Store Id (optional)
@@ -619,8 +622,8 @@ open class AttributeAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func attributeList(start: Int? = nil, count: Int? = nil, attributeIds: String? = nil, attributeSetId: String? = nil, storeId: String? = nil, langId: String? = nil, type: String? = nil, visible: Bool? = nil, _required: Bool? = nil, system: Bool? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseAttributeList?, _ error: Error?) -> Void)) -> RequestTask {
-        return attributeListWithRequestBuilder(start: start, count: count, attributeIds: attributeIds, attributeSetId: attributeSetId, storeId: storeId, langId: langId, type: type, visible: visible, _required: _required, system: system, responseFields: responseFields, params: params, exclude: exclude).execute(apiResponseQueue) { result in
+    open class func attributeList(start: Int? = nil, count: Int? = nil, pageCursor: String? = nil, attributeIds: String? = nil, attributeSetId: String? = nil, storeId: String? = nil, langId: String? = nil, type: String? = nil, visible: Bool? = nil, _required: Bool? = nil, system: Bool? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseAttributeList?, _ error: Error?) -> Void)) -> RequestTask {
+        return attributeListWithRequestBuilder(start: start, count: count, pageCursor: pageCursor, attributeIds: attributeIds, attributeSetId: attributeSetId, storeId: storeId, langId: langId, type: type, visible: visible, _required: _required, system: system, responseFields: responseFields, params: params, exclude: exclude).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -642,6 +645,7 @@ open class AttributeAPI {
        - name: ApiKeyAuth
      - parameter start: (query) This parameter sets the number from which you want to get entities (optional, default to 0)
      - parameter count: (query) This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 (optional, default to 10)
+     - parameter pageCursor: (query) Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) (optional)
      - parameter attributeIds: (query) Filter attributes by ids (optional)
      - parameter attributeSetId: (query) Filter items by attribute set id (optional)
      - parameter storeId: (query) Store Id (optional)
@@ -655,7 +659,7 @@ open class AttributeAPI {
      - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
      - returns: RequestBuilder<ModelResponseAttributeList> 
      */
-    open class func attributeListWithRequestBuilder(start: Int? = nil, count: Int? = nil, attributeIds: String? = nil, attributeSetId: String? = nil, storeId: String? = nil, langId: String? = nil, type: String? = nil, visible: Bool? = nil, _required: Bool? = nil, system: Bool? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil) -> RequestBuilder<ModelResponseAttributeList> {
+    open class func attributeListWithRequestBuilder(start: Int? = nil, count: Int? = nil, pageCursor: String? = nil, attributeIds: String? = nil, attributeSetId: String? = nil, storeId: String? = nil, langId: String? = nil, type: String? = nil, visible: Bool? = nil, _required: Bool? = nil, system: Bool? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil) -> RequestBuilder<ModelResponseAttributeList> {
         let localVariablePath = "/attribute.list.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -664,6 +668,7 @@ open class AttributeAPI {
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
             "start": (wrappedValue: start?.encodeToJSON(), isExplode: true),
             "count": (wrappedValue: count?.encodeToJSON(), isExplode: true),
+            "page_cursor": (wrappedValue: pageCursor?.encodeToJSON(), isExplode: true),
             "attribute_ids": (wrappedValue: attributeIds?.encodeToJSON(), isExplode: true),
             "attribute_set_id": (wrappedValue: attributeSetId?.encodeToJSON(), isExplode: true),
             "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
@@ -858,7 +863,9 @@ open class AttributeAPI {
      attribute.update
      
      - parameter id: (query) Entity id 
-     - parameter name: (query) Defines new attributes&#39;s name 
+     - parameter name: (query) Defines new attributes&#39;s name (optional)
+     - parameter visible: (query) Set visibility status (optional)
+     - parameter position: (query) Attribute&#x60;s position (optional, default to 0)
      - parameter storeId: (query) Store Id (optional)
      - parameter langId: (query) Language id (optional)
      - parameter idempotencyKey: (query) A unique identifier associated with a specific request. Repeated requests with the same &lt;strong&gt;idempotency_key&lt;/strong&gt; return a cached response without re-executing the business logic. &lt;strong&gt;Please note that the cache lifetime is 15 minutes.&lt;/strong&gt; (optional)
@@ -866,8 +873,8 @@ open class AttributeAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func attributeUpdate(id: String, name: String, storeId: String? = nil, langId: String? = nil, idempotencyKey: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: AttributeUpdate200Response?, _ error: Error?) -> Void)) -> RequestTask {
-        return attributeUpdateWithRequestBuilder(id: id, name: name, storeId: storeId, langId: langId, idempotencyKey: idempotencyKey).execute(apiResponseQueue) { result in
+    open class func attributeUpdate(id: String, name: String? = nil, visible: Bool? = nil, position: Int? = nil, storeId: String? = nil, langId: String? = nil, idempotencyKey: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: AttributeUpdate200Response?, _ error: Error?) -> Void)) -> RequestTask {
+        return attributeUpdateWithRequestBuilder(id: id, name: name, visible: visible, position: position, storeId: storeId, langId: langId, idempotencyKey: idempotencyKey).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -888,13 +895,15 @@ open class AttributeAPI {
        - type: apiKey x-api-key (HEADER)
        - name: ApiKeyAuth
      - parameter id: (query) Entity id 
-     - parameter name: (query) Defines new attributes&#39;s name 
+     - parameter name: (query) Defines new attributes&#39;s name (optional)
+     - parameter visible: (query) Set visibility status (optional)
+     - parameter position: (query) Attribute&#x60;s position (optional, default to 0)
      - parameter storeId: (query) Store Id (optional)
      - parameter langId: (query) Language id (optional)
      - parameter idempotencyKey: (query) A unique identifier associated with a specific request. Repeated requests with the same &lt;strong&gt;idempotency_key&lt;/strong&gt; return a cached response without re-executing the business logic. &lt;strong&gt;Please note that the cache lifetime is 15 minutes.&lt;/strong&gt; (optional)
      - returns: RequestBuilder<AttributeUpdate200Response> 
      */
-    open class func attributeUpdateWithRequestBuilder(id: String, name: String, storeId: String? = nil, langId: String? = nil, idempotencyKey: String? = nil) -> RequestBuilder<AttributeUpdate200Response> {
+    open class func attributeUpdateWithRequestBuilder(id: String, name: String? = nil, visible: Bool? = nil, position: Int? = nil, storeId: String? = nil, langId: String? = nil, idempotencyKey: String? = nil) -> RequestBuilder<AttributeUpdate200Response> {
         let localVariablePath = "/attribute.update.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -902,7 +911,9 @@ open class AttributeAPI {
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
             "id": (wrappedValue: id.encodeToJSON(), isExplode: true),
-            "name": (wrappedValue: name.encodeToJSON(), isExplode: true),
+            "name": (wrappedValue: name?.encodeToJSON(), isExplode: true),
+            "visible": (wrappedValue: visible?.encodeToJSON(), isExplode: true),
+            "position": (wrappedValue: position?.encodeToJSON(), isExplode: true),
             "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
             "lang_id": (wrappedValue: langId?.encodeToJSON(), isExplode: true),
             "idempotency_key": (wrappedValue: idempotencyKey?.encodeToJSON(), isExplode: true),
