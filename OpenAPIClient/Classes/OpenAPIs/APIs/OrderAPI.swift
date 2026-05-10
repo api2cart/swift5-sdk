@@ -1096,6 +1096,127 @@ open class OrderAPI {
     }
 
     /**
+     order.shipment.event.add
+     
+     - parameter orderShipmentEventAdd: (body)  
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    @discardableResult
+    open class func orderShipmentEventAdd(orderShipmentEventAdd: OrderShipmentEventAdd, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: AttributeAdd200Response?, _ error: Error?) -> Void)) -> RequestTask {
+        return orderShipmentEventAddWithRequestBuilder(orderShipmentEventAdd: orderShipmentEventAdd).execute(apiResponseQueue) { result in
+            switch result {
+            case let .success(response):
+                completion(response.body, nil)
+            case let .failure(error):
+                completion(nil, error)
+            }
+        }
+    }
+
+    /**
+     order.shipment.event.add
+     - POST /order.shipment.event.add.json
+     - Add a tracking event to the shipment.
+     - API Key:
+       - type: apiKey x-store-key (HEADER)
+       - name: StoreKeyAuth
+     - API Key:
+       - type: apiKey x-api-key (HEADER)
+       - name: ApiKeyAuth
+     - parameter orderShipmentEventAdd: (body)  
+     - returns: RequestBuilder<AttributeAdd200Response> 
+     */
+    open class func orderShipmentEventAddWithRequestBuilder(orderShipmentEventAdd: OrderShipmentEventAdd) -> RequestBuilder<AttributeAdd200Response> {
+        let localVariablePath = "/order.shipment.event.add.json"
+        let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: orderShipmentEventAdd)
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            "Content-Type": "application/json",
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<AttributeAdd200Response>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
+    }
+
+    /**
+     order.shipment.event.list
+     
+     - parameter shipmentId: (query) Defines the shipment for which tracking events will be retrieved 
+     - parameter orderId: (query) Defines the order to which the shipment belongs (optional)
+     - parameter storeId: (query) Store Id (optional)
+     - parameter start: (query) This parameter sets the number from which you want to get entities (optional, default to 0)
+     - parameter count: (query) This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 (optional, default to 10)
+     - parameter pageCursor: (query) Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) (optional)
+     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    @discardableResult
+    open class func orderShipmentEventList(shipmentId: String, orderId: String? = nil, storeId: String? = nil, start: Int? = nil, count: Int? = nil, pageCursor: String? = nil, responseFields: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseOrderShipmentEventList?, _ error: Error?) -> Void)) -> RequestTask {
+        return orderShipmentEventListWithRequestBuilder(shipmentId: shipmentId, orderId: orderId, storeId: storeId, start: start, count: count, pageCursor: pageCursor, responseFields: responseFields).execute(apiResponseQueue) { result in
+            switch result {
+            case let .success(response):
+                completion(response.body, nil)
+            case let .failure(error):
+                completion(nil, error)
+            }
+        }
+    }
+
+    /**
+     order.shipment.event.list
+     - GET /order.shipment.event.list.json
+     - Get list of shipment tracking events.
+     - API Key:
+       - type: apiKey x-store-key (HEADER)
+       - name: StoreKeyAuth
+     - API Key:
+       - type: apiKey x-api-key (HEADER)
+       - name: ApiKeyAuth
+     - parameter shipmentId: (query) Defines the shipment for which tracking events will be retrieved 
+     - parameter orderId: (query) Defines the order to which the shipment belongs (optional)
+     - parameter storeId: (query) Store Id (optional)
+     - parameter start: (query) This parameter sets the number from which you want to get entities (optional, default to 0)
+     - parameter count: (query) This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 (optional, default to 10)
+     - parameter pageCursor: (query) Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) (optional)
+     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
+     - returns: RequestBuilder<ModelResponseOrderShipmentEventList> 
+     */
+    open class func orderShipmentEventListWithRequestBuilder(shipmentId: String, orderId: String? = nil, storeId: String? = nil, start: Int? = nil, count: Int? = nil, pageCursor: String? = nil, responseFields: String? = nil) -> RequestBuilder<ModelResponseOrderShipmentEventList> {
+        let localVariablePath = "/order.shipment.event.list.json"
+        let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "shipment_id": (wrappedValue: shipmentId.encodeToJSON(), isExplode: true),
+            "order_id": (wrappedValue: orderId?.encodeToJSON(), isExplode: true),
+            "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
+            "start": (wrappedValue: start?.encodeToJSON(), isExplode: true),
+            "count": (wrappedValue: count?.encodeToJSON(), isExplode: true),
+            "page_cursor": (wrappedValue: pageCursor?.encodeToJSON(), isExplode: true),
+            "response_fields": (wrappedValue: responseFields?.encodeToJSON(), isExplode: true),
+        ])
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<ModelResponseOrderShipmentEventList>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
+    }
+
+    /**
      order.shipment.info
      
      - parameter id: (query) Entity id 
