@@ -15,20 +15,17 @@ public struct ProductVariantAddAttributesInner: Codable, JSONEncodable, Hashable
     public var attributeName: String?
     public var attributeValue: String?
     public var attributePrice: Double?
-    public var attributeWeight: Double?
 
-    public init(attributeName: String? = nil, attributeValue: String? = nil, attributePrice: Double? = nil, attributeWeight: Double? = nil) {
+    public init(attributeName: String? = nil, attributeValue: String? = nil, attributePrice: Double? = nil) {
         self.attributeName = attributeName
         self.attributeValue = attributeValue
         self.attributePrice = attributePrice
-        self.attributeWeight = attributeWeight
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case attributeName = "attribute_name"
         case attributeValue = "attribute_value"
         case attributePrice = "attribute_price"
-        case attributeWeight = "attribute_weight"
     }
 
     // Encodable protocol methods
@@ -38,7 +35,6 @@ public struct ProductVariantAddAttributesInner: Codable, JSONEncodable, Hashable
         try container.encodeIfPresent(attributeName, forKey: .attributeName)
         try container.encodeIfPresent(attributeValue, forKey: .attributeValue)
         try container.encodeIfPresent(attributePrice, forKey: .attributePrice)
-        try container.encodeIfPresent(attributeWeight, forKey: .attributeWeight)
     }
 }
 

@@ -45,6 +45,7 @@ public struct AccountCartAdd: Codable, JSONEncodable, Hashable {
         case mijoShop = "MijoShop"
         case miva = "Miva"
         case neto = "Neto"
+        case nopcommerce = "Nopcommerce"
         case opencart14 = "Opencart14"
         case oscmax2 = "Oscmax2"
         case oscommerce22ms2 = "Oscommerce22ms2"

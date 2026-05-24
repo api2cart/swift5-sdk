@@ -36,10 +36,12 @@ public struct OrderShipmentUpdate: Codable, JSONEncodable, Hashable {
     public var trackingProvider: String?
     /** Defines items in the order that will be shipped */
     public var items: [OrderShipmentAddItemsInner]?
+    /** Specifies admin's order comment */
+    public var adminComment: String?
     /** A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong> */
     public var idempotencyKey: String?
 
-    public init(shipmentId: String, orderId: String? = nil, storeId: String? = nil, shipmentProvider: String? = nil, trackingNumbers: [OrderShipmentAddTrackingNumbersInner]? = nil, trackingLink: String? = nil, isShipped: Bool? = true, deliveredAt: String? = nil, replace: Bool? = true, sendNotifications: Bool? = false, trackingProvider: String? = nil, items: [OrderShipmentAddItemsInner]? = nil, idempotencyKey: String? = nil) {
+    public init(shipmentId: String, orderId: String? = nil, storeId: String? = nil, shipmentProvider: String? = nil, trackingNumbers: [OrderShipmentAddTrackingNumbersInner]? = nil, trackingLink: String? = nil, isShipped: Bool? = true, deliveredAt: String? = nil, replace: Bool? = true, sendNotifications: Bool? = false, trackingProvider: String? = nil, items: [OrderShipmentAddItemsInner]? = nil, adminComment: String? = nil, idempotencyKey: String? = nil) {
         self.shipmentId = shipmentId
         self.orderId = orderId
         self.storeId = storeId
@@ -52,6 +54,7 @@ public struct OrderShipmentUpdate: Codable, JSONEncodable, Hashable {
         self.sendNotifications = sendNotifications
         self.trackingProvider = trackingProvider
         self.items = items
+        self.adminComment = adminComment
         self.idempotencyKey = idempotencyKey
     }
 
@@ -68,6 +71,7 @@ public struct OrderShipmentUpdate: Codable, JSONEncodable, Hashable {
         case sendNotifications = "send_notifications"
         case trackingProvider = "tracking_provider"
         case items
+        case adminComment = "admin_comment"
         case idempotencyKey = "idempotency_key"
     }
 
@@ -87,6 +91,7 @@ public struct OrderShipmentUpdate: Codable, JSONEncodable, Hashable {
         try container.encodeIfPresent(sendNotifications, forKey: .sendNotifications)
         try container.encodeIfPresent(trackingProvider, forKey: .trackingProvider)
         try container.encodeIfPresent(items, forKey: .items)
+        try container.encodeIfPresent(adminComment, forKey: .adminComment)
         try container.encodeIfPresent(idempotencyKey, forKey: .idempotencyKey)
     }
 }
