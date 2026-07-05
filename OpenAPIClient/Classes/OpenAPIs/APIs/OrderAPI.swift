@@ -236,7 +236,7 @@ open class OrderAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func orderCount(orderIds: String? = nil, ids: String? = nil, customerId: String? = nil, storeId: String? = nil, customerEmail: String? = nil, orderStatus: String? = nil, orderStatusIds: [String]? = nil, ebayOrderStatus: String? = nil, financialStatus: String? = nil, financialStatusIds: [String]? = nil, fulfillmentChannel: String? = nil, fulfillmentStatus: String? = nil, shippingMethod: String? = nil, deliveryMethod: String? = nil, tags: String? = nil, shipNodeType: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, useLatestApiVersion: Bool? = nil, vendorId: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: OrderCount200Response?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func orderCount(orderIds: String? = nil, ids: String? = nil, customerId: String? = nil, storeId: String? = nil, customerEmail: String? = nil, orderStatus: String? = nil, orderStatusIds: [String]? = nil, ebayOrderStatus: String? = nil, financialStatus: String? = nil, financialStatusIds: [String]? = nil, fulfillmentChannel: String? = nil, fulfillmentStatus: String? = nil, shippingMethod: String? = nil, deliveryMethod: String? = nil, tags: String? = nil, shipNodeType: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, useLatestApiVersion: Bool? = nil, vendorId: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseOrderCount?, _ error: Error?) -> Void)) -> RequestTask {
         return orderCountWithRequestBuilder(orderIds: orderIds, ids: ids, customerId: customerId, storeId: storeId, customerEmail: customerEmail, orderStatus: orderStatus, orderStatusIds: orderStatusIds, ebayOrderStatus: ebayOrderStatus, financialStatus: financialStatus, financialStatusIds: financialStatusIds, fulfillmentChannel: fulfillmentChannel, fulfillmentStatus: fulfillmentStatus, shippingMethod: shippingMethod, deliveryMethod: deliveryMethod, tags: tags, shipNodeType: shipNodeType, createdFrom: createdFrom, createdTo: createdTo, modifiedFrom: modifiedFrom, modifiedTo: modifiedTo, useLatestApiVersion: useLatestApiVersion, vendorId: vendorId).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
@@ -279,9 +279,9 @@ open class OrderAPI {
      - parameter modifiedTo: (query) Retrieve entities to their modification date (optional)
      - parameter useLatestApiVersion: (query) Use the latest platform API version (optional, default to false)
      - parameter vendorId: (query) Counts orders specified by vendor id (optional)
-     - returns: RequestBuilder<OrderCount200Response> 
+     - returns: RequestBuilder<ModelResponseOrderCount> 
      */
-    open class func orderCountWithRequestBuilder(orderIds: String? = nil, ids: String? = nil, customerId: String? = nil, storeId: String? = nil, customerEmail: String? = nil, orderStatus: String? = nil, orderStatusIds: [String]? = nil, ebayOrderStatus: String? = nil, financialStatus: String? = nil, financialStatusIds: [String]? = nil, fulfillmentChannel: String? = nil, fulfillmentStatus: String? = nil, shippingMethod: String? = nil, deliveryMethod: String? = nil, tags: String? = nil, shipNodeType: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, useLatestApiVersion: Bool? = nil, vendorId: String? = nil) -> RequestBuilder<OrderCount200Response> {
+    open class func orderCountWithRequestBuilder(orderIds: String? = nil, ids: String? = nil, customerId: String? = nil, storeId: String? = nil, customerEmail: String? = nil, orderStatus: String? = nil, orderStatusIds: [String]? = nil, ebayOrderStatus: String? = nil, financialStatus: String? = nil, financialStatusIds: [String]? = nil, fulfillmentChannel: String? = nil, fulfillmentStatus: String? = nil, shippingMethod: String? = nil, deliveryMethod: String? = nil, tags: String? = nil, shipNodeType: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, useLatestApiVersion: Bool? = nil, vendorId: String? = nil) -> RequestBuilder<ModelResponseOrderCount> {
         let localVariablePath = "/order.count.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -318,7 +318,7 @@ open class OrderAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<OrderCount200Response>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<ModelResponseOrderCount>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }
@@ -330,7 +330,7 @@ open class OrderAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func orderFinancialStatusList(apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: OrderFinancialStatusList200Response?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func orderFinancialStatusList(apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseOrderFinancialStatusList?, _ error: Error?) -> Void)) -> RequestTask {
         return orderFinancialStatusListWithRequestBuilder().execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
@@ -351,9 +351,9 @@ open class OrderAPI {
      - API Key:
        - type: apiKey x-api-key (HEADER)
        - name: ApiKeyAuth
-     - returns: RequestBuilder<OrderFinancialStatusList200Response> 
+     - returns: RequestBuilder<ModelResponseOrderFinancialStatusList> 
      */
-    open class func orderFinancialStatusListWithRequestBuilder() -> RequestBuilder<OrderFinancialStatusList200Response> {
+    open class func orderFinancialStatusListWithRequestBuilder() -> RequestBuilder<ModelResponseOrderFinancialStatusList> {
         let localVariablePath = "/order.financial_status.list.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -366,7 +366,7 @@ open class OrderAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<OrderFinancialStatusList200Response>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<ModelResponseOrderFinancialStatusList>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }
@@ -379,7 +379,7 @@ open class OrderAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func orderFulfillmentStatusList(action: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: OrderFulfillmentStatusList200Response?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func orderFulfillmentStatusList(action: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseOrderFulfillmentStatusList?, _ error: Error?) -> Void)) -> RequestTask {
         return orderFulfillmentStatusListWithRequestBuilder(action: action).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
@@ -401,9 +401,9 @@ open class OrderAPI {
        - type: apiKey x-api-key (HEADER)
        - name: ApiKeyAuth
      - parameter action: (query) Available statuses for the specified action. (optional)
-     - returns: RequestBuilder<OrderFulfillmentStatusList200Response> 
+     - returns: RequestBuilder<ModelResponseOrderFulfillmentStatusList> 
      */
-    open class func orderFulfillmentStatusListWithRequestBuilder(action: String? = nil) -> RequestBuilder<OrderFulfillmentStatusList200Response> {
+    open class func orderFulfillmentStatusListWithRequestBuilder(action: String? = nil) -> RequestBuilder<ModelResponseOrderFulfillmentStatusList> {
         let localVariablePath = "/order.fulfillment_status.list.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -419,7 +419,7 @@ open class OrderAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<OrderFulfillmentStatusList200Response>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<ModelResponseOrderFulfillmentStatusList>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }

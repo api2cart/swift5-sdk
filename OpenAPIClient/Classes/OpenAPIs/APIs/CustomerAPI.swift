@@ -209,7 +209,7 @@ open class CustomerAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func customerCount(ids: String? = nil, sinceId: String? = nil, customerListId: String? = nil, groupId: String? = nil, storeId: String? = nil, avail: Bool? = nil, includeGuests: Bool? = nil, findValue: String? = nil, findWhere: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: CustomerCount200Response?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func customerCount(ids: String? = nil, sinceId: String? = nil, customerListId: String? = nil, groupId: String? = nil, storeId: String? = nil, avail: Bool? = nil, includeGuests: Bool? = nil, findValue: String? = nil, findWhere: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseCustomerCount?, _ error: Error?) -> Void)) -> RequestTask {
         return customerCountWithRequestBuilder(ids: ids, sinceId: sinceId, customerListId: customerListId, groupId: groupId, storeId: storeId, avail: avail, includeGuests: includeGuests, findValue: findValue, findWhere: findWhere, createdFrom: createdFrom, createdTo: createdTo, modifiedFrom: modifiedFrom, modifiedTo: modifiedTo).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
@@ -243,9 +243,9 @@ open class CustomerAPI {
      - parameter createdTo: (query) Retrieve entities to their creation date (optional)
      - parameter modifiedFrom: (query) Retrieve entities from their modification date (optional)
      - parameter modifiedTo: (query) Retrieve entities to their modification date (optional)
-     - returns: RequestBuilder<CustomerCount200Response> 
+     - returns: RequestBuilder<ModelResponseCustomerCount> 
      */
-    open class func customerCountWithRequestBuilder(ids: String? = nil, sinceId: String? = nil, customerListId: String? = nil, groupId: String? = nil, storeId: String? = nil, avail: Bool? = nil, includeGuests: Bool? = nil, findValue: String? = nil, findWhere: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil) -> RequestBuilder<CustomerCount200Response> {
+    open class func customerCountWithRequestBuilder(ids: String? = nil, sinceId: String? = nil, customerListId: String? = nil, groupId: String? = nil, storeId: String? = nil, avail: Bool? = nil, includeGuests: Bool? = nil, findValue: String? = nil, findWhere: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil) -> RequestBuilder<ModelResponseCustomerCount> {
         let localVariablePath = "/customer.count.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -273,7 +273,7 @@ open class CustomerAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<CustomerCount200Response>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<ModelResponseCustomerCount>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }
@@ -346,7 +346,7 @@ open class CustomerAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func customerFind(findValue: String, findWhere: String? = nil, findParams: String? = nil, storeId: String? = nil, includeGuests: Bool? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: CustomerFind200Response?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func customerFind(findValue: String, findWhere: String? = nil, findParams: String? = nil, storeId: String? = nil, includeGuests: Bool? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseCustomerFind?, _ error: Error?) -> Void)) -> RequestTask {
         return customerFindWithRequestBuilder(findValue: findValue, findWhere: findWhere, findParams: findParams, storeId: storeId, includeGuests: includeGuests).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
@@ -372,9 +372,9 @@ open class CustomerAPI {
      - parameter findParams: (query) Entity search that is specified by comma-separated parameters (optional, default to "whole_words")
      - parameter storeId: (query) Store Id (optional)
      - parameter includeGuests: (query) Indicates whether to search among guest customers when looking up a customer. (optional, default to false)
-     - returns: RequestBuilder<CustomerFind200Response> 
+     - returns: RequestBuilder<ModelResponseCustomerFind> 
      */
-    open class func customerFindWithRequestBuilder(findValue: String, findWhere: String? = nil, findParams: String? = nil, storeId: String? = nil, includeGuests: Bool? = nil) -> RequestBuilder<CustomerFind200Response> {
+    open class func customerFindWithRequestBuilder(findValue: String, findWhere: String? = nil, findParams: String? = nil, storeId: String? = nil, includeGuests: Bool? = nil) -> RequestBuilder<ModelResponseCustomerFind> {
         let localVariablePath = "/customer.find.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -394,7 +394,7 @@ open class CustomerAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<CustomerFind200Response>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<ModelResponseCustomerFind>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }

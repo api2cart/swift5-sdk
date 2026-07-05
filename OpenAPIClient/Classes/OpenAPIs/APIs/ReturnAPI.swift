@@ -19,7 +19,7 @@ open class ReturnAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func returnActionList(apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ReturnActionList200Response?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func returnActionList(apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseReturnActionList?, _ error: Error?) -> Void)) -> RequestTask {
         return returnActionListWithRequestBuilder().execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
@@ -40,9 +40,9 @@ open class ReturnAPI {
      - API Key:
        - type: apiKey x-api-key (HEADER)
        - name: ApiKeyAuth
-     - returns: RequestBuilder<ReturnActionList200Response> 
+     - returns: RequestBuilder<ModelResponseReturnActionList> 
      */
-    open class func returnActionListWithRequestBuilder() -> RequestBuilder<ReturnActionList200Response> {
+    open class func returnActionListWithRequestBuilder() -> RequestBuilder<ModelResponseReturnActionList> {
         let localVariablePath = "/return.action.list.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -55,7 +55,7 @@ open class ReturnAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<ReturnActionList200Response>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<ModelResponseReturnActionList>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }
@@ -78,7 +78,7 @@ open class ReturnAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func returnCount(orderIds: String? = nil, customerId: String? = nil, storeId: String? = nil, status: String? = nil, returnType: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, reportRequestId: String? = nil, disableReportCache: Bool? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ReturnCount200Response?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func returnCount(orderIds: String? = nil, customerId: String? = nil, storeId: String? = nil, status: String? = nil, returnType: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, reportRequestId: String? = nil, disableReportCache: Bool? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseReturnCount?, _ error: Error?) -> Void)) -> RequestTask {
         return returnCountWithRequestBuilder(orderIds: orderIds, customerId: customerId, storeId: storeId, status: status, returnType: returnType, createdFrom: createdFrom, createdTo: createdTo, modifiedFrom: modifiedFrom, modifiedTo: modifiedTo, reportRequestId: reportRequestId, disableReportCache: disableReportCache).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
@@ -110,9 +110,9 @@ open class ReturnAPI {
      - parameter modifiedTo: (query) Retrieve entities to their modification date (optional)
      - parameter reportRequestId: (query) Report request id (optional)
      - parameter disableReportCache: (query) Disable report cache for current request (optional, default to false)
-     - returns: RequestBuilder<ReturnCount200Response> 
+     - returns: RequestBuilder<ModelResponseReturnCount> 
      */
-    open class func returnCountWithRequestBuilder(orderIds: String? = nil, customerId: String? = nil, storeId: String? = nil, status: String? = nil, returnType: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, reportRequestId: String? = nil, disableReportCache: Bool? = nil) -> RequestBuilder<ReturnCount200Response> {
+    open class func returnCountWithRequestBuilder(orderIds: String? = nil, customerId: String? = nil, storeId: String? = nil, status: String? = nil, returnType: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, reportRequestId: String? = nil, disableReportCache: Bool? = nil) -> RequestBuilder<ModelResponseReturnCount> {
         let localVariablePath = "/return.count.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -138,7 +138,7 @@ open class ReturnAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<ReturnCount200Response>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<ModelResponseReturnCount>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }
@@ -323,7 +323,7 @@ open class ReturnAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func returnReasonList(storeId: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ReturnReasonList200Response?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func returnReasonList(storeId: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseReturnReasonList?, _ error: Error?) -> Void)) -> RequestTask {
         return returnReasonListWithRequestBuilder(storeId: storeId).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
@@ -345,9 +345,9 @@ open class ReturnAPI {
        - type: apiKey x-api-key (HEADER)
        - name: ApiKeyAuth
      - parameter storeId: (query) Store Id (optional)
-     - returns: RequestBuilder<ReturnReasonList200Response> 
+     - returns: RequestBuilder<ModelResponseReturnReasonList> 
      */
-    open class func returnReasonListWithRequestBuilder(storeId: String? = nil) -> RequestBuilder<ReturnReasonList200Response> {
+    open class func returnReasonListWithRequestBuilder(storeId: String? = nil) -> RequestBuilder<ModelResponseReturnReasonList> {
         let localVariablePath = "/return.reason.list.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -363,7 +363,7 @@ open class ReturnAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<ReturnReasonList200Response>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<ModelResponseReturnReasonList>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }
@@ -375,7 +375,7 @@ open class ReturnAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func returnStatusList(apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ReturnStatusList200Response?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func returnStatusList(apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseReturnStatusList?, _ error: Error?) -> Void)) -> RequestTask {
         return returnStatusListWithRequestBuilder().execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
@@ -396,9 +396,9 @@ open class ReturnAPI {
      - API Key:
        - type: apiKey x-api-key (HEADER)
        - name: ApiKeyAuth
-     - returns: RequestBuilder<ReturnStatusList200Response> 
+     - returns: RequestBuilder<ModelResponseReturnStatusList> 
      */
-    open class func returnStatusListWithRequestBuilder() -> RequestBuilder<ReturnStatusList200Response> {
+    open class func returnStatusListWithRequestBuilder() -> RequestBuilder<ModelResponseReturnStatusList> {
         let localVariablePath = "/return.status.list.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -411,7 +411,7 @@ open class ReturnAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<ReturnStatusList200Response>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<ModelResponseReturnStatusList>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }

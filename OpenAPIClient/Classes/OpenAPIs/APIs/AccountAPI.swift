@@ -777,7 +777,7 @@ open class AccountAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func accountSupportedPlatforms(apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: AccountSupportedPlatforms200Response?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func accountSupportedPlatforms(apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseAccountSupportedPlatforms?, _ error: Error?) -> Void)) -> RequestTask {
         return accountSupportedPlatformsWithRequestBuilder().execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
@@ -795,9 +795,9 @@ open class AccountAPI {
      - API Key:
        - type: apiKey x-api-key (HEADER)
        - name: ApiKeyAuth
-     - returns: RequestBuilder<AccountSupportedPlatforms200Response> 
+     - returns: RequestBuilder<ModelResponseAccountSupportedPlatforms> 
      */
-    open class func accountSupportedPlatformsWithRequestBuilder() -> RequestBuilder<AccountSupportedPlatforms200Response> {
+    open class func accountSupportedPlatformsWithRequestBuilder() -> RequestBuilder<ModelResponseAccountSupportedPlatforms> {
         let localVariablePath = "/account.supported_platforms.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -810,7 +810,7 @@ open class AccountAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<AccountSupportedPlatforms200Response>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<ModelResponseAccountSupportedPlatforms>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }

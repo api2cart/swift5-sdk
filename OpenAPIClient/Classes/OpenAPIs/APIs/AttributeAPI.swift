@@ -346,7 +346,7 @@ open class AttributeAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func attributeCount(type: String? = nil, attributeSetId: String? = nil, storeId: String? = nil, langId: String? = nil, visible: Bool? = nil, _required: Bool? = nil, system: Bool? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: AttributeCount200Response?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func attributeCount(type: String? = nil, attributeSetId: String? = nil, storeId: String? = nil, langId: String? = nil, visible: Bool? = nil, _required: Bool? = nil, system: Bool? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseAttributeCount?, _ error: Error?) -> Void)) -> RequestTask {
         return attributeCountWithRequestBuilder(type: type, attributeSetId: attributeSetId, storeId: storeId, langId: langId, visible: visible, _required: _required, system: system).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
@@ -374,9 +374,9 @@ open class AttributeAPI {
      - parameter visible: (query) Filter items by visibility status (optional)
      - parameter _required: (query) Defines if the option is required (optional)
      - parameter system: (query) True if attribute is system (optional)
-     - returns: RequestBuilder<AttributeCount200Response> 
+     - returns: RequestBuilder<ModelResponseAttributeCount> 
      */
-    open class func attributeCountWithRequestBuilder(type: String? = nil, attributeSetId: String? = nil, storeId: String? = nil, langId: String? = nil, visible: Bool? = nil, _required: Bool? = nil, system: Bool? = nil) -> RequestBuilder<AttributeCount200Response> {
+    open class func attributeCountWithRequestBuilder(type: String? = nil, attributeSetId: String? = nil, storeId: String? = nil, langId: String? = nil, visible: Bool? = nil, _required: Bool? = nil, system: Bool? = nil) -> RequestBuilder<ModelResponseAttributeCount> {
         let localVariablePath = "/attribute.count.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -398,7 +398,7 @@ open class AttributeAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<AttributeCount200Response>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<ModelResponseAttributeCount>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }
@@ -700,7 +700,7 @@ open class AttributeAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func attributeTypeList(apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: AttributeTypeList200Response?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func attributeTypeList(apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseAttributeTypeList?, _ error: Error?) -> Void)) -> RequestTask {
         return attributeTypeListWithRequestBuilder().execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
@@ -721,9 +721,9 @@ open class AttributeAPI {
      - API Key:
        - type: apiKey x-api-key (HEADER)
        - name: ApiKeyAuth
-     - returns: RequestBuilder<AttributeTypeList200Response> 
+     - returns: RequestBuilder<ModelResponseAttributeTypeList> 
      */
-    open class func attributeTypeListWithRequestBuilder() -> RequestBuilder<AttributeTypeList200Response> {
+    open class func attributeTypeListWithRequestBuilder() -> RequestBuilder<ModelResponseAttributeTypeList> {
         let localVariablePath = "/attribute.type.list.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -736,7 +736,7 @@ open class AttributeAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<AttributeTypeList200Response>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<ModelResponseAttributeTypeList>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }

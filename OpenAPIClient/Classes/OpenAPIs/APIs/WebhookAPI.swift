@@ -22,7 +22,7 @@ open class WebhookAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func webhookCount(entity: String? = nil, action: String? = nil, active: Bool? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: WebhookCount200Response?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func webhookCount(entity: String? = nil, action: String? = nil, active: Bool? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseWebhookCount?, _ error: Error?) -> Void)) -> RequestTask {
         return webhookCountWithRequestBuilder(entity: entity, action: action, active: active).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
@@ -46,9 +46,9 @@ open class WebhookAPI {
      - parameter entity: (query) The entity you want to filter webhooks by (e.g. order or product) (optional)
      - parameter action: (query) The action you want to filter webhooks by (e.g. order or product) (optional)
      - parameter active: (query) The webhook status you want to filter webhooks by (optional)
-     - returns: RequestBuilder<WebhookCount200Response> 
+     - returns: RequestBuilder<ModelResponseWebhookCount> 
      */
-    open class func webhookCountWithRequestBuilder(entity: String? = nil, action: String? = nil, active: Bool? = nil) -> RequestBuilder<WebhookCount200Response> {
+    open class func webhookCountWithRequestBuilder(entity: String? = nil, action: String? = nil, active: Bool? = nil) -> RequestBuilder<ModelResponseWebhookCount> {
         let localVariablePath = "/webhook.count.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -66,7 +66,7 @@ open class WebhookAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<WebhookCount200Response>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<ModelResponseWebhookCount>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }
@@ -181,7 +181,7 @@ open class WebhookAPI {
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func webhookEvents(apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: WebhookEvents200Response?, _ error: Error?) -> Void)) -> RequestTask {
+    open class func webhookEvents(apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseWebhookEvents?, _ error: Error?) -> Void)) -> RequestTask {
         return webhookEventsWithRequestBuilder().execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
@@ -202,9 +202,9 @@ open class WebhookAPI {
      - API Key:
        - type: apiKey x-api-key (HEADER)
        - name: ApiKeyAuth
-     - returns: RequestBuilder<WebhookEvents200Response> 
+     - returns: RequestBuilder<ModelResponseWebhookEvents> 
      */
-    open class func webhookEventsWithRequestBuilder() -> RequestBuilder<WebhookEvents200Response> {
+    open class func webhookEventsWithRequestBuilder() -> RequestBuilder<ModelResponseWebhookEvents> {
         let localVariablePath = "/webhook.events.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -217,7 +217,7 @@ open class WebhookAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<WebhookEvents200Response>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<ModelResponseWebhookEvents>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }
