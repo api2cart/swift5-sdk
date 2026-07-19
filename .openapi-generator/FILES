@@ -6,6 +6,7 @@ OpenAPIClient.podspec
 OpenAPIClient/Classes/OpenAPIs/APIHelper.swift
 OpenAPIClient/Classes/OpenAPIs/APIs.swift
 OpenAPIClient/Classes/OpenAPIs/APIs/AccountAPI.swift
+OpenAPIClient/Classes/OpenAPIs/APIs/AnalyticsAPI.swift
 OpenAPIClient/Classes/OpenAPIs/APIs/AttributeAPI.swift
 OpenAPIClient/Classes/OpenAPIs/APIs/BasketAPI.swift
 OpenAPIClient/Classes/OpenAPIs/APIs/BatchAPI.swift
@@ -42,6 +43,13 @@ OpenAPIClient/Classes/OpenAPIs/Models/AccountFailedWebhooks200ResponseResultWebh
 OpenAPIClient/Classes/OpenAPIs/Models/AccountSupportedPlatform.swift
 OpenAPIClient/Classes/OpenAPIs/Models/AccountSupportedPlatformParams.swift
 OpenAPIClient/Classes/OpenAPIs/Models/AccountSupportedPlatformParamsRequiredInnerInner.swift
+OpenAPIClient/Classes/OpenAPIs/Models/AnalyticsCustomer.swift
+OpenAPIClient/Classes/OpenAPIs/Models/AnalyticsCustomerMetric.swift
+OpenAPIClient/Classes/OpenAPIs/Models/AnalyticsInterval.swift
+OpenAPIClient/Classes/OpenAPIs/Models/AnalyticsMetric.swift
+OpenAPIClient/Classes/OpenAPIs/Models/AnalyticsPeriod.swift
+OpenAPIClient/Classes/OpenAPIs/Models/AnalyticsProduct.swift
+OpenAPIClient/Classes/OpenAPIs/Models/AnalyticsProductMetric.swift
 OpenAPIClient/Classes/OpenAPIs/Models/AttributeAdd200Response.swift
 OpenAPIClient/Classes/OpenAPIs/Models/AttributeAdd200ResponseResult.swift
 OpenAPIClient/Classes/OpenAPIs/Models/AttributeAssignGroup200Response.swift
@@ -381,6 +389,9 @@ OpenAPIClient/Classes/OpenAPIs/Models/ProductVariantUpdateBatch.swift
 OpenAPIClient/Classes/OpenAPIs/Models/ProductVariantUpdateBatchPayloadInner.swift
 OpenAPIClient/Classes/OpenAPIs/Models/ProductVariantUpdateOptionsInner.swift
 OpenAPIClient/Classes/OpenAPIs/Models/ResponseAccountSupportedPlatformsResult.swift
+OpenAPIClient/Classes/OpenAPIs/Models/ResponseAnalyticsCustomerReportResult.swift
+OpenAPIClient/Classes/OpenAPIs/Models/ResponseAnalyticsProductReportResult.swift
+OpenAPIClient/Classes/OpenAPIs/Models/ResponseAnalyticsReportResult.swift
 OpenAPIClient/Classes/OpenAPIs/Models/ResponseAttributeAttributesetListResult.swift
 OpenAPIClient/Classes/OpenAPIs/Models/ResponseAttributeCountResult.swift
 OpenAPIClient/Classes/OpenAPIs/Models/ResponseAttributeGroupListResult.swift
@@ -493,6 +504,14 @@ docs/AccountFailedWebhooks200ResponseResultWebhookInner.md
 docs/AccountSupportedPlatform.md
 docs/AccountSupportedPlatformParams.md
 docs/AccountSupportedPlatformParamsRequiredInnerInner.md
+docs/AnalyticsAPI.md
+docs/AnalyticsCustomer.md
+docs/AnalyticsCustomerMetric.md
+docs/AnalyticsInterval.md
+docs/AnalyticsMetric.md
+docs/AnalyticsPeriod.md
+docs/AnalyticsProduct.md
+docs/AnalyticsProductMetric.md
 docs/AttributeAPI.md
 docs/AttributeAdd200Response.md
 docs/AttributeAdd200ResponseResult.md
@@ -842,6 +861,9 @@ docs/ProductVariantUpdateBatch.md
 docs/ProductVariantUpdateBatchPayloadInner.md
 docs/ProductVariantUpdateOptionsInner.md
 docs/ResponseAccountSupportedPlatformsResult.md
+docs/ResponseAnalyticsCustomerReportResult.md
+docs/ResponseAnalyticsProductReportResult.md
+docs/ResponseAnalyticsReportResult.md
 docs/ResponseAttributeAttributesetListResult.md
 docs/ResponseAttributeCountResult.md
 docs/ResponseAttributeGroupListResult.md
