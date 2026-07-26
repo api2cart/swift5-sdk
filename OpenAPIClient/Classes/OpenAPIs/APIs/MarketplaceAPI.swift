@@ -26,9 +26,9 @@ open class MarketplaceAPI {
      - parameter upc: (query) Universal Product Code. A UPC (UPC-A) is a commonly used identifer for many different products. (optional)
      - parameter mpn: (query) Manufacturer Part Number. A MPN is an identifier of a particular part design or material used. (optional)
      - parameter isbn: (query) International Standard Book Number. An ISBN is a unique identifier for books. (optional)
-     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
-     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "force_all")
-     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
+     - parameter responseFields: (query) Set this parameter to choose which entity fields to retrieve. Use comma-separated field names in curly braces, nested to match the response structure, e.g. {result{product{id,name}}}. The wildcard * returns every field at a level: {*} gives the whole response, {result{product{*}}} all product fields. (optional)
+     - parameter params: (query) Important! Parameter deprecated, use response_fields instead. Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "force_all")
+     - parameter exclude: (query) Important! Parameter deprecated, use response_fields instead. Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
@@ -65,9 +65,9 @@ open class MarketplaceAPI {
      - parameter upc: (query) Universal Product Code. A UPC (UPC-A) is a commonly used identifer for many different products. (optional)
      - parameter mpn: (query) Manufacturer Part Number. A MPN is an identifier of a particular part design or material used. (optional)
      - parameter isbn: (query) International Standard Book Number. An ISBN is a unique identifier for books. (optional)
-     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
-     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "force_all")
-     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
+     - parameter responseFields: (query) Set this parameter to choose which entity fields to retrieve. Use comma-separated field names in curly braces, nested to match the response structure, e.g. {result{product{id,name}}}. The wildcard * returns every field at a level: {*} gives the whole response, {result{product{*}}} all product fields. (optional)
+     - parameter params: (query) Important! Parameter deprecated, use response_fields instead. Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "force_all")
+     - parameter exclude: (query) Important! Parameter deprecated, use response_fields instead. Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
      - returns: RequestBuilder<ModelResponseMarketplaceProductFind> 
      */
     open class func marketplaceProductFindWithRequestBuilder(count: Int? = nil, pageCursor: String? = nil, keyword: String? = nil, categoriesIds: String? = nil, storeId: String? = nil, asin: String? = nil, ean: String? = nil, gtin: String? = nil, upc: String? = nil, mpn: String? = nil, isbn: String? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil) -> RequestBuilder<ModelResponseMarketplaceProductFind> {

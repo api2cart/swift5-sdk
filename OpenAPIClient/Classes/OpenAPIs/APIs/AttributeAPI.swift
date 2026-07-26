@@ -272,9 +272,9 @@ open class AttributeAPI {
      
      - parameter start: (query) This parameter sets the number from which you want to get entities (optional, default to 0)
      - parameter count: (query) This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 (optional, default to 10)
-     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
-     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,name")
-     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
+     - parameter responseFields: (query) Set this parameter to choose which entity fields to retrieve. Use comma-separated field names in curly braces, nested to match the response structure, e.g. {result{product{id,name}}}. The wildcard * returns every field at a level: {*} gives the whole response, {result{product{*}}} all product fields. (optional)
+     - parameter params: (query) Important! Parameter deprecated, use response_fields instead. Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,name")
+     - parameter exclude: (query) Important! Parameter deprecated, use response_fields instead. Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
@@ -302,9 +302,9 @@ open class AttributeAPI {
        - name: ApiKeyAuth
      - parameter start: (query) This parameter sets the number from which you want to get entities (optional, default to 0)
      - parameter count: (query) This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 (optional, default to 10)
-     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
-     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,name")
-     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
+     - parameter responseFields: (query) Set this parameter to choose which entity fields to retrieve. Use comma-separated field names in curly braces, nested to match the response structure, e.g. {result{product{id,name}}}. The wildcard * returns every field at a level: {*} gives the whole response, {result{product{*}}} all product fields. (optional)
+     - parameter params: (query) Important! Parameter deprecated, use response_fields instead. Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,name")
+     - parameter exclude: (query) Important! Parameter deprecated, use response_fields instead. Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
      - returns: RequestBuilder<ModelResponseAttributeAttributesetList> 
      */
     open class func attributeAttributesetListWithRequestBuilder(start: Int? = nil, count: Int? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil) -> RequestBuilder<ModelResponseAttributeAttributesetList> {
@@ -466,9 +466,9 @@ open class AttributeAPI {
      - parameter count: (query) This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 (optional, default to 10)
      - parameter attributeSetId: (query) Attribute set id (optional)
      - parameter langId: (query) Language id (optional)
-     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
-     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,name")
-     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
+     - parameter responseFields: (query) Set this parameter to choose which entity fields to retrieve. Use comma-separated field names in curly braces, nested to match the response structure, e.g. {result{product{id,name}}}. The wildcard * returns every field at a level: {*} gives the whole response, {result{product{*}}} all product fields. (optional)
+     - parameter params: (query) Important! Parameter deprecated, use response_fields instead. Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,name")
+     - parameter exclude: (query) Important! Parameter deprecated, use response_fields instead. Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
@@ -498,9 +498,9 @@ open class AttributeAPI {
      - parameter count: (query) This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 (optional, default to 10)
      - parameter attributeSetId: (query) Attribute set id (optional)
      - parameter langId: (query) Language id (optional)
-     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
-     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,name")
-     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
+     - parameter responseFields: (query) Set this parameter to choose which entity fields to retrieve. Use comma-separated field names in curly braces, nested to match the response structure, e.g. {result{product{id,name}}}. The wildcard * returns every field at a level: {*} gives the whole response, {result{product{*}}} all product fields. (optional)
+     - parameter params: (query) Important! Parameter deprecated, use response_fields instead. Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,name")
+     - parameter exclude: (query) Important! Parameter deprecated, use response_fields instead. Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
      - returns: RequestBuilder<ModelResponseAttributeGroupList> 
      */
     open class func attributeGroupListWithRequestBuilder(start: Int? = nil, count: Int? = nil, attributeSetId: String? = nil, langId: String? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil) -> RequestBuilder<ModelResponseAttributeGroupList> {
@@ -537,9 +537,9 @@ open class AttributeAPI {
      - parameter attributeSetId: (query) Attribute set id (optional)
      - parameter storeId: (query) Store Id (optional)
      - parameter langId: (query) Language id (optional)
-     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
-     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "force_all")
-     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
+     - parameter responseFields: (query) Set this parameter to choose which entity fields to retrieve. Use comma-separated field names in curly braces, nested to match the response structure, e.g. {result{product{id,name}}}. The wildcard * returns every field at a level: {*} gives the whole response, {result{product{*}}} all product fields. (optional)
+     - parameter params: (query) Important! Parameter deprecated, use response_fields instead. Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "force_all")
+     - parameter exclude: (query) Important! Parameter deprecated, use response_fields instead. Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
@@ -569,9 +569,9 @@ open class AttributeAPI {
      - parameter attributeSetId: (query) Attribute set id (optional)
      - parameter storeId: (query) Store Id (optional)
      - parameter langId: (query) Language id (optional)
-     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
-     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "force_all")
-     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
+     - parameter responseFields: (query) Set this parameter to choose which entity fields to retrieve. Use comma-separated field names in curly braces, nested to match the response structure, e.g. {result{product{id,name}}}. The wildcard * returns every field at a level: {*} gives the whole response, {result{product{*}}} all product fields. (optional)
+     - parameter params: (query) Important! Parameter deprecated, use response_fields instead. Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "force_all")
+     - parameter exclude: (query) Important! Parameter deprecated, use response_fields instead. Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
      - returns: RequestBuilder<AttributeInfo200Response> 
      */
     open class func attributeInfoWithRequestBuilder(id: String, attributeSetId: String? = nil, storeId: String? = nil, langId: String? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil) -> RequestBuilder<AttributeInfo200Response> {
@@ -615,9 +615,9 @@ open class AttributeAPI {
      - parameter visible: (query) Filter items by visibility status (optional)
      - parameter _required: (query) Defines if the option is required (optional)
      - parameter system: (query) True if attribute is system (optional)
-     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
-     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,name,code,type")
-     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
+     - parameter responseFields: (query) Set this parameter to choose which entity fields to retrieve. Use comma-separated field names in curly braces, nested to match the response structure, e.g. {result{product{id,name}}}. The wildcard * returns every field at a level: {*} gives the whole response, {result{product{*}}} all product fields. (optional)
+     - parameter params: (query) Important! Parameter deprecated, use response_fields instead. Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,name,code,type")
+     - parameter exclude: (query) Important! Parameter deprecated, use response_fields instead. Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
@@ -654,9 +654,9 @@ open class AttributeAPI {
      - parameter visible: (query) Filter items by visibility status (optional)
      - parameter _required: (query) Defines if the option is required (optional)
      - parameter system: (query) True if attribute is system (optional)
-     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
-     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,name,code,type")
-     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
+     - parameter responseFields: (query) Set this parameter to choose which entity fields to retrieve. Use comma-separated field names in curly braces, nested to match the response structure, e.g. {result{product{id,name}}}. The wildcard * returns every field at a level: {*} gives the whole response, {result{product{*}}} all product fields. (optional)
+     - parameter params: (query) Important! Parameter deprecated, use response_fields instead. Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,name,code,type")
+     - parameter exclude: (query) Important! Parameter deprecated, use response_fields instead. Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
      - returns: RequestBuilder<ModelResponseAttributeList> 
      */
     open class func attributeListWithRequestBuilder(start: Int? = nil, count: Int? = nil, pageCursor: String? = nil, attributeIds: String? = nil, attributeSetId: String? = nil, storeId: String? = nil, langId: String? = nil, type: String? = nil, visible: Bool? = nil, _required: Bool? = nil, system: Bool? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil) -> RequestBuilder<ModelResponseAttributeList> {

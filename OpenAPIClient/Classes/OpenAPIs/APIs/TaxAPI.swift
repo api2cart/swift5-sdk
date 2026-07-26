@@ -18,9 +18,9 @@ open class TaxAPI {
      - parameter taxClassId: (query) Retrieves taxes specified by class id 
      - parameter storeId: (query) Store Id (optional)
      - parameter langId: (query) Language id (optional)
-     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
-     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "tax_class_id,name,avail")
-     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
+     - parameter responseFields: (query) Set this parameter to choose which entity fields to retrieve. Use comma-separated field names in curly braces, nested to match the response structure, e.g. {result{product{id,name}}}. The wildcard * returns every field at a level: {*} gives the whole response, {result{product{*}}} all product fields. (optional)
+     - parameter params: (query) Important! Parameter deprecated, use response_fields instead. Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "tax_class_id,name,avail")
+     - parameter exclude: (query) Important! Parameter deprecated, use response_fields instead. Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
@@ -49,9 +49,9 @@ open class TaxAPI {
      - parameter taxClassId: (query) Retrieves taxes specified by class id 
      - parameter storeId: (query) Store Id (optional)
      - parameter langId: (query) Language id (optional)
-     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional)
-     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "tax_class_id,name,avail")
-     - parameter exclude: (query) Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
+     - parameter responseFields: (query) Set this parameter to choose which entity fields to retrieve. Use comma-separated field names in curly braces, nested to match the response structure, e.g. {result{product{id,name}}}. The wildcard * returns every field at a level: {*} gives the whole response, {result{product{*}}} all product fields. (optional)
+     - parameter params: (query) Important! Parameter deprecated, use response_fields instead. Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "tax_class_id,name,avail")
+     - parameter exclude: (query) Important! Parameter deprecated, use response_fields instead. Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
      - returns: RequestBuilder<ModelResponseTaxClassInfo> 
      */
     open class func taxClassInfoWithRequestBuilder(taxClassId: String, storeId: String? = nil, langId: String? = nil, responseFields: String? = nil, params: String? = nil, exclude: String? = nil) -> RequestBuilder<ModelResponseTaxClassInfo> {
@@ -93,7 +93,7 @@ open class TaxAPI {
      - parameter createdFrom: (query) Retrieve entities from their creation date (optional)
      - parameter modifiedTo: (query) Retrieve entities to their modification date (optional)
      - parameter modifiedFrom: (query) Retrieve entities from their modification date (optional)
-     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "{return_code,return_message,pagination,result}")
+     - parameter responseFields: (query) Set this parameter to choose which entity fields to retrieve. Use comma-separated field names in curly braces, nested to match the response structure, e.g. {result{product{id,name}}}. The wildcard * returns every field at a level: {*} gives the whole response, {result{product{*}}} all product fields. (optional, default to "{return_code,return_message,pagination,result}")
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
@@ -129,7 +129,7 @@ open class TaxAPI {
      - parameter createdFrom: (query) Retrieve entities from their creation date (optional)
      - parameter modifiedTo: (query) Retrieve entities to their modification date (optional)
      - parameter modifiedFrom: (query) Retrieve entities from their modification date (optional)
-     - parameter responseFields: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "{return_code,return_message,pagination,result}")
+     - parameter responseFields: (query) Set this parameter to choose which entity fields to retrieve. Use comma-separated field names in curly braces, nested to match the response structure, e.g. {result{product{id,name}}}. The wildcard * returns every field at a level: {*} gives the whole response, {result{product{*}}} all product fields. (optional, default to "{return_code,return_message,pagination,result}")
      - returns: RequestBuilder<ModelResponseTaxClassList> 
      */
     open class func taxClassListWithRequestBuilder(count: Int? = nil, start: Int? = nil, pageCursor: String? = nil, storeId: String? = nil, findValue: String? = nil, findWhere: String? = nil, createdTo: String? = nil, createdFrom: String? = nil, modifiedTo: String? = nil, modifiedFrom: String? = nil, responseFields: String? = nil) -> RequestBuilder<ModelResponseTaxClassList> {

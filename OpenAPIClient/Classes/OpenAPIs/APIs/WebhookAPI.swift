@@ -231,7 +231,7 @@ open class WebhookAPI {
      - parameter action: (query) The action you want to filter webhooks by (e.g. add, update, or delete) (optional)
      - parameter active: (query) The webhook status you want to filter webhooks by (optional)
      - parameter ids: (query) List of сomma-separated webhook ids (optional)
-     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,entity,action,callback")
+     - parameter params: (query) Important! Parameter deprecated, use response_fields instead. Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,entity,action,callback")
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
@@ -263,7 +263,7 @@ open class WebhookAPI {
      - parameter action: (query) The action you want to filter webhooks by (e.g. add, update, or delete) (optional)
      - parameter active: (query) The webhook status you want to filter webhooks by (optional)
      - parameter ids: (query) List of сomma-separated webhook ids (optional)
-     - parameter params: (query) Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,entity,action,callback")
+     - parameter params: (query) Important! Parameter deprecated, use response_fields instead. Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "id,entity,action,callback")
      - returns: RequestBuilder<WebhookList200Response> 
      */
     open class func webhookListWithRequestBuilder(start: Int? = nil, count: Int? = nil, entity: String? = nil, action: String? = nil, active: Bool? = nil, ids: String? = nil, params: String? = nil) -> RequestBuilder<WebhookList200Response> {
