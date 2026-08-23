@@ -835,12 +835,13 @@ open class CartAPI {
      - parameter responseFields: (query) Set this parameter to choose which entity fields to retrieve. Use comma-separated field names in curly braces, nested to match the response structure, e.g. {result{product{id,name}}}. The wildcard * returns every field at a level: {*} gives the whole response, {result{product{*}}} all product fields. (optional)
      - parameter params: (query) Important! Parameter deprecated, use response_fields instead. Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "store_name,store_url,db_prefix")
      - parameter exclude: (query) Important! Parameter deprecated, use response_fields instead. Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
+     - parameter useLatestApiVersion: (query) Use the latest platform API version (optional, default to false)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func cartInfo(responseFields: String? = nil, params: String? = nil, exclude: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: CartInfo200Response?, _ error: Error?) -> Void)) -> RequestTask {
-        return cartInfoWithRequestBuilder(responseFields: responseFields, params: params, exclude: exclude).execute(apiResponseQueue) { result in
+    open class func cartInfo(responseFields: String? = nil, params: String? = nil, exclude: String? = nil, useLatestApiVersion: Bool? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: CartInfo200Response?, _ error: Error?) -> Void)) -> RequestTask {
+        return cartInfoWithRequestBuilder(responseFields: responseFields, params: params, exclude: exclude, useLatestApiVersion: useLatestApiVersion).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -863,9 +864,10 @@ open class CartAPI {
      - parameter responseFields: (query) Set this parameter to choose which entity fields to retrieve. Use comma-separated field names in curly braces, nested to match the response structure, e.g. {result{product{id,name}}}. The wildcard * returns every field at a level: {*} gives the whole response, {result{product{*}}} all product fields. (optional)
      - parameter params: (query) Important! Parameter deprecated, use response_fields instead. Set this parameter in order to choose which entity fields you want to retrieve (optional, default to "store_name,store_url,db_prefix")
      - parameter exclude: (query) Important! Parameter deprecated, use response_fields instead. Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all (optional)
+     - parameter useLatestApiVersion: (query) Use the latest platform API version (optional, default to false)
      - returns: RequestBuilder<CartInfo200Response> 
      */
-    open class func cartInfoWithRequestBuilder(responseFields: String? = nil, params: String? = nil, exclude: String? = nil) -> RequestBuilder<CartInfo200Response> {
+    open class func cartInfoWithRequestBuilder(responseFields: String? = nil, params: String? = nil, exclude: String? = nil, useLatestApiVersion: Bool? = nil) -> RequestBuilder<CartInfo200Response> {
         let localVariablePath = "/cart.info.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -875,6 +877,7 @@ open class CartAPI {
             "response_fields": (wrappedValue: responseFields?.encodeToJSON(), isExplode: true),
             "params": (wrappedValue: params?.encodeToJSON(), isExplode: true),
             "exclude": (wrappedValue: exclude?.encodeToJSON(), isExplode: true),
+            "use_latest_api_version": (wrappedValue: useLatestApiVersion?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
