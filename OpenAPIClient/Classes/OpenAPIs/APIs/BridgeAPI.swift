@@ -15,12 +15,13 @@ open class BridgeAPI {
     /**
      bridge.delete
      
+     - parameter idempotencyKey: (query) A unique identifier associated with a specific request. Repeated requests with the same &lt;strong&gt;idempotency_key&lt;/strong&gt; return a cached response without re-executing the business logic. &lt;strong&gt;Please note that the cache lifetime is 15 minutes.&lt;/strong&gt; (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func bridgeDelete(apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: AttributeValueDelete200Response?, _ error: Error?) -> Void)) -> RequestTask {
-        return bridgeDeleteWithRequestBuilder().execute(apiResponseQueue) { result in
+    open class func bridgeDelete(idempotencyKey: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: AttributeValueDelete200Response?, _ error: Error?) -> Void)) -> RequestTask {
+        return bridgeDeleteWithRequestBuilder(idempotencyKey: idempotencyKey).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -40,14 +41,18 @@ open class BridgeAPI {
      - API Key:
        - type: apiKey x-api-key (HEADER)
        - name: ApiKeyAuth
+     - parameter idempotencyKey: (query) A unique identifier associated with a specific request. Repeated requests with the same &lt;strong&gt;idempotency_key&lt;/strong&gt; return a cached response without re-executing the business logic. &lt;strong&gt;Please note that the cache lifetime is 15 minutes.&lt;/strong&gt; (optional)
      - returns: RequestBuilder<AttributeValueDelete200Response> 
      */
-    open class func bridgeDeleteWithRequestBuilder() -> RequestBuilder<AttributeValueDelete200Response> {
+    open class func bridgeDeleteWithRequestBuilder(idempotencyKey: String? = nil) -> RequestBuilder<AttributeValueDelete200Response> {
         let localVariablePath = "/bridge.delete.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
 
-        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "idempotency_key": (wrappedValue: idempotencyKey?.encodeToJSON(), isExplode: true),
+        ])
 
         let localVariableNillableHeaders: [String: Any?] = [
             :
@@ -116,12 +121,13 @@ open class BridgeAPI {
     /**
      bridge.update
      
+     - parameter idempotencyKey: (query) A unique identifier associated with a specific request. Repeated requests with the same &lt;strong&gt;idempotency_key&lt;/strong&gt; return a cached response without re-executing the business logic. &lt;strong&gt;Please note that the cache lifetime is 15 minutes.&lt;/strong&gt; (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
     @discardableResult
-    open class func bridgeUpdate(apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: AttributeUpdate200Response?, _ error: Error?) -> Void)) -> RequestTask {
-        return bridgeUpdateWithRequestBuilder().execute(apiResponseQueue) { result in
+    open class func bridgeUpdate(idempotencyKey: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: AttributeUpdate200Response?, _ error: Error?) -> Void)) -> RequestTask {
+        return bridgeUpdateWithRequestBuilder(idempotencyKey: idempotencyKey).execute(apiResponseQueue) { result in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -141,14 +147,18 @@ open class BridgeAPI {
      - API Key:
        - type: apiKey x-api-key (HEADER)
        - name: ApiKeyAuth
+     - parameter idempotencyKey: (query) A unique identifier associated with a specific request. Repeated requests with the same &lt;strong&gt;idempotency_key&lt;/strong&gt; return a cached response without re-executing the business logic. &lt;strong&gt;Please note that the cache lifetime is 15 minutes.&lt;/strong&gt; (optional)
      - returns: RequestBuilder<AttributeUpdate200Response> 
      */
-    open class func bridgeUpdateWithRequestBuilder() -> RequestBuilder<AttributeUpdate200Response> {
+    open class func bridgeUpdateWithRequestBuilder(idempotencyKey: String? = nil) -> RequestBuilder<AttributeUpdate200Response> {
         let localVariablePath = "/bridge.update.json"
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
 
-        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "idempotency_key": (wrappedValue: idempotencyKey?.encodeToJSON(), isExplode: true),
+        ])
 
         let localVariableNillableHeaders: [String: Any?] = [
             :
