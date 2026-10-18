@@ -93,7 +93,7 @@ public struct ProductUpdate: Codable, JSONEncodable, Hashable {
     public var backorderStatus: String?
     /** Defines the incremental changes in product quantity. Effective only when manage_stock is true — otherwise the value is ignored. */
     public var increaseQuantity: Double?
-    /** Defines the decrement changes in product quantity. Effective only when manage_stock is true — otherwise the value is ignored. */
+    /** Defines the decrement changes in product quantity. Effective only when manage_stock is true. */
     public var reduceQuantity: Double?
     /** Specify the quantity threshold below which the product is considered low in stock */
     public var lowStockThreshold: Double?
