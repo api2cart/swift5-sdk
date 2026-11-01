@@ -238,6 +238,7 @@ OpenAPIClient/Classes/OpenAPIs/Models/OrderCalculateShippingRate.swift
 OpenAPIClient/Classes/OpenAPIs/Models/OrderCalculateSubtotal.swift
 OpenAPIClient/Classes/OpenAPIs/Models/OrderCalculateTax.swift
 OpenAPIClient/Classes/OpenAPIs/Models/OrderInfo200Response.swift
+OpenAPIClient/Classes/OpenAPIs/Models/OrderInvoiceAdd.swift
 OpenAPIClient/Classes/OpenAPIs/Models/OrderItem.swift
 OpenAPIClient/Classes/OpenAPIs/Models/OrderItemOption.swift
 OpenAPIClient/Classes/OpenAPIs/Models/OrderPaymentMethod.swift
@@ -709,6 +710,7 @@ docs/OrderCalculateShippingRate.md
 docs/OrderCalculateSubtotal.md
 docs/OrderCalculateTax.md
 docs/OrderInfo200Response.md
+docs/OrderInvoiceAdd.md
 docs/OrderItem.md
 docs/OrderItemOption.md
 docs/OrderPaymentMethod.md

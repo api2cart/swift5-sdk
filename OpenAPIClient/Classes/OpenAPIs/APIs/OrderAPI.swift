@@ -505,6 +505,56 @@ open class OrderAPI {
     }
 
     /**
+     order.invoice.add
+     
+     - parameter orderInvoiceAdd: (body)  
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    @discardableResult
+    open class func orderInvoiceAdd(orderInvoiceAdd: OrderInvoiceAdd, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: AttributeAdd200Response?, _ error: Error?) -> Void)) -> RequestTask {
+        return orderInvoiceAddWithRequestBuilder(orderInvoiceAdd: orderInvoiceAdd).execute(apiResponseQueue) { result in
+            switch result {
+            case let .success(response):
+                completion(response.body, nil)
+            case let .failure(error):
+                completion(nil, error)
+            }
+        }
+    }
+
+    /**
+     order.invoice.add
+     - POST /order.invoice.add.json
+     - Upload a PDF invoice or credit note of the order to the store. The store checks the document after the upload, so a successful response means it was received, not accepted. Use the returned id to find the result of the check in the store.
+     - API Key:
+       - type: apiKey x-store-key (HEADER)
+       - name: StoreKeyAuth
+     - API Key:
+       - type: apiKey x-api-key (HEADER)
+       - name: ApiKeyAuth
+     - parameter orderInvoiceAdd: (body)  
+     - returns: RequestBuilder<AttributeAdd200Response> 
+     */
+    open class func orderInvoiceAddWithRequestBuilder(orderInvoiceAdd: OrderInvoiceAdd) -> RequestBuilder<AttributeAdd200Response> {
+        let localVariablePath = "/order.invoice.add.json"
+        let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: orderInvoiceAdd)
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            "Content-Type": "application/json",
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<AttributeAdd200Response>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
+    }
+
+    /**
      order.list
      
      - parameter start: (query) This parameter sets the number from which you want to get entities (optional, default to 0)
