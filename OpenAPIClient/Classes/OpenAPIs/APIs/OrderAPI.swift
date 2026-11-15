@@ -555,6 +555,86 @@ open class OrderAPI {
     }
 
     /**
+     order.invoice.list
+     
+     - parameter count: (query) This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 (optional, default to 10)
+     - parameter pageCursor: (query) Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) (optional)
+     - parameter orderIds: (query) Retrieves invoices of the orders specified by order ids (optional)
+     - parameter ids: (query) Retrieves invoices specified by ids (optional)
+     - parameter storeId: (query) Retrieves invoices of the store specified by store id. The default store is taken when not specified (optional)
+     - parameter createdFrom: (query) Retrieve entities from their creation date (optional)
+     - parameter createdTo: (query) Retrieve entities to their creation date (optional)
+     - parameter modifiedFrom: (query) Retrieve entities from their modification date (optional)
+     - parameter modifiedTo: (query) Retrieve entities to their modification date (optional)
+     - parameter responseFields: (query) Set this parameter to choose which entity fields to retrieve. Use comma-separated field names in curly braces, nested to match the response structure, e.g. {result{product{id,name}}}. The wildcard * returns every field at a level: {*} gives the whole response, {result{product{*}}} all product fields. (optional, default to "{return_code,return_message,pagination,result}")
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    @discardableResult
+    open class func orderInvoiceList(count: Int? = nil, pageCursor: String? = nil, orderIds: String? = nil, ids: String? = nil, storeId: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, responseFields: String? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ModelResponseOrderInvoiceList?, _ error: Error?) -> Void)) -> RequestTask {
+        return orderInvoiceListWithRequestBuilder(count: count, pageCursor: pageCursor, orderIds: orderIds, ids: ids, storeId: storeId, createdFrom: createdFrom, createdTo: createdTo, modifiedFrom: modifiedFrom, modifiedTo: modifiedTo, responseFields: responseFields).execute(apiResponseQueue) { result in
+            switch result {
+            case let .success(response):
+                completion(response.body, nil)
+            case let .failure(error):
+                completion(nil, error)
+            }
+        }
+    }
+
+    /**
+     order.invoice.list
+     - GET /order.invoice.list.json
+     - Get list of invoices the store issued for orders. Only the invoices of one store are returned, also when filtered by order_ids or ids: the store given in store_id, or the default store when store_id is not given.
+     - API Key:
+       - type: apiKey x-store-key (HEADER)
+       - name: StoreKeyAuth
+     - API Key:
+       - type: apiKey x-api-key (HEADER)
+       - name: ApiKeyAuth
+     - parameter count: (query) This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 (optional, default to 10)
+     - parameter pageCursor: (query) Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) (optional)
+     - parameter orderIds: (query) Retrieves invoices of the orders specified by order ids (optional)
+     - parameter ids: (query) Retrieves invoices specified by ids (optional)
+     - parameter storeId: (query) Retrieves invoices of the store specified by store id. The default store is taken when not specified (optional)
+     - parameter createdFrom: (query) Retrieve entities from their creation date (optional)
+     - parameter createdTo: (query) Retrieve entities to their creation date (optional)
+     - parameter modifiedFrom: (query) Retrieve entities from their modification date (optional)
+     - parameter modifiedTo: (query) Retrieve entities to their modification date (optional)
+     - parameter responseFields: (query) Set this parameter to choose which entity fields to retrieve. Use comma-separated field names in curly braces, nested to match the response structure, e.g. {result{product{id,name}}}. The wildcard * returns every field at a level: {*} gives the whole response, {result{product{*}}} all product fields. (optional, default to "{return_code,return_message,pagination,result}")
+     - returns: RequestBuilder<ModelResponseOrderInvoiceList> 
+     */
+    open class func orderInvoiceListWithRequestBuilder(count: Int? = nil, pageCursor: String? = nil, orderIds: String? = nil, ids: String? = nil, storeId: String? = nil, createdFrom: String? = nil, createdTo: String? = nil, modifiedFrom: String? = nil, modifiedTo: String? = nil, responseFields: String? = nil) -> RequestBuilder<ModelResponseOrderInvoiceList> {
+        let localVariablePath = "/order.invoice.list.json"
+        let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "count": (wrappedValue: count?.encodeToJSON(), isExplode: true),
+            "page_cursor": (wrappedValue: pageCursor?.encodeToJSON(), isExplode: true),
+            "order_ids": (wrappedValue: orderIds?.encodeToJSON(), isExplode: true),
+            "ids": (wrappedValue: ids?.encodeToJSON(), isExplode: true),
+            "store_id": (wrappedValue: storeId?.encodeToJSON(), isExplode: true),
+            "created_from": (wrappedValue: createdFrom?.encodeToJSON(), isExplode: true),
+            "created_to": (wrappedValue: createdTo?.encodeToJSON(), isExplode: true),
+            "modified_from": (wrappedValue: modifiedFrom?.encodeToJSON(), isExplode: true),
+            "modified_to": (wrappedValue: modifiedTo?.encodeToJSON(), isExplode: true),
+            "response_fields": (wrappedValue: responseFields?.encodeToJSON(), isExplode: true),
+        ])
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<ModelResponseOrderInvoiceList>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
+    }
+
+    /**
      order.list
      
      - parameter start: (query) This parameter sets the number from which you want to get entities (optional, default to 0)

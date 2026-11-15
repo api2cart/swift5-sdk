@@ -13,13 +13,16 @@ import AnyCodable
 public struct OrderShipmentAdd200ResponseResult: Codable, JSONEncodable, Hashable {
 
     public var shipmentId: String?
+    public var additionalFields: AnyCodable?
 
-    public init(shipmentId: String? = nil) {
+    public init(shipmentId: String? = nil, additionalFields: AnyCodable? = nil) {
         self.shipmentId = shipmentId
+        self.additionalFields = additionalFields
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case shipmentId = "shipment_id"
+        case additionalFields = "additional_fields"
     }
 
     // Encodable protocol methods
@@ -27,6 +30,7 @@ public struct OrderShipmentAdd200ResponseResult: Codable, JSONEncodable, Hashabl
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(shipmentId, forKey: .shipmentId)
+        try container.encodeIfPresent(additionalFields, forKey: .additionalFields)
     }
 }
 

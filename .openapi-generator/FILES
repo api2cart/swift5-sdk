@@ -192,6 +192,7 @@ OpenAPIClient/Classes/OpenAPIs/Models/ModelResponseOrderAbandonedList.swift
 OpenAPIClient/Classes/OpenAPIs/Models/ModelResponseOrderCount.swift
 OpenAPIClient/Classes/OpenAPIs/Models/ModelResponseOrderFinancialStatusList.swift
 OpenAPIClient/Classes/OpenAPIs/Models/ModelResponseOrderFulfillmentStatusList.swift
+OpenAPIClient/Classes/OpenAPIs/Models/ModelResponseOrderInvoiceList.swift
 OpenAPIClient/Classes/OpenAPIs/Models/ModelResponseOrderList.swift
 OpenAPIClient/Classes/OpenAPIs/Models/ModelResponseOrderPreestimateShippingList.swift
 OpenAPIClient/Classes/OpenAPIs/Models/ModelResponseOrderShipmentEventList.swift
@@ -238,7 +239,11 @@ OpenAPIClient/Classes/OpenAPIs/Models/OrderCalculateShippingRate.swift
 OpenAPIClient/Classes/OpenAPIs/Models/OrderCalculateSubtotal.swift
 OpenAPIClient/Classes/OpenAPIs/Models/OrderCalculateTax.swift
 OpenAPIClient/Classes/OpenAPIs/Models/OrderInfo200Response.swift
+OpenAPIClient/Classes/OpenAPIs/Models/OrderInvoice.swift
 OpenAPIClient/Classes/OpenAPIs/Models/OrderInvoiceAdd.swift
+OpenAPIClient/Classes/OpenAPIs/Models/OrderInvoiceComment.swift
+OpenAPIClient/Classes/OpenAPIs/Models/OrderInvoiceItem.swift
+OpenAPIClient/Classes/OpenAPIs/Models/OrderInvoiceTotals.swift
 OpenAPIClient/Classes/OpenAPIs/Models/OrderItem.swift
 OpenAPIClient/Classes/OpenAPIs/Models/OrderItemOption.swift
 OpenAPIClient/Classes/OpenAPIs/Models/OrderPaymentMethod.swift
@@ -426,6 +431,7 @@ OpenAPIClient/Classes/OpenAPIs/Models/ResponseOrderAbandonedListResult.swift
 OpenAPIClient/Classes/OpenAPIs/Models/ResponseOrderCountResult.swift
 OpenAPIClient/Classes/OpenAPIs/Models/ResponseOrderFinancialStatusListResult.swift
 OpenAPIClient/Classes/OpenAPIs/Models/ResponseOrderFulfillmentStatusListResult.swift
+OpenAPIClient/Classes/OpenAPIs/Models/ResponseOrderInvoiceListResult.swift
 OpenAPIClient/Classes/OpenAPIs/Models/ResponseOrderListResult.swift
 OpenAPIClient/Classes/OpenAPIs/Models/ResponseOrderPreestimateShippingListResult.swift
 OpenAPIClient/Classes/OpenAPIs/Models/ResponseOrderShipmentEventListResult.swift
@@ -663,6 +669,7 @@ docs/ModelResponseOrderAbandonedList.md
 docs/ModelResponseOrderCount.md
 docs/ModelResponseOrderFinancialStatusList.md
 docs/ModelResponseOrderFulfillmentStatusList.md
+docs/ModelResponseOrderInvoiceList.md
 docs/ModelResponseOrderList.md
 docs/ModelResponseOrderPreestimateShippingList.md
 docs/ModelResponseOrderShipmentEventList.md
@@ -710,7 +717,11 @@ docs/OrderCalculateShippingRate.md
 docs/OrderCalculateSubtotal.md
 docs/OrderCalculateTax.md
 docs/OrderInfo200Response.md
+docs/OrderInvoice.md
 docs/OrderInvoiceAdd.md
+docs/OrderInvoiceComment.md
+docs/OrderInvoiceItem.md
+docs/OrderInvoiceTotals.md
 docs/OrderItem.md
 docs/OrderItemOption.md
 docs/OrderPaymentMethod.md
@@ -899,6 +910,7 @@ docs/ResponseOrderAbandonedListResult.md
 docs/ResponseOrderCountResult.md
 docs/ResponseOrderFinancialStatusListResult.md
 docs/ResponseOrderFulfillmentStatusListResult.md
+docs/ResponseOrderInvoiceListResult.md
 docs/ResponseOrderListResult.md
 docs/ResponseOrderPreestimateShippingListResult.md
 docs/ResponseOrderShipmentEventListResult.md
